@@ -150,7 +150,7 @@ require_once 'database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="images/metdda-logo.png" alt="Meta" class="mb-3">
+                        <img src="images/meta-logo.png" alt="Meta" class="mb-3">
                         <h4>Marketing Analytics</h4>
                         <p class="mb-0">Meta</p>
                     </div>

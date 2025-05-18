@@ -45,16 +45,63 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section section-padding">
+    <section id="home" class="hero-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-4">Creative Designer & Developer</h1>
-                    <p class="lead mb-4">Turning your ideas into reality with creative design and development solutions</p>
-                    <a href="#contact" class="btn btn-primary btn-lg">Get in Touch</a>
+                    <div class="hero-content">
+                        <h1 class="hero-heading">Building Brands Through Strategic Storytelling</h1>
+                        <p class="hero-description">Helping brands cut through the noise with compelling narratives, data-driven strategies, and AI-powered solutions.</p>
+                        
+                        <div class="hero-cta-group">
+                            <a href="#contact" class="btn btn-primary btn-hero-primary">Start a Project</a>
+                            <a href="case-studies.php" class="btn btn-outline-dark btn-hero-primary">View Case Studies</a>
+                        </div>
+
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">7+</div>
+                                <div class="hero-stat-label">Years Experience</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">90+</div>
+                                <div class="hero-stat-label">Projects Completed</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">95%</div>
+                                <div class="hero-stat-label">Client Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-6">
-                    <img src="images/hero-image.png" alt="Hero Image" class="img-fluid">
+                    <div class="hero-image-container">
+                        <div class="orbital-background"></div>
+                        <div class="orbital-container">
+                            <div class="metallic-ball"></div>
+                            
+                            <div class="orbit orbit-1">
+                                <div class="orbital-tag">
+                                    <i class="fas fa-pen-fancy"></i>
+                                    <span>Brand Strategy</span>
+                                </div>
+                            </div>
+                            
+                            <div class="orbit orbit-2">
+                                <div class="orbital-tag">
+                                    <i class="fas fa-robot"></i>
+                                    <span>AI Copy</span>
+                                </div>
+                            </div>
+                            
+                            <div class="orbit orbit-3">
+                                <div class="orbital-tag">
+                                    <i class="fas fa-bullseye"></i>
+                                    <span>Market Research</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
