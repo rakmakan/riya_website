@@ -81,23 +81,20 @@
                             <div class="metallic-ball"></div>
                             
                             <div class="orbit orbit-1">
-                                <div class="orbital-tag">
+                                <div class="orbital-tag" data-label="Brand Strategy">
                                     <i class="fas fa-pen-fancy"></i>
-                                    <span>Brand Strategy</span>
                                 </div>
                             </div>
                             
                             <div class="orbit orbit-2">
-                                <div class="orbital-tag">
+                                <div class="orbital-tag" data-label="AI Solutions">
                                     <i class="fas fa-robot"></i>
-                                    <span>AI Copy</span>
                                 </div>
                             </div>
                             
                             <div class="orbit orbit-3">
-                                <div class="orbital-tag">
+                                <div class="orbital-tag" data-label="Market Research">
                                     <i class="fas fa-bullseye"></i>
-                                    <span>Market Research</span>
                                 </div>
                             </div>
                         </div>

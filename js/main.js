@@ -180,3 +180,74 @@ const counterObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.counter').forEach(counter => {
     counterObserver.observe(counter);
 });
+
+// Orbit Animation Control
+document.addEventListener('DOMContentLoaded', () => {
+    const orbitalContainer = document.querySelector('.orbital-container');
+    if (!orbitalContainer) return;
+
+    // Pause animations on hover
+    orbitalContainer.addEventListener('mouseenter', () => {
+        document.querySelectorAll('.orbit').forEach(orbit => {
+            orbit.style.animationPlayState = 'paused';
+        });
+    });
+
+    orbitalContainer.addEventListener('mouseleave', () => {
+        document.querySelectorAll('.orbit').forEach(orbit => {
+            orbit.style.animationPlayState = 'running';
+        });
+    });
+
+    // Calculate and set orbital tag positions
+    const orbitTags = document.querySelectorAll('.orbital-tag');
+    orbitTags.forEach((tag, index) => {
+        const angle = (360 / orbitTags.length) * index;
+        const orbit = tag.closest('.orbit');
+        const radius = orbit.offsetWidth / 2;
+        
+        // Position tags along their orbits
+        const x = Math.cos((angle * Math.PI) / 180) * radius;
+        const y = Math.sin((angle * Math.PI) / 180) * radius;
+        tag.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Mobile responsive checks
+    const checkMobile = () => {
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.orbit').forEach(orbit => {
+                orbit.style.animation = 'none';
+            });
+            
+            // Stack orbital tags vertically
+            orbitTags.forEach((tag, index) => {
+                tag.style.transform = 'none';
+                tag.style.opacity = '0';
+                setTimeout(() => {
+                    tag.style.opacity = '1';
+                }, index * 200);
+            });
+        } else {
+            document.querySelectorAll('.orbit').forEach(orbit => {
+                orbit.style.animation = '';
+            });
+        }
+    };
+
+    // Check on load and resize
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+});
+
+// Smooth scroll for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
