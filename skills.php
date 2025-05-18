@@ -142,7 +142,7 @@ require_once 'database/config.php';
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="images/hubspot-logo.png" alt="Hubspot Academy" class="mb-3">
+                        <img src="images/hubspot-logo.svg" alt="Hubspot Academy" class="mb-3">
                         <h4>Email Marketing Certification</h4>
                         <p class="mb-0">Hubspot Academy</p>
                     </div>
@@ -150,7 +150,7 @@ require_once 'database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="images/meta-logo.jpg" alt="Meta" class="mb-3">
+                        <img src="images/metdda-logo.png" alt="Meta" class="mb-3">
                         <h4>Marketing Analytics</h4>
                         <p class="mb-0">Meta</p>
                     </div>
