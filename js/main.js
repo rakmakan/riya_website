@@ -5,8 +5,62 @@ AOS.init({
     once: true
 });
 
+// Verify main.js is loading
+console.log('main.js is loaded');
+
+// Dark Mode Implementation
+function initDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    // Add a console log to check if the element exists
+    console.log('Dark mode toggle element:', darkModeToggle);
+    
+    // Don't proceed if the button isn't found
+    if (!darkModeToggle) {
+        console.error('Dark mode toggle button not found!');
+        return;
+    }
+    
+    const body = document.body;
+    
+    // Check for saved theme preference or respect OS preference
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = localStorage.getItem('theme');
+    
+    // If user previously chose a theme, use it
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '☀️';
+    } else if (savedTheme === 'light') {
+        body.classList.remove('dark-mode');
+        darkModeToggle.innerHTML = '🌙';
+    } else {
+        // If no saved preference, use OS preference
+        if (prefersDarkScheme.matches) {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '☀️';
+        }
+    }
+
+    // Toggle theme when button is clicked
+    darkModeToggle.addEventListener('click', () => {
+        console.log('Dark mode button clicked');
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        
+        // Update button icon
+        darkModeToggle.innerHTML = isDarkMode ? '☀️' : '🌙';
+        
+        // Save preference to localStorage
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
+}
+
 // Navigation scroll behavior
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize dark mode
+    initDarkMode();
+    
     const navbar = document.querySelector('.navbar');
     const navLinks = document.querySelectorAll('.nav-link');
     const heroSection = document.querySelector('.hero-section');

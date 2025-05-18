@@ -51,19 +51,13 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <button id="darkModeToggle" class="btn" aria-label="Toggle dark mode">
+                            🌙
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- AOS JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
-    <!-- Custom JS -->
-    <script src="js/script.js"></script>
-</body>
-</html>
