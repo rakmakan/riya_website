@@ -302,38 +302,33 @@
             <div class="client-logos">
                 <div class="row align-items-center justify-content-center g-4">
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/idemia-logo.svg" alt="IDEMIA" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/parimatch-logo.svg" alt="Pari Match" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/opensense-logo.svg" alt="OpenSense Labs" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/hubsell-logo.svg" alt="Hubshell" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/cladiator-logo.svg" alt="Cladiator" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/gripphy-logo.svg" alt="Gripphy" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="client-logo">
-                            <img src="images/preipo-logo.svg" alt="Pre-IPO" class="img-fluid">
                         </div>
                     </div>
                 </div>

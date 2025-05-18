@@ -542,58 +542,74 @@ body {
     object-fit: contain;
     margin: 0 auto;
     display: block;
+    filter: brightness(0) saturate(100%);
+    opacity: 0.85;
+    transition: all 0.3s ease;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 100px 0 60px;
-    }
+.certification-card:hover img {
+    filter: none;
+    opacity: 1;
+}
 
-    .hero-heading {
-        font-size: 2.5rem;
-    }
+/* Client Logos Section */
+.client-logo-box {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    max-width: 200px;
+    margin: 0 auto;
+    transition: all 0.3s ease;
+}
 
-    .hero-image-container {
-        height: auto;
-        margin-top: 3rem;
-    }
+.client-logo-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
 
-    .orbital-container {
-        width: 300px;
-        height: 300px;
-    }
+.client-logo-box img {
+    max-width: 100%;
+    max-height: 60px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%);
+    opacity: 0.85;
+    transition: all 0.3s ease;
+}
 
-    .orbit {
-        animation: none;
-    }
+.client-logo-box:hover img {
+    filter: none;
+    opacity: 1;
+}
 
-    .orbital-tag {
-        position: static;
-        margin: 1rem auto;
-        transform: none;
-        opacity: 0;
-        animation: fadeIn 0.5s ease forwards;
-    }
+.client-logo-box svg {
+    fill: #000 !important;
+    max-width: 100%;
+    max-height: 60px;
+    opacity: 0.85;
+    transition: all 0.3s ease;
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+.client-logo-box:hover svg {
+    opacity: 1;
+}
 
-    .orbit-1 .orbital-tag { animation-delay: 0.2s; }
-    .orbit-2 .orbital-tag { animation-delay: 0.4s; }
-    .orbit-3 .orbital-tag { animation-delay: 0.6s; }
-    
-    .hero-stats {
-        gap: 2rem;
-    }
-    
-    .hero-stat-number {
-        font-size: 2rem;
-    }
-    
-    .hero-stat-label {
-        font-size: 0.75rem;
-    }
+/* Apply the same styling to review section company logos */
+.review-profile .company-logo {
+    max-width: 120px;
+    max-height: 40px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%);
+    opacity: 0.85;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.review-card:hover .company-logo {
+    filter: none;
+    opacity: 1;
 }
