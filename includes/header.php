@@ -49,7 +49,7 @@
                         <a class="nav-link" href="case-studies.php">Case Studies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="contact.php">Contact</a>
                     </li>
                     <li class="nav-item">
                         <button id="darkModeToggle" class="btn" aria-label="Toggle dark mode">

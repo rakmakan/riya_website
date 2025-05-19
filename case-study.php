@@ -241,7 +241,7 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
                         <div class="case-info-box text-center">
                             <h3 class="h4 mb-4">Ready to Create Something Amazing?</h3>
                             <p>Let's discuss how I can help your business achieve similar results.</p>
-                            <a href="#contact" class="btn btn-primary">Start a Conversation</a>
+                            <a href="contact.php" class="btn btn-primary">Start a Conversation</a>
                         </div>
                     </div>
                 </div>
