@@ -1,7 +1,69 @@
+// Initialize AOS
+AOS.init({
+    duration: 800,
+    easing: 'ease-out',
+    once: true
+});
+
+// Verify main.js is loading
+console.log('main.js is loaded');
+
+// Dark Mode Implementation
+function initDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    // Add a console log to check if the element exists
+    console.log('Dark mode toggle element:', darkModeToggle);
+    
+    // Don't proceed if the button isn't found
+    if (!darkModeToggle) {
+        console.error('Dark mode toggle button not found!');
+        return;
+    }
+    
+    const body = document.body;
+    
+    // Check for saved theme preference or respect OS preference
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = localStorage.getItem('theme');
+    
+    // If user previously chose a theme, use it
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '☀️';
+    } else if (savedTheme === 'light') {
+        body.classList.remove('dark-mode');
+        darkModeToggle.innerHTML = '🌙';
+    } else {
+        // If no saved preference, use OS preference
+        if (prefersDarkScheme.matches) {
+            body.classList.add('dark-mode');
+            darkModeToggle.innerHTML = '☀️';
+        }
+    }
+
+    // Toggle theme when button is clicked
+    darkModeToggle.addEventListener('click', () => {
+        console.log('Dark mode button clicked');
+        body.classList.toggle('dark-mode');
+        const isDarkMode = body.classList.contains('dark-mode');
+        
+        // Update button icon
+        darkModeToggle.innerHTML = isDarkMode ? '☀️' : '🌙';
+        
+        // Save preference to localStorage
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    });
+}
+
 // Navigation scroll behavior
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize dark mode
+    initDarkMode();
+    
     const navbar = document.querySelector('.navbar');
     const navLinks = document.querySelectorAll('.nav-link');
+    const heroSection = document.querySelector('.hero-section');
 
     // Add shadow to navbar on scroll
     window.addEventListener('scroll', () => {
@@ -63,23 +125,183 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Animate skill bars
-    const skillSection = document.querySelector('.skills-section');
-    if (skillSection) {
-        const progressBars = skillSection.querySelectorAll('.progress-bar');
-        
-        const observer = new IntersectionObserver((entries) => {
+    // Initialize navbar behavior
+    if (heroSection) {
+        const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    progressBars.forEach(bar => {
-                        const width = bar.getAttribute('aria-valuenow') + '%';
-                        bar.style.width = width;
-                    });
-                    observer.unobserve(entry.target);
+                if (!entry.isIntersecting) {
+                    navbar.classList.add('navbar-scrolled');
+                } else {
+                    navbar.classList.remove('navbar-scrolled');
                 }
             });
-        }, { threshold: 0.5 });
-
-        observer.observe(skillSection);
+        }, { threshold: 0.1 });
+        
+        heroObserver.observe(heroSection);
     }
+
+    // Animate skill bars
+    const skillBars = document.querySelectorAll('.progress-bar');
+    const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const width = entry.target.getAttribute('aria-valuenow') + '%';
+                entry.target.style.width = width;
+            }
+        });
+    }, { threshold: 0.2 });
+
+    skillBars.forEach(bar => skillObserver.observe(bar));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Add animation classes to elements
+    const animatedElements = document.querySelectorAll('.service-card, .case-study-card, .review-card');
+    animatedElements.forEach((element, index) => {
+        element.setAttribute('data-aos', 'fade-up');
+        element.setAttribute('data-aos-delay', (index * 100).toString());
+    });
+
+    // Add hover effect to service icons
+    const serviceIcons = document.querySelectorAll('.service-icon');
+    serviceIcons.forEach(icon => {
+        icon.addEventListener('mouseover', function() {
+            this.style.transform = 'rotate(0deg) scale(1.1)';
+        });
+        icon.addEventListener('mouseout', function() {
+            this.style.transform = 'rotate(-5deg) scale(1)';
+        });
+    });
+
+    // Form submission animation
+    const contactForm = document.querySelector('.contact-section form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const button = this.querySelector('button[type="submit"]');
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            // Add your form submission logic here
+            setTimeout(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                button.classList.add('btn-success');
+                this.reset();
+                setTimeout(() => {
+                    button.innerHTML = 'Send Message';
+                    button.classList.remove('btn-success');
+                }, 3000);
+            }, 1500);
+        });
+    }
+});
+
+// Counter animation for statistics
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50; // Adjust speed here
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            clearInterval(timer);
+            current = target;
+        }
+        element.textContent = Math.round(current);
+    }, 30);
+}
+
+// Initialize counters when they come into view
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const target = parseInt(entry.target.getAttribute('data-target'));
+            animateCounter(entry.target, target);
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.counter').forEach(counter => {
+    counterObserver.observe(counter);
+});
+
+// Orbit Animation Control
+document.addEventListener('DOMContentLoaded', () => {
+    const orbitalContainer = document.querySelector('.orbital-container');
+    if (!orbitalContainer) return;
+
+    // Pause animations on hover
+    orbitalContainer.addEventListener('mouseenter', () => {
+        document.querySelectorAll('.orbit').forEach(orbit => {
+            orbit.style.animationPlayState = 'paused';
+        });
+    });
+
+    orbitalContainer.addEventListener('mouseleave', () => {
+        document.querySelectorAll('.orbit').forEach(orbit => {
+            orbit.style.animationPlayState = 'running';
+        });
+    });
+
+    // Calculate and set orbital tag positions
+    const orbitTags = document.querySelectorAll('.orbital-tag');
+    orbitTags.forEach((tag, index) => {
+        const angle = (360 / orbitTags.length) * index;
+        const orbit = tag.closest('.orbit');
+        const radius = orbit.offsetWidth / 2;
+        
+        // Position tags along their orbits
+        const x = Math.cos((angle * Math.PI) / 180) * radius;
+        const y = Math.sin((angle * Math.PI) / 180) * radius;
+        tag.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    // Mobile responsive checks
+    const checkMobile = () => {
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.orbit').forEach(orbit => {
+                orbit.style.animation = 'none';
+            });
+            
+            // Stack orbital tags vertically
+            orbitTags.forEach((tag, index) => {
+                tag.style.transform = 'none';
+                tag.style.opacity = '0';
+                setTimeout(() => {
+                    tag.style.opacity = '1';
+                }, index * 200);
+            });
+        } else {
+            document.querySelectorAll('.orbit').forEach(orbit => {
+                orbit.style.animation = '';
+            });
+        }
+    };
+
+    // Check on load and resize
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+});
+
+// Smooth scroll for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
 });

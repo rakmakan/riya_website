@@ -1,0 +1,5 @@
+# Ignore site files and archives
+/Site Files/*
+*.zip
+*.tar.gz
+*.tar.bz2

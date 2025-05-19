@@ -9,59 +9,78 @@ $case_studies = get_case_studies();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Studies - Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <?php include 'includes/header.php'; ?>
+
+    <!-- Case Studies Header -->
+    <section class="case-studies-header">
         <div class="container">
-            <a class="navbar-brand" href="index.php">Portfolio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#work">Work</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="case-studies.php">Case Studies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#skills">Skills</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#contact">Contact</a>
-                    </li>
-                </ul>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-4">Case Studies</h1>
+                    <p class="lead">Explore how I've helped businesses transform their messaging and achieve growth through strategic communications.</p>
+                </div>
             </div>
         </div>
-    </nav>
+    </section>
 
     <!-- Case Studies List -->
     <section class="case-studies-list section-padding">
         <div class="container">
-            <h1 class="section-title">Case Studies</h1>
+            <div class="section-intro">
+                <p>Each case study provides an in-depth look at the challenges, solutions, and results of projects I've worked on. You'll find detailed information about my approach and the impact of my work.</p>
+            </div>
+            
             <div class="row g-4">
-                <?php foreach ($case_studies as $case): ?>
-                <div class="col-md-6 col-lg-4">
-                    <div class="case-study-card h-100">
-                        <img src="<?php echo htmlspecialchars($case['featured_image']); ?>" 
-                             class="card-img-top" alt="<?php echo htmlspecialchars($case['title']); ?>">
-                        <div class="card-body">
-                            <h3 class="card-title h4"><?php echo htmlspecialchars($case['title']); ?></h3>
-                            <p class="card-text"><?php echo htmlspecialchars($case['summary']); ?></p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">Client: <?php echo htmlspecialchars($case['client']); ?></small>
-                                <a href="case-study.php?slug=<?php echo urlencode($case['slug']); ?>" 
-                                   class="btn btn-outline-primary">View Case Study</a>
+                <?php foreach ($case_studies as $case): 
+                    $services = !empty($case['services']) ? explode(',', $case['services']) : [];
+                ?>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="case-study-card">
+                        <!-- Top Section (Visual) -->
+                        <div class="image-container">
+                            <img src="<?php echo htmlspecialchars($case['featured_image']); ?>" 
+                                 alt="<?php echo htmlspecialchars($case['title']); ?>">
+                            <div class="card-overlay">
+                                <span class="badge bg-primary">Case Study</span>
                             </div>
+                        </div>
+                        
+                        <!-- Middle Section (Content) -->
+                        <div class="card-body">
+                            <h3 class="card-title fw-semibold"><?php echo htmlspecialchars($case['title']); ?></h3>
+                            
+                            <div class="service-tags">
+                                <?php foreach (array_slice($services, 0, 3) as $service): ?>
+                                <span class="service-tag"><i class="fas fa-tag"></i><?php echo htmlspecialchars(trim($service)); ?></span>
+                                <?php endforeach; ?>
+                                <?php if (count($services) > 3): ?>
+                                <span class="service-tag"><i class="fas fa-ellipsis-h"></i>+<?php echo count($services) - 3; ?> more</span>
+                                <?php endif; ?>
+                            </div>
+                            
+                            <p class="card-text"><?php echo htmlspecialchars($case['summary']); ?></p>
+                        </div>
+                        
+                        <!-- Footer Section -->
+                        <div class="card-footer">
+                            <div class="meta-info">
+                                <div class="client-info">
+                                    <i class="fas fa-building"></i>
+                                    <span><?php echo htmlspecialchars($case['client']); ?></span>
+                                </div>
+                                <div class="date-completed">
+                                    <i class="far fa-calendar-alt"></i>
+                                    <span><?php echo date('F Y', strtotime($case['date_completed'])); ?></span>
+                                </div>
+                            </div>
+                            
+                            <a href="case-study.php?slug=<?php echo urlencode($case['slug']); ?>" 
+                               class="btn btn-primary view-case-btn">View Details <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -70,14 +89,20 @@ $case_studies = get_case_studies();
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-light py-4">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2023 Portfolio. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <?php include 'includes/footer.php'; ?>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+        });
+    </script>
 </body>
 </html>

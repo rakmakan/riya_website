@@ -106,37 +106,7 @@ require_once 'database/config.php';
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">Portfolio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="work.php">Work</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="case-studies.php">Case Studies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="skills.php">Skills</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include 'includes/header.php'; ?>
 
     <!-- Work Experience Section -->
     <section class="work-experience-section section-padding pt-120">
@@ -250,12 +220,7 @@ require_once 'database/config.php';
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-light py-4">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2023 Portfolio. All Rights Reserved.</p>
-        </div>
-    </footer>
+    <?php include 'includes/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/main.js"></script>

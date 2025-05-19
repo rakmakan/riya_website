@@ -4,57 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">Portfolio</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="work.php">Work</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="case-studies.php">Case Studies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="skills.php">Skills</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php include 'includes/header.php'; ?>
 
     <!-- Hero Section -->
-    <section id="home" class="hero-section section-padding">
+    <section id="home" class="hero-section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-4">Creative Designer & Developer</h1>
-                    <p class="lead mb-4">Turning your ideas into reality with creative design and development solutions</p>
-                    <a href="#contact" class="btn btn-primary btn-lg">Get in Touch</a>
+                    <div class="hero-content">
+                        <h1 class="hero-heading">Building Brands Through Strategic Storytelling</h1>
+                        <p class="hero-description">Helping brands cut through the noise with compelling narratives, data-driven strategies, and AI-powered solutions.</p>
+                        
+                        <div class="hero-cta-group">
+                            <a href="#contact" class="btn btn-primary btn-hero-primary">Start a Project</a>
+                            <a href="case-studies.php" class="btn btn-outline-dark btn-hero-primary">View Case Studies</a>
+                        </div>
+
+                        <div class="hero-stats">
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">7+</div>
+                                <div class="hero-stat-label">Years Experience</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">90+</div>
+                                <div class="hero-stat-label">Projects Completed</div>
+                            </div>
+                            <div class="hero-stat">
+                                <div class="hero-stat-number">95%</div>
+                                <div class="hero-stat-label">Client Satisfaction</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-6">
-                    <img src="images/hero-image.png" alt="Hero Image" class="img-fluid">
+                    <div class="hero-image-container">
+                        <div class="orbital-background"></div>
+                        <div class="orbital-container">
+                            <div class="metallic-ball"></div>
+                            
+                            <div class="orbit orbit-1">
+                                <div class="orbital-tag" data-label="Brand Strategy">
+                                    <i class="fas fa-pen-fancy"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="orbit orbit-2">
+                                <div class="orbital-tag" data-label="AI Solutions">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="orbit orbit-3">
+                                <div class="orbital-tag" data-label="Market Research">
+                                    <i class="fas fa-bullseye"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -118,6 +126,67 @@
                         </div>
                         <h4>Consulting</h4>
                         <p>Need a marketer without hiring one full-time? I plug into your team, review what's working, scrap what's not, and help you market smarter — not just louder.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How I Work Section -->
+    <section id="how-i-work" class="how-i-work-section section-padding">
+        <div class="container">
+            <h2 class="section-title">How I Work</h2>
+            <div class="row g-4">
+                <!-- Step 1: LISTEN -->
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-icon-circle">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="step-title">LISTEN</h3>
+                        <p class="step-description">We start with interviews, surveys, and a little (friendly) stalking to understand what your audience really thinks and wants.</p>
+                        <ul class="step-tags">
+                            <li>Voice-of-customer research</li>
+                            <li>Stakeholder interviews</li>
+                            <li>Message audit (AI-supported)</li>
+                        </ul>
+                        <div class="step-connector"></div>
+                    </div>
+                </div>
+
+                <!-- Step 2: FRAME -->
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-icon-circle">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h3 class="step-title">FRAME</h3>
+                        <p class="step-description">We shape your message, tone, and position with a clear POV. Strategy before copy.</p>
+                        <ul class="step-tags">
+                            <li>Positioning + personality</li>
+                            <li>Messaging framework</li>
+                            <li>Voice & tone system</li>
+                        </ul>
+                        <div class="step-connector"></div>
+                    </div>
+                </div>
+
+                <!-- Step 3: WRITE -->
+                <div class="col-md-4">
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-icon-circle">
+                            <i class="fas fa-pen-nib"></i>
+                        </div>
+                        <h3 class="step-title">WRITE</h3>
+                        <p class="step-description">Words that sound human — and sell. AI helps move faster, not sound robotic.</p>
+                        <ul class="step-tags">
+                            <li>Website copy</li>
+                            <li>Email flows</li>
+                            <li>Sales decks & social messaging</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -258,38 +327,33 @@
             <div class="client-logos">
                 <div class="row align-items-center justify-content-center g-4">
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/idemia-logo.svg" alt="IDEMIA" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/parimatch-logo.svg" alt="Pari Match" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/opensense-logo.svg" alt="OpenSense Labs" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/hubsell-logo.svg" alt="Hubshell" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/cladiator-logo.svg" alt="Cladiator" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
-                        <div class="client-logo">
+                        <div class="client-logo-box">
                             <img src="images/gripphy-logo.svg" alt="Gripphy" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="client-logo">
-                            <img src="images/preipo-logo.svg" alt="Pre-IPO" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -396,15 +460,25 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-light py-4">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2023 Portfolio. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
+    <?php include 'includes/footer.php'; ?>
+    
+    <!-- Direct Dark Mode Script (Debugging) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Direct script execution');
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            console.log('Direct toggle element:', darkModeToggle);
+            
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', function() {
+                    console.log('Toggle clicked directly');
+                    document.body.classList.toggle('dark-mode');
+                    const isDarkMode = document.body.classList.contains('dark-mode');
+                    darkModeToggle.innerHTML = isDarkMode ? '☀️' : '🌙';
+                    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
