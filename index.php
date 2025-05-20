@@ -207,7 +207,7 @@
             <h2 class="section-title">Case Studies</h2>
             <div class="case-study-slider">
                 <?php
-                require_once 'database/config.php';
+                require_once $_SERVER['DOCUMENT_ROOT'] . '/database/config.php';
                 $featured_cases = get_case_studies(3);
                 ?>
                 <div id="caseStudyCarousel" class="carousel slide" data-bs-ride="carousel">
