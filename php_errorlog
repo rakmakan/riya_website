@@ -1,0 +1,5 @@
+[19-May-2025 01:59:23 UTC] PHP Fatal error:  Uncaught Error: Failed opening required 'database/config.php' (include_path='.:/usr/local/php82/pear') in /home/customer/www/rakshitm.sg-host.com/public_html/index.php:202
+Stack trace:
+#0 {main}
+  thrown in /home/customer/www/rakshitm.sg-host.com/public_html/index.php on line 202
+[19-May-2025 10:53:44 UTC] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in /home/customer/www/rakshitm.sg-host.com/public_html/process_contact.php on line 18
