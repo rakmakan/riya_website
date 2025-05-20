@@ -1,12 +1,6 @@
 # Enable URL rewriting
 RewriteEngine On
 
-# Temporarily enable error display for debugging
-php_flag display_startup_errors on
-php_flag display_errors on
-php_flag html_errors on
-php_value error_reporting E_ALL
-
 # Set default character set
 AddDefaultCharset UTF-8
 
@@ -32,3 +26,9 @@ Options -Indexes
   Deny from all
   Allow from env=REDIRECT_STATUS
 </Files>
+
+# PHP error handling - Using a different approach that's compatible with SiteGround
+<IfModule mod_php.c>
+  php_value display_errors 1
+  php_value display_startup_errors 1
+</IfModule>
