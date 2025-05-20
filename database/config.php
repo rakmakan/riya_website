@@ -1,6 +1,26 @@
 <?php
-$db_file = __DIR__ . '/portfolio.db';
-$db = new SQLite3($db_file);
+// Define database file path with absolute path for server compatibility
+$db_file = $_SERVER['DOCUMENT_ROOT'] . '/database/portfolio.db';
+
+// Check if database directory is writable
+$db_dir = dirname($db_file);
+if (!is_writable($db_dir)) {
+    error_log("Database directory is not writable: $db_dir");
+    // Try to set permissions (this may not work depending on server configuration)
+    @chmod($db_dir, 0755);
+}
+
+// Error handling for SQLite connection
+try {
+    $db = new SQLite3($db_file);
+    $db->busyTimeout(5000); // Set timeout for busy database
+    // Enable error logging to help debug issues
+    $db->exec('PRAGMA journal_mode = WAL;'); // Use Write-Ahead Logging for better concurrency
+} catch (Exception $e) {
+    error_log("SQLite connection error: " . $e->getMessage());
+    // Fail gracefully instead of showing errors to users
+    // You might want to display a maintenance message here in production
+}
 
 // Create tables if they don't exist
 $db->exec("CREATE TABLE IF NOT EXISTS content (

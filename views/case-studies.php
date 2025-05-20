@@ -1,5 +1,5 @@
 <?php
-require_once '../database/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/database/config.php';
 $case_studies = get_case_studies();
 ?>
 <!DOCTYPE html>

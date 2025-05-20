@@ -1,5 +1,5 @@
 <?php
-require_once '../database/config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/database/config.php';
 
 // Get case study slug from URL
 $slug = isset($_GET['slug']) ? $_GET['slug'] : '';
