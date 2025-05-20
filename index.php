@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
@@ -12,14 +20,14 @@
     <section id="home" class="hero-section">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-lg-1 order-2">
                     <div class="hero-content">
                         <h1 class="hero-heading">Building Brands Through Strategic Storytelling</h1>
                         <p class="hero-description">Helping brands cut through the noise with compelling narratives, data-driven strategies, and AI-powered solutions.</p>
                         
                         <div class="hero-cta-group">
                             <a href="#contact" class="btn btn-primary btn-hero-primary">Start a Project</a>
-                            <a href="case-studies.php" class="btn btn-outline-dark btn-hero-primary">View Case Studies</a>
+                            <a href="views/case-studies.php" class="btn btn-outline-dark btn-hero-primary">View Case Studies</a>
                         </div>
 
                         <div class="hero-stats">
@@ -38,7 +46,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-lg-2 order-1">
                     <div class="hero-image-container">
                         <div class="orbital-background"></div>
                         <div class="orbital-container">
@@ -74,7 +82,7 @@
             <h2 class="section-title">About Me</h2>
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="images/about-image.png" alt="About Image" class="img-fluid rounded shadow">
+                    <img src="assets/images/about-image.png" alt="About Image" class="img-fluid rounded shadow">
                 </div>
                 <div class="col-lg-6">
                     <h3 class="mb-4">Building Brands Through Strategic Storytelling</h3>
@@ -90,7 +98,7 @@
                             <p class="mb-0">Projects Completed</p>
                         </div>
                     </div>
-                    <a href="about.php" class="btn btn-primary">Learn More About Me</a>
+                    <a href="views/about.php" class="btn btn-primary">Learn More About Me</a>
                 </div>
             </div>
         </div>
@@ -221,7 +229,7 @@
                                     <div class="col-lg-6">
                                         <h3><?php echo htmlspecialchars($case['title']); ?></h3>
                                         <p class="lead"><?php echo htmlspecialchars($case['summary']); ?></p>
-                                        <a href="case-study.php?slug=<?php echo urlencode($case['slug']); ?>" 
+                                        <a href="views/case-study.php?slug=<?php echo urlencode($case['slug']); ?>" 
                                            class="btn btn-primary">View Case Study</a>
                                     </div>
                                 </div>
@@ -237,7 +245,7 @@
                     </button>
                 </div>
                 <div class="text-center mt-5">
-                    <a href="case-studies.php" class="btn btn-outline-primary">View All Case Studies</a>
+                    <a href="views/case-studies.php" class="btn btn-outline-primary">View All Case Studies</a>
                 </div>
             </div>
         </div>
@@ -251,7 +259,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="review-card">
                         <div class="review-profile">
-                            <img src="images/hubsell-logo.svg" alt="Hubsell" class="company-logo">
+                            <img src="assets/images/hubsell-logo.svg" alt="Hubsell" class="company-logo">
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -268,7 +276,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="review-card">
                         <div class="review-profile">
-                            <img src="images/opensense-logo.svg" alt="Opensense Labs" class="company-logo">
+                            <img src="assets/images/opensense-logo.svg" alt="Opensense Labs" class="company-logo">
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -285,7 +293,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="review-card">
                         <div class="review-profile">
-                            <img src="images/parimatch-logo.svg" alt="Parimatch" class="company-logo">
+                            <img src="assets/images/parimatch-logo.svg" alt="Parimatch" class="company-logo">
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -302,7 +310,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="review-card">
                         <div class="review-profile">
-                            <img src="images/idemia-logo.svg" alt="IDEMIA" class="company-logo">
+                            <img src="assets/images/idemia-logo.svg" alt="IDEMIA" class="company-logo">
                             <div class="rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -328,32 +336,32 @@
                 <div class="row align-items-center justify-content-center g-4">
                     <div class="col-6 col-md-3">
                         <div class="client-logo-box">
-                            <img src="images/idemia-logo.svg" alt="IDEMIA" class="img-fluid">
+                            <img src="assets/images/idemia-logo.svg" alt="IDEMIA" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="client-logo-box">
-                            <img src="images/parimatch-logo.svg" alt="Pari Match" class="img-fluid">
+                            <img src="assets/images/parimatch-logo.svg" alt="Pari Match" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="client-logo-box">
-                            <img src="images/opensense-logo.svg" alt="OpenSense Labs" class="img-fluid">
+                            <img src="assets/images/opensense-logo.svg" alt="OpenSense Labs" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="client-logo-box">
-                            <img src="images/hubsell-logo.svg" alt="Hubshell" class="img-fluid">
+                            <img src="assets/images/hubsell-logo.svg" alt="Hubshell" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="client-logo-box">
-                            <img src="images/cladiator-logo.svg" alt="Cladiator" class="img-fluid">
+                            <img src="assets/images/cladiator-logo.svg" alt="Cladiator" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="client-logo-box">
-                            <img src="images/gripphy-logo.svg" alt="Gripphy" class="img-fluid">
+                            <img src="assets/images/gripphy-logo.svg" alt="Gripphy" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -432,7 +440,7 @@
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="skills.php" class="btn btn-outline-primary">View Full Skills & Experience</a>
+                <a href="views/skills.php" class="btn btn-outline-primary">View Full Skills & Experience</a>
             </div>
         </div>
     </section>
@@ -441,16 +449,17 @@
     <section id="contact" class="contact-section section-padding">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
-            <form action="#" method="POST">
+            <form action="services/process_contact.php" method="POST">
+                <input type="hidden" name="redirect" value="true">
                 <div class="row">
                     <div class="col-md-6 mb-4">
-                        <input type="text" class="form-control" placeholder="Your Name" required>
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                     </div>
                     <div class="col-md-6 mb-4">
-                        <input type="email" class="form-control" placeholder="Your Email" required>
+                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
                     </div>
                     <div class="col-md-12 mb-4">
-                        <textarea class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                        <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
                     </div>
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary btn-lg">Send Message</button>

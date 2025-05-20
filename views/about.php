@@ -1,5 +1,5 @@
 <?php
-require_once 'database/config.php';
+require_once '../database/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,10 +9,10 @@ require_once 'database/config.php';
     <title>About Me - Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
+    <?php include '../includes/header.php'; ?>
 
     <main class="about-section">
         <div class="container">
@@ -113,7 +113,7 @@ require_once 'database/config.php';
                     foreach ($clients as $client): ?>
                         <div class="client-item">
                             <div class="client-logo">
-                                <img src="images/clients/<?php echo strtolower(str_replace(' ', '-', $client[0])); ?>.svg" 
+                                <img src="../assets/images/clients/<?php echo strtolower(str_replace(' ', '-', $client[0])); ?>.svg" 
                                      alt="<?php echo $client[0]; ?> logo" 
                                      class="img-fluid">
                             </div>
@@ -134,6 +134,6 @@ require_once 'database/config.php';
         </div>
     </main>
 
-    <?php include 'includes/footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 </body>
 </html>

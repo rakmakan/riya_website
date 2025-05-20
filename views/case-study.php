@@ -1,9 +1,11 @@
 <?php
-require_once 'database/config.php';
+require_once '../database/config.php';
 
-$slug = $_GET['slug'] ?? '';
+// Get case study slug from URL
+$slug = isset($_GET['slug']) ? $_GET['slug'] : '';
 $case_study = get_case_study($slug);
 
+// Redirect if case study not found
 if (!$case_study) {
     header('Location: case-studies.php');
     exit;
@@ -18,15 +20,10 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($case_study['title']); ?> - Case Study</title>
-    <!-- Bootstrap CSS -->
+    <title><?php echo htmlspecialchars($case_study['title']); ?> - Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Lightbox CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-    <!-- AOS Animation -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="../assets/css/style.css" rel="stylesheet">
     <style>
         .case-study-detail {
             padding-top: 120px;
@@ -155,7 +152,7 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
     </style>
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
+    <?php include '../includes/header.php'; ?>
 
     <!-- Case Study Hero -->
     <section class="case-study-header">
@@ -255,13 +252,14 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
         </div>
     </section>
 
-    <?php include 'includes/footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
     
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../assets/js/main.js"></script>
     
     <!-- Initialize AOS Animation -->
     <script>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Professional Portfolio - Creative Designer & Developer">
-    <title>Portfolio</title>
+    <title>airyalps</title>
     
     <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,35 +21,35 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? '../assets/css/style.css' : 'assets/css/style.css'; ?>" rel="stylesheet">
 </head>
 <body>
 <header class="header fixed-top">
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
-            <a class="navbar-brand" href="index.php">Riya</a>
+            <a class="navbar-brand" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? '../index.php' : 'index.php'; ?>">AIRYALPS</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Home</a>
+                        <a class="nav-link" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? '../index.php' : 'index.php'; ?>">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.php">About</a>
+                        <a class="nav-link" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? 'about.php' : 'views/about.php'; ?>">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="skills.php">Skills</a>
+                        <a class="nav-link" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? 'skills.php' : 'views/skills.php'; ?>">Skills</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="work.php">Work</a>
+                        <a class="nav-link" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? 'work.php' : 'views/work.php'; ?>">Work</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="case-studies.php">Case Studies</a>
+                        <a class="nav-link" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? 'case-studies.php' : 'views/case-studies.php'; ?>">Case Studies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.php">Contact</a>
+                        <a class="nav-link" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? 'contact.php' : 'views/contact.php'; ?>">Contact</a>
                     </li>
                     <li class="nav-item">
                         <button id="darkModeToggle" class="btn" aria-label="Toggle dark mode">

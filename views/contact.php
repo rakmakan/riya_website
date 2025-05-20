@@ -1,5 +1,5 @@
 <?php
-require_once 'database/config.php';
+require_once '../database/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,7 @@ require_once 'database/config.php';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
     <style>
         .contact-header {
             background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
@@ -94,7 +94,7 @@ require_once 'database/config.php';
     </style>
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
+    <?php include '../includes/header.php'; ?>
 
     <!-- Contact Header -->
     <section class="contact-header">
@@ -168,7 +168,7 @@ require_once 'database/config.php';
                             <div class="col-md-7">
                                 <h3 class="mb-4">Send Me a Message</h3>
                                 
-                                <form id="contactForm">
+                                <form id="contactForm" action="../services/process_contact.php" method="POST">
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
                                     </div>
@@ -202,12 +202,12 @@ require_once 'database/config.php';
         </div>
     </section>
 
-    <?php include 'includes/footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script>
         $(document).ready(function() {
             // Initialize AOS animation
@@ -223,7 +223,7 @@ require_once 'database/config.php';
                 
                 $.ajax({
                     type: 'POST',
-                    url: 'process_contact.php',
+                    url: '../services/process_contact.php',
                     data: $(this).serialize(),
                     dataType: 'json',
                     success: function(response) {

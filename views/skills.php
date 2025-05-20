@@ -1,5 +1,5 @@
 <?php
-require_once 'database/config.php';
+require_once '../database/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,10 +9,10 @@ require_once 'database/config.php';
     <title>Skills & Expertise - Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <?php include 'includes/header.php'; ?>
+    <?php include '../includes/header.php'; ?>
 
     <!-- Why I'm Your Go-To Section -->
     <section class="section-padding pt-120">
@@ -112,7 +112,7 @@ require_once 'database/config.php';
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="images/hubspot-logo.svg" alt="Hubspot Academy" class="mb-3">
+                        <img src="../assets/images/hubspot-logo.svg" alt="Hubspot Academy" class="mb-3">
                         <h4>Email Marketing Certification</h4>
                         <p class="mb-0">Hubspot Academy</p>
                     </div>
@@ -120,7 +120,7 @@ require_once 'database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="images/meta-logo.png" alt="Meta" class="mb-3">
+                        <img src="../assets/images/meta-logo.png" alt="Meta" class="mb-3">
                         <h4>Marketing Analytics</h4>
                         <p class="mb-0">Meta</p>
                     </div>
@@ -128,7 +128,7 @@ require_once 'database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="images/udacity-logo.jpg" alt="Udacity" class="mb-3">
+                        <img src="../assets/images/udacity-logo.jpg" alt="Udacity" class="mb-3">
                         <h4>Digital Marketing Nanodegree</h4>
                         <p class="mb-0">Udacity</p>
                     </div>
@@ -136,7 +136,7 @@ require_once 'database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="images/wes-logo.webp" alt="WES" class="mb-3">
+                        <img src="../assets/images/wes-logo.webp" alt="WES" class="mb-3">
                         <h4>WES Certification</h4>
                         <p class="mb-0">Credly by Pearson</p>
                     </div>
@@ -145,6 +145,10 @@ require_once 'database/config.php';
         </div>
     </section>
 
-    <?php include 'includes/footer.php'; ?>
+    <?php include '../includes/footer.php'; ?>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 </html>
