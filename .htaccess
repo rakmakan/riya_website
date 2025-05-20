@@ -1,12 +1,11 @@
 # Enable URL rewriting
 RewriteEngine On
 
-# Handle PHP errors
-php_flag display_startup_errors off
-php_flag display_errors off
-php_flag html_errors off
-php_value docref_root 0
-php_value docref_ext 0
+# Temporarily enable error display for debugging
+php_flag display_startup_errors on
+php_flag display_errors on
+php_flag html_errors on
+php_value error_reporting E_ALL
 
 # Set default character set
 AddDefaultCharset UTF-8
@@ -27,8 +26,9 @@ AddDefaultCharset UTF-8
 # Protect against directory listing
 Options -Indexes
 
-# Protect the database folder
+# SQLite database protection - modified to allow PHP access
 <Files "portfolio.db">
-  Order allow,deny
+  Order deny,allow
   Deny from all
+  Allow from env=REDIRECT_STATUS
 </Files>
