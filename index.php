@@ -1,3 +1,13 @@
+<?php
+require_once __DIR__ . '/database/config.php';
+
+// Get content for different sections
+$hero_content = get_section_content('hero');
+$services = get_services();
+$testimonials = get_testimonials();
+$featured_cases = get_case_studies(3);
+$clients = get_clients();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,8 +32,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-1 order-2">
                     <div class="hero-content">
-                        <h1 class="hero-heading">Building Brands Through Strategic Storytelling</h1>
-                        <p class="hero-description">Helping brands cut through the noise with compelling narratives, data-driven strategies, and AI-powered solutions.</p>
+                        <h1 class="hero-heading"><?php echo htmlspecialchars($hero_content['title'] ?? 'Building Brands Through Strategic Storytelling'); ?></h1>
+                        <p class="hero-description"><?php echo htmlspecialchars($hero_content['description'] ?? 'Helping brands cut through the noise with compelling narratives, data-driven strategies, and AI-powered solutions.'); ?></p>
                         
                         <div class="hero-cta-group">
                             <a href="#contact" class="btn btn-primary btn-hero-primary">Start a Project</a>
@@ -31,18 +41,33 @@
                         </div>
 
                         <div class="hero-stats">
-                            <div class="hero-stat">
-                                <div class="hero-stat-number">7+</div>
-                                <div class="hero-stat-label">Years Experience</div>
-                            </div>
-                            <div class="hero-stat">
-                                <div class="hero-stat-number">20+</div>
-                                <div class="hero-stat-label">Projects Completed</div>
-                            </div>
-                            <div class="hero-stat">
-                                <div class="hero-stat-number">8+</div>
-                                <div class="hero-stat-label">Brands</div>
-                            </div>
+                            <?php 
+                            $stats = get_homepage_stats();
+                            if (empty($stats)): 
+                                $default_stats = [
+                                    ['value' => '7+', 'label' => 'Years Experience'],
+                                    ['value' => '20+', 'label' => 'Projects Completed'],
+                                    ['value' => '8+', 'label' => 'Brands']
+                                ];
+                                foreach ($default_stats as $stat):
+                            ?>
+                                <div class="hero-stat">
+                                    <div class="hero-stat-number"><?php echo $stat['value']; ?></div>
+                                    <div class="hero-stat-label"><?php echo $stat['label']; ?></div>
+                                </div>
+                            <?php 
+                                endforeach;
+                            else:
+                                foreach ($stats as $stat):
+                            ?>
+                                <div class="hero-stat">
+                                    <div class="hero-stat-number"><?php echo htmlspecialchars($stat['value']); ?></div>
+                                    <div class="hero-stat-label"><?php echo htmlspecialchars($stat['label']); ?></div>
+                                </div>
+                            <?php 
+                                endforeach;
+                            endif;
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -109,33 +134,53 @@
         <div class="container">
             <h2 class="section-title">My Services</h2>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-bullseye"></i>
+                <?php if (empty($services)): 
+                    $default_services = [
+                        [
+                            'icon' => 'fas fa-bullseye',
+                            'title' => 'Market Positioning',
+                            'description' => 'Most brands sound the same. I help you say something different — and mean it. Together, we\'ll figure out who you\'re for, what makes you worth caring about, and how to claim a space no one else owns.'
+                        ],
+                        [
+                            'icon' => 'fas fa-pen-fancy',
+                            'title' => 'Brand Copy',
+                            'description' => 'Words make people feel things. Or scroll past. I write the kind that make them feel, act, and remember. Websites, taglines, decks, bios — if it needs a voice, I give it yours (but sharper).'
+                        ],
+                        [
+                            'icon' => 'fas fa-lightbulb',
+                            'title' => 'Consulting',
+                            'description' => 'Need a marketer without hiring one full-time? I plug into your team, review what\'s working, scrap what\'s not, and help you market smarter — not just louder.'
+                        ]
+                    ];
+                    foreach ($default_services as $service):
+                ?>
+                    <div class="col-md-4">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="<?php echo $service['icon']; ?>"></i>
+                            </div>
+                            <h4><?php echo $service['title']; ?></h4>
+                            <p><?php echo $service['description']; ?></p>
                         </div>
-                        <h4>Market Positioning</h4>
-                        <p>Most brands sound the same. I help you say something different — and mean it. Together, we'll figure out who you're for, what makes you worth caring about, and how to claim a space no one else owns.</p>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-pen-fancy"></i>
+                <?php 
+                    endforeach;
+                else:
+                    foreach ($services as $service):
+                ?>
+                    <div class="col-md-4">
+                        <div class="service-card">
+                            <div class="service-icon">
+                                <i class="<?php echo htmlspecialchars($service['icon']); ?>"></i>
+                            </div>
+                            <h4><?php echo htmlspecialchars($service['title']); ?></h4>
+                            <p><?php echo htmlspecialchars($service['description']); ?></p>
                         </div>
-                        <h4>Brand Copy</h4>
-                        <p>Words make people feel things. Or scroll past. I write the kind that make them feel, act, and remember. Websites, taglines, decks, bios — if it needs a voice, I give it yours (but sharper).</p>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h4>Consulting</h4>
-                        <p>Need a marketer without hiring one full-time? I plug into your team, review what's working, scrap what's not, and help you market smarter — not just louder.</p>
-                    </div>
-                </div>
+                <?php 
+                    endforeach;
+                endif;
+                ?>
             </div>
         </div>
     </section>
@@ -257,74 +302,62 @@
         <div class="container">
             <h2 class="section-title">Client Reviews</h2>
             <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
-                    <div class="review-card">
-                        <div class="review-profile">
-                            <img src="assets/images/hubsell-logo.svg" alt="Hubsell" class="company-logo">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                <?php if (empty($testimonials)): 
+                    $default_testimonials = [
+                        [
+                            'client_name' => 'Karan Sharma',
+                            'client_position' => 'Founder, Hubsell',
+                            'company_logo' => 'hubsell-logo.svg',
+                            'rating' => 5,
+                            'review_text' => 'I highly recommend Riya to anybody needing help in marketing, corporate communications and PR. She is a self-starter with commendable storytelling, analytical and writing skills, all of which make her an excellent marketer.'
+                        ],
+                        // ... other default testimonials
+                    ];
+                    foreach ($default_testimonials as $testimonial):
+                ?>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="review-card">
+                            <div class="review-profile">
+                                <img src="assets/images/<?php echo $testimonial['company_logo']; ?>" 
+                                     alt="<?php echo htmlspecialchars($testimonial['client_position']); ?>" 
+                                     class="company-logo">
+                                <div class="rating">
+                                    <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
+                                        <i class="fas fa-star"></i>
+                                    <?php endfor; ?>
+                                </div>
                             </div>
+                            <p class="review-text"><?php echo htmlspecialchars($testimonial['review_text']); ?></p>
+                            <h4 class="client-name"><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
+                            <p class="client-position"><?php echo htmlspecialchars($testimonial['client_position']); ?></p>
                         </div>
-                        <p class="review-text">I highly recommend Riya to anybody needing help in marketing, corporate communications and PR. She is a self-starter with commendable storytelling, analytical and writing skills, all of which make her an excellent marketer. Her knowledge helped us create highly targeted content and scale our outreach.</p>
-                        <h4 class="client-name">Karan Sharma</h4>
-                        <p class="client-position">Founder, Hubsell</p>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="review-card">
-                        <div class="review-profile">
-                            <img src="assets/images/opensense-logo.svg" alt="Opensense Labs" class="company-logo">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                <?php 
+                    endforeach;
+                else:
+                    foreach ($testimonials as $testimonial):
+                ?>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="review-card">
+                            <div class="review-profile">
+                                <img src="<?php echo htmlspecialchars($testimonial['image_url']); ?>" 
+                                     alt="<?php echo htmlspecialchars($testimonial['client_name']); ?>" 
+                                     class="company-logo">
+                                <div class="rating">
+                                    <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
+                                        <i class="fas fa-star"></i>
+                                    <?php endfor; ?>
+                                </div>
                             </div>
+                            <p class="review-text"><?php echo htmlspecialchars($testimonial['review_text']); ?></p>
+                            <h4 class="client-name"><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
+                            <p class="client-position"><?php echo htmlspecialchars($testimonial['client_position']); ?></p>
                         </div>
-                        <p class="review-text">It was a pleasant experience working with Riya. She exhibited exceptional talent for copywriting, demonstrating a keen ability to craft compelling narratives that resonate with our target audience. A quick learner and someone who could always think on her feet, she added great value to our team.</p>
-                        <h4 class="client-name">Danish Usmani</h4>
-                        <p class="client-position">CEO, Opensense Labs</p>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="review-card">
-                        <div class="review-profile">
-                            <img src="assets/images/parimatch-logo.svg" alt="Parimatch" class="company-logo">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="review-text">It's a pleasure to work with Riya! All comms were done perfectly, she's well-structured and ready to implement changes if needed. All the text were selling and catchy. Will definitely go on cooperating with Riya and highly recommend her as TOP professional.</p>
-                        <h4 class="client-name">Olha Tkachenko</h4>
-                        <p class="client-position">Product Manager, Parimatch</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="review-card">
-                        <div class="review-profile">
-                            <img src="assets/images/idemia-logo.svg" alt="IDEMIA" class="company-logo">
-                            <div class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="review-text">Riya is brilliant at creating internal as well as external communications. She successfully executed various campaigns for us internally for employees as well as externally for clients and potential customers. She has a good understanding of technology and does a great job in defining the target audience.</p>
-                        <h4 class="client-name">Manisha Dubey</h4>
-                        <p class="client-position">VP Marketing & Communications, IDEMIA</p>
-                    </div>
-                </div>
+                <?php 
+                    endforeach;
+                endif;
+                ?>
             </div>
         </div>
     </section>
@@ -335,36 +368,40 @@
             <h2 class="section-title">Trusted By</h2>
             <div class="client-logos">
                 <div class="row align-items-center justify-content-center g-4">
-                    <div class="col-6 col-md-3">
-                        <div class="client-logo-box">
-                            <img src="assets/images/idemia-logo.svg" alt="IDEMIA" class="img-fluid">
+                    <?php if (empty($clients)): 
+                        $default_clients = [
+                            ['company_name' => 'IDEMIA', 'logo_url' => 'idemia-logo.svg'],
+                            ['company_name' => 'Pari Match', 'logo_url' => 'parimatch-logo.svg'],
+                            ['company_name' => 'OpenSense Labs', 'logo_url' => 'opensense-logo.svg'],
+                            ['company_name' => 'Hubsell', 'logo_url' => 'hubsell-logo.svg'],
+                            ['company_name' => 'Cladiator', 'logo_url' => 'cladiator-logo.svg'],
+                            ['company_name' => 'Gripphy', 'logo_url' => 'gripphy-logo.svg']
+                        ];
+                        foreach ($default_clients as $client):
+                    ?>
+                        <div class="col-6 col-md-3">
+                            <div class="client-logo-box">
+                                <img src="assets/images/<?php echo $client['logo_url']; ?>" 
+                                     alt="<?php echo htmlspecialchars($client['company_name']); ?>" 
+                                     class="img-fluid">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="client-logo-box">
-                            <img src="assets/images/parimatch-logo.svg" alt="Pari Match" class="img-fluid">
+                    <?php 
+                        endforeach;
+                    else:
+                        foreach ($clients as $client):
+                    ?>
+                        <div class="col-6 col-md-3">
+                            <div class="client-logo-box">
+                                <img src="<?php echo htmlspecialchars($client['logo_url']); ?>" 
+                                     alt="<?php echo htmlspecialchars($client['company_name']); ?>" 
+                                     class="img-fluid">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="client-logo-box">
-                            <img src="assets/images/opensense-logo.svg" alt="OpenSense Labs" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="client-logo-box">
-                            <img src="assets/images/hubsell-logo.svg" alt="Hubshell" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="client-logo-box">
-                            <img src="assets/images/cladiator-logo.svg" alt="Cladiator" class="img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="client-logo-box">
-                            <img src="assets/images/gripphy-logo.svg" alt="Gripphy" class="img-fluid">
-                        </div>
-                    </div>
+                    <?php 
+                        endforeach;
+                    endif;
+                    ?>
                 </div>
             </div>
         </div>
@@ -450,7 +487,7 @@
     <section id="contact" class="contact-section section-padding">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
-            <form action="services/process_contact.php" method="POST">
+            <form id="contactFormHome" action="services/process_contact.php" method="POST">
                 <input type="hidden" name="redirect" value="true">
                 <div class="row">
                     <div class="col-md-6 mb-4">
@@ -488,6 +525,47 @@
                     localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
                 });
             }
+        });
+    </script>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Contact form submission for homepage
+            $('#contactFormHome').on('submit', function(e) {
+                if (!$(this).find('input[name="redirect"]').val()) {
+                    e.preventDefault();
+                    
+                    const button = $(this).find('button[type="submit"]');
+                    const originalButtonText = button.html();
+                    button.html('<i class="fas fa-spinner fa-spin"></i> Sending...').prop('disabled', true);
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: 'services/process_contact.php',
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.success) {
+                                alert('Thank you for your message. I will get back to you soon!');
+                                $('#contactFormHome')[0].reset();
+                            } else {
+                                alert(response.message || 'An error occurred. Please try again.');
+                            }
+                        },
+                        error: function() {
+                            alert('An error occurred. Please try again later.');
+                        },
+                        complete: function() {
+                            button.html(originalButtonText).prop('disabled', false);
+                        }
+                    });
+                }
+            });
         });
     </script>
 </body>

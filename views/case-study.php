@@ -261,16 +261,9 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../assets/js/main.js"></script>
     
-    <!-- Initialize AOS Animation -->
+    <!-- Initialize Lightbox -->
     <script>
         $(document).ready(function() {
-            // Initialize AOS animation
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true
-            });
-            
             // Initialize Lightbox
             lightbox.option({
                 'resizeDuration': 200,

@@ -125,7 +125,7 @@ require_once '../database/config.php';
                                     </div>
                                     <div>
                                         <h5 class="mb-1">Email</h5>
-                                        <p class="mb-0">hello@yourdomain.com</p>
+                                        <p class="mb-0">riyauppal777@gmail.com</p>
                                     </div>
                                 </div>
                                 
@@ -135,7 +135,7 @@ require_once '../database/config.php';
                                     </div>
                                     <div>
                                         <h5 class="mb-1">Location</h5>
-                                        <p class="mb-0">New Delhi, India</p>
+                                        <p class="mb-0">Toronto, Canada</p>
                                     </div>
                                 </div>
                                 
@@ -152,13 +152,10 @@ require_once '../database/config.php';
                                 <div class="mt-5">
                                     <h5 class="mb-3">Follow Me</h5>
                                     <div class="d-flex gap-3">
-                                        <a href="#" class="text-decoration-none">
+                                        <a href="https://www.linkedin.com/in/riya-uppal01/" class="text-decoration-none">
                                             <i class="fab fa-linkedin fa-lg"></i>
                                         </a>
-                                        <a href="#" class="text-decoration-none">
-                                            <i class="fab fa-twitter fa-lg"></i>
-                                        </a>
-                                        <a href="#" class="text-decoration-none">
+                                        <a href="https://www.instagram.com/riya279/" class="text-decoration-none">
                                             <i class="fab fa-instagram fa-lg"></i>
                                         </a>
                                     </div>
@@ -210,16 +207,21 @@ require_once '../database/config.php';
     <script src="../assets/js/main.js"></script>
     <script>
         $(document).ready(function() {
-            // Initialize AOS animation
-            AOS.init({
-                duration: 800,
-                easing: 'ease-in-out',
-                once: true
-            });
+            // Reset message displays on new submission
+            function resetMessages() {
+                $('#successMessage').hide();
+                $('#errorMessage').hide();
+            }
             
             // Contact form submission
             $('#contactForm').on('submit', function(e) {
                 e.preventDefault();
+                resetMessages();
+                
+                const button = $(this).find('button[type="submit"]');
+                const originalButtonText = button.html();
+                button.html('<i class="fas fa-spinner fa-spin"></i> Sending...');
+                button.prop('disabled', true);
                 
                 $.ajax({
                     type: 'POST',
@@ -228,14 +230,20 @@ require_once '../database/config.php';
                     dataType: 'json',
                     success: function(response) {
                         if (response.success) {
-                            $('#successMessage').show();
+                            $('#successMessage').fadeIn();
                             $('#contactForm')[0].reset();
+                            button.html('<i class="fas fa-check"></i> Message Sent!');
+                            setTimeout(() => {
+                                window.location.href = 'thank-you.php';
+                            }, 2000);
                         } else {
-                            $('#errorMessage').text(response.message).show();
+                            $('#errorMessage').fadeIn().text(response.message || 'An error occurred. Please try again.');
+                            button.html(originalButtonText).prop('disabled', false);
                         }
                     },
                     error: function() {
-                        $('#errorMessage').text('An error occurred. Please try again later.').show();
+                        $('#errorMessage').fadeIn().text('An error occurred. Please try again later.');
+                        button.html(originalButtonText).prop('disabled', false);
                     }
                 });
             });

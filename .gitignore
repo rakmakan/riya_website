@@ -1,3 +1,42 @@
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# PHP files
+php_errorlog
+*error_log
+phpinfo.php
+diagnostics.php
+
+# Database files
+*.db
+*.db.backup
+*.sqlite
+*.sqlite3
+
+# Sensitive information
+database/config.php
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Cache and temporary files
+/cache/*
+/tmp/*
+.DS_Store
+
+# Vendor directories
+/vendor/
+
+# Development environment specific
+.env
+.env.local
+.env.*.local
+
 # Ignore site files and archives
 /Site Files/*
 *.zip

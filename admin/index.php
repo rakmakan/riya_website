@@ -1,5 +1,28 @@
 <?php
 require_once '../database/config.php';
+
+// Handle logout
+if (isset($_GET['logout'])) {
+    session_start();
+    session_destroy();
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
+}
+
+// Ensure session directory is writable
+$session_dir = session_save_path();
+if (!is_writable($session_dir)) {
+    error_log("Session directory is not writable: " . $session_dir);
+}
+
+// Set session cookie parameters
+session_set_cookie_params([
+    'lifetime' => 3600,
+    'path' => '/',
+    'secure' => true,
+    'httponly' => true
+]);
+
 session_start();
 
 // Simple authentication (in production, use proper authentication)
@@ -8,6 +31,12 @@ $admin_password = 'admin123'; // Change this in production
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
     if ($_POST['password'] === $admin_password) {
         $_SESSION['admin'] = true;
+        $_SESSION['login_time'] = time();
+        // Redirect to the same page to avoid form resubmission
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    } else {
+        $error_message = 'Invalid password';
     }
 }
 
@@ -29,6 +58,9 @@ if (!isset($_SESSION['admin'])) {
                     <div class="card">
                         <div class="card-body">
                             <h3 class="card-title text-center mb-4">Admin Login</h3>
+                            <?php if (isset($error_message)): ?>
+                            <div class="alert alert-danger"><?php echo htmlspecialchars($error_message); ?></div>
+                            <?php endif; ?>
                             <form method="POST">
                                 <div class="mb-3">
                                     <input type="password" name="password" class="form-control" placeholder="Password" required>
@@ -72,7 +104,10 @@ $about_content = get_section_content('about');
 </head>
 <body class="bg-light">
     <div class="container py-5">
-        <h1 class="mb-4">Website Content Management</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Website Content Management</h1>
+            <a href="?logout" class="btn btn-danger">Logout</a>
+        </div>
         
         <!-- Hero Section Content -->
         <div class="card mb-4">
@@ -121,6 +156,7 @@ $about_content = get_section_content('about');
         </div>
 
         <a href="testimonials.php" class="btn btn-secondary me-2">Manage Testimonials</a>
+        <a href="services.php" class="btn btn-secondary me-2">Manage Services</a>
         <a href="clients.php" class="btn btn-secondary me-2">Manage Clients</a>
         <a href="case-studies.php" class="btn btn-secondary">Manage Case Studies</a>
     </div>

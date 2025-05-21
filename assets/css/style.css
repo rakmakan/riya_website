@@ -17,7 +17,7 @@
 }
 
 /* Dark Mode Variables */
-.dark-mode {
+[data-theme="dark"] {
     --bg-color: #121212;
     --text-color: #e0e0e0;
     --card-bg: #1e1e1e;
@@ -41,18 +41,25 @@ body {
 .navbar {
     background-color: var(--navbar-bg);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2px 15px var(--shadow-color);
     padding: 1rem 0;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .navbar-brand {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--text-color) !important;
 }
 
 .nav-link {
+    color: var(--text-color) !important;
     font-weight: 500;
     margin: 0 0.5rem;
     position: relative;
@@ -252,10 +259,36 @@ body {
     to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
+.orbit-1, .orbit-2, .orbit-3 {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.orbit-1 .orbital-tag {
+    animation: counterSpin 20s linear infinite;
+}
+
+.orbit-2 .orbital-tag {
+    animation: counterSpin 25s linear infinite reverse;
+}
+
+.orbit-3 .orbital-tag {
+    animation: counterSpin 30s linear infinite;
+}
+
+@keyframes counterSpin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
 /* Position orbital tags */
-.orbit-1 .orbital-tag { top: 0; left: 50%; transform: translate(-50%, -50%); }
-.orbit-2 .orbital-tag { top: 50%; right: 0; transform: translate(50%, -50%); }
-.orbit-3 .orbital-tag { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+.orbit-1 .orbital-tag { top: -30px; left: 50%; transform: translate(-50%, 0); }
+.orbit-2 .orbital-tag { top: 50%; right: -30px; transform: translate(0, -50%); }
+.orbit-3 .orbital-tag { bottom: -30px; left: 50%; transform: translate(-50%, 0); }
 
 /* Utility Classes */
 .section-padding {
@@ -407,8 +440,22 @@ body {
     padding: 2.5rem;
     border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
+    will-change: transform, opacity;
+    visibility: visible;
+}
+
+.service-card[data-aos] {
+    opacity: 0 !important;
+    transform: translateY(20px);
+    visibility: hidden;
+}
+
+.service-card.aos-animate {
+    opacity: 1 !important;
+    transform: translateY(0);
+    visibility: visible;
 }
 
 .service-card:hover {

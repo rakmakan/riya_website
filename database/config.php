@@ -126,6 +126,24 @@ $db->query("CREATE TABLE IF NOT EXISTS case_studies (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )");
 
+$db->query('CREATE TABLE IF NOT EXISTS services (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100),
+    description TEXT,
+    icon VARCHAR(50),
+    display_order INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)');
+
+$db->query('CREATE TABLE IF NOT EXISTS stats (
+    id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    section VARCHAR(50),
+    label VARCHAR(100),
+    value VARCHAR(50),
+    display_order INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)');
+
 // Update functions to work with MySQLi
 
 function get_section_content($section) {
@@ -139,7 +157,7 @@ function get_section_content($section) {
 
 function get_testimonials() {
     global $db;
-    $result = $db->query('SELECT * FROM testimonials ORDER BY created_at DESC LIMIT 3');
+    $result = $db->query('SELECT * FROM testimonials ORDER BY created_at DESC');
     $testimonials = [];
     while ($row = $result->fetch_assoc()) {
         $testimonials[] = $row;
@@ -185,5 +203,25 @@ function get_case_study($slug) {
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc();
+}
+
+function get_services() {
+    global $db;
+    $result = $db->query('SELECT * FROM services ORDER BY display_order ASC');
+    $services = [];
+    while ($row = $result->fetch_assoc()) {
+        $services[] = $row;
+    }
+    return $services;
+}
+
+function get_homepage_stats() {
+    global $db;
+    $result = $db->query('SELECT * FROM stats WHERE section = "homepage" LIMIT 3');
+    $stats = [];
+    while ($row = $result->fetch_assoc()) {
+        $stats[] = $row;
+    }
+    return $stats;
 }
 ?>

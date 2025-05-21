@@ -1,62 +1,79 @@
-// Initialize AOS
-AOS.init({
-    duration: 800,
-    easing: 'ease-out',
-    once: true
-});
-
 // Verify main.js is loading
 console.log('main.js is loaded');
+
+// Initialize AOS with optimal settings
+function initAOS() {
+    AOS.init({
+        duration: 800,
+        easing: 'ease-out',
+        once: true,
+        offset: 50,
+        delay: 0,
+        mirror: false,
+        anchorPlacement: 'top-bottom',
+        disable: function() {
+            return window.innerWidth < 768;
+        }
+    });
+}
+
+// Counter animation for statistics
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50; // Adjust speed here
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            clearInterval(timer);
+            current = target;
+        }
+        element.textContent = Math.round(current);
+    }, 30);
+}
+
+// Initialize counters when they come into view
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const target = parseInt(entry.target.getAttribute('data-target'));
+            animateCounter(entry.target, target);
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
 
 // Dark Mode Implementation
 function initDarkMode() {
     const darkModeToggle = document.getElementById('darkModeToggle');
-    
-    // Add a console log to check if the element exists
-    console.log('Dark mode toggle element:', darkModeToggle);
-    
-    // Don't proceed if the button isn't found
-    if (!darkModeToggle) {
-        console.error('Dark mode toggle button not found!');
-        return;
-    }
-    
     const body = document.body;
     
-    // Check for saved theme preference or respect OS preference
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    // Check for saved theme preference
     const savedTheme = localStorage.getItem('theme');
     
-    // If user previously chose a theme, use it
+    // Apply saved theme or system preference
     if (savedTheme === 'dark') {
-        body.classList.add('dark-mode');
+        body.setAttribute('data-theme', 'dark');
         darkModeToggle.innerHTML = '☀️';
-    } else if (savedTheme === 'light') {
-        body.classList.remove('dark-mode');
-        darkModeToggle.innerHTML = '🌙';
     } else {
-        // If no saved preference, use OS preference
-        if (prefersDarkScheme.matches) {
-            body.classList.add('dark-mode');
-            darkModeToggle.innerHTML = '☀️';
-        }
+        body.removeAttribute('data-theme');
+        darkModeToggle.innerHTML = '🌙';
     }
 
     // Toggle theme when button is clicked
     darkModeToggle.addEventListener('click', () => {
-        console.log('Dark mode button clicked');
-        body.classList.toggle('dark-mode');
-        const isDarkMode = body.classList.contains('dark-mode');
-        
-        // Update button icon
-        darkModeToggle.innerHTML = isDarkMode ? '☀️' : '🌙';
-        
-        // Save preference to localStorage
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        if (body.getAttribute('data-theme') === 'dark') {
+            body.removeAttribute('data-theme');
+            darkModeToggle.innerHTML = '🌙';
+            localStorage.setItem('theme', 'light');
+        } else {
+            body.setAttribute('data-theme', 'dark');
+            darkModeToggle.innerHTML = '☀️';
+            localStorage.setItem('theme', 'dark');
+        }
     });
 }
 
-// Navigation scroll behavior
+// Main initialization when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize dark mode
     initDarkMode();
@@ -72,6 +89,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             navbar.classList.remove('shadow-sm');
         }
+    });
+
+    // Observe counter elements after DOM is loaded
+    document.querySelectorAll('.counter').forEach(counter => {
+        counterObserver.observe(counter);
     });
 
     // Smooth scroll for navigation links
@@ -98,30 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         new bootstrap.Carousel(carousel, {
             interval: 5000,
             wrap: true
-        });
-    }
-
-    // Handle contact form submission
-    const contactForm = document.querySelector('#contact form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-
-            try {
-                const response = await fetch('process_contact.php', {
-                    method: 'POST',
-                    body: formData
-                });
-                const result = await response.json();
-                
-                alert(result.message);
-                if (result.success) {
-                    contactForm.reset();
-                }
-            } catch (error) {
-                alert('An error occurred. Please try again later.');
-            }
         });
     }
 
@@ -153,25 +151,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     skillBars.forEach(bar => skillObserver.observe(bar));
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
     // Add animation classes to elements
     const animatedElements = document.querySelectorAll('.service-card, .case-study-card, .review-card');
     animatedElements.forEach((element, index) => {
         element.setAttribute('data-aos', 'fade-up');
         element.setAttribute('data-aos-delay', (index * 100).toString());
+        element.style.opacity = '0';
+    });
+
+    // Initialize AOS after everything is set up
+    window.addEventListener('load', () => {
+        // Short delay to ensure all elements are properly laid out
+        setTimeout(initAOS, 100);
+        
+        // Make elements visible after AOS is initialized
+        animatedElements.forEach(element => {
+            element.style.opacity = '';
+        });
     });
 
     // Add hover effect to service icons
@@ -184,55 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.style.transform = 'rotate(-5deg) scale(1)';
         });
     });
-
-    // Form submission animation
-    const contactForm = document.querySelector('.contact-section form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const button = this.querySelector('button[type="submit"]');
-            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            // Add your form submission logic here
-            setTimeout(() => {
-                button.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-                button.classList.add('btn-success');
-                this.reset();
-                setTimeout(() => {
-                    button.innerHTML = 'Send Message';
-                    button.classList.remove('btn-success');
-                }, 3000);
-            }, 1500);
-        });
-    }
-});
-
-// Counter animation for statistics
-function animateCounter(element, target) {
-    let current = 0;
-    const increment = target / 50; // Adjust speed here
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            clearInterval(timer);
-            current = target;
-        }
-        element.textContent = Math.round(current);
-    }, 30);
-}
-
-// Initialize counters when they come into view
-const counterObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const target = parseInt(entry.target.getAttribute('data-target'));
-            animateCounter(entry.target, target);
-            counterObserver.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-document.querySelectorAll('.counter').forEach(counter => {
-    counterObserver.observe(counter);
 });
 
 // Orbit Animation Control
