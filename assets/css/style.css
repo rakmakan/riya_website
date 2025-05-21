@@ -740,6 +740,41 @@ body {
     }
 }
 
+/* Mobile-specific styles for reviews */
+@media (max-width: 768px) {
+    .reviews-container {
+        padding: 20px 0;
+    }
+
+    .review-track {
+        display: flex;
+        animation: none;
+        transition: transform 0.3s ease;
+        gap: 1rem;
+    }
+
+    .review-card {
+        width: 280px;
+        min-height: 250px;
+        padding: 1.25rem;
+        margin: 0 0.5rem;
+        flex: 0 0 auto;
+    }
+
+    .review-text {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .client-name {
+        font-size: 1rem;
+    }
+
+    .client-position {
+        font-size: 0.875rem;
+    }
+}
+
 /* Contact Section */
 .contact-section {
     background-color: #fff;
@@ -918,6 +953,66 @@ body {
     
     .client-logo-box img {
         max-height: 40px;
+    }
+}
+
+/* Mobile-specific styles for client logos */
+@media (max-width: 768px) {
+    .client-logos-container {
+        padding: 20px 0;
+    }
+    
+    .client-logos-track {
+        gap: 20px;
+        animation: mobileMarquee 20s linear infinite;
+    }
+    
+    .client-logo-box {
+        padding: 10px 20px;
+        min-width: 120px;
+        max-width: 140px;
+    }
+    
+    .client-logo-box img {
+        max-height: 30px;
+    }
+
+    @keyframes mobileMarquee {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100% - 20px));
+        }
+    }
+}
+
+/* Touch screen slide controls */
+@media (max-width: 768px) {
+    .reviews-container {
+        position: relative;
+        touch-action: pan-x;
+    }
+
+    .reviews-container::before,
+    .reviews-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 40px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .reviews-container::before {
+        left: 0;
+        background: linear-gradient(to right, var(--bg-color), transparent);
+    }
+
+    .reviews-container::after {
+        right: 0;
+        background: linear-gradient(to left, var(--bg-color), transparent);
     }
 }
 

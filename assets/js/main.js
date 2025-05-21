@@ -252,3 +252,63 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Touch-based sliding for reviews on mobile
+document.addEventListener('DOMContentLoaded', function() {
+    const reviewsContainer = document.querySelector('.reviews-container');
+    const reviewTrack = document.querySelector('.review-track');
+    
+    if (!reviewsContainer || !reviewTrack) return;
+
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    // Mobile touch events
+    reviewTrack.addEventListener('touchstart', touchStart);
+    reviewTrack.addEventListener('touchmove', touchMove);
+    reviewTrack.addEventListener('touchend', touchEnd);
+
+    function touchStart(event) {
+        if (window.innerWidth > 768) return; // Only activate on mobile
+        isDragging = true;
+        startPos = event.touches[0].clientX;
+        prevTranslate = currentTranslate;
+        
+        // Pause the marquee animation
+        reviewTrack.style.animation = 'none';
+    }
+
+    function touchMove(event) {
+        if (!isDragging) return;
+        
+        const currentPosition = event.touches[0].clientX;
+        const diff = currentPosition - startPos;
+        currentTranslate = prevTranslate + diff;
+        
+        // Apply the transformation
+        reviewTrack.style.transform = `translateX(${currentTranslate}px)`;
+    }
+
+    function touchEnd() {
+        isDragging = false;
+        
+        // Snap to the nearest review card
+        const reviewWidth = 280; // Width of review card + margin
+        const snapPosition = Math.round(currentTranslate / reviewWidth) * reviewWidth;
+        
+        // Limit the scroll range
+        const maxScroll = -(reviewTrack.scrollWidth - reviewsContainer.offsetWidth);
+        currentTranslate = Math.max(Math.min(snapPosition, 0), maxScroll);
+        
+        // Smooth transition to snapped position
+        reviewTrack.style.transition = 'transform 0.3s ease-out';
+        reviewTrack.style.transform = `translateX(${currentTranslate}px)`;
+        
+        // Reset transition after animation
+        setTimeout(() => {
+            reviewTrack.style.transition = 'none';
+        }, 300);
+    }
+});
