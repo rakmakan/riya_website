@@ -301,73 +301,80 @@ $clients = get_clients();
     <section id="reviews" class="reviews-section section-padding">
         <div class="container">
             <h2 class="section-title">Client Reviews</h2>
-            <div class="row g-4">
-                <?php if (empty($testimonials)): 
-                    $default_testimonials = [
-                        [
-                            'client_name' => 'Karan Sharma',
-                            'client_position' => 'Founder, Hubsell',
-                            'company_logo' => 'hubsell-logo.svg',
-                            'rating' => 5,
-                            'review_text' => 'I highly recommend Riya to anybody needing help in marketing, corporate communications and PR. She is a self-starter with commendable storytelling, analytical and writing skills, all of which make her an excellent marketer.'
-                        ],
-                        // ... other default testimonials
-                    ];
-                    foreach ($default_testimonials as $testimonial):
-                ?>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="review-card">
-                            <div class="review-profile">
-                                <img src="assets/images/<?php echo $testimonial['company_logo']; ?>" 
-                                     alt="<?php echo htmlspecialchars($testimonial['client_position']); ?>" 
-                                     class="company-logo">
-                                <div class="rating">
-                                    <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
-                                        <i class="fas fa-star"></i>
-                                    <?php endfor; ?>
+            <div class="reviews-container">
+                <div class="review-track">
+                    <?php if (empty($testimonials)): 
+                        $default_testimonials = [
+                            [
+                                'client_name' => 'Karan Sharma',
+                                'client_position' => 'Founder, Hubsell',
+                                'company_logo' => 'hubsell-logo.svg',
+                                'rating' => 5,
+                                'review_text' => 'I highly recommend Riya to anybody needing help in marketing, corporate communications and PR. She is a self-starter with commendable storytelling, analytical and writing skills, all of which make her an excellent marketer.'
+                            ],
+                            // ... other default testimonials
+                        ];
+                        
+                        // Print testimonials twice for seamless loop
+                        for ($i = 0; $i < 2; $i++):
+                            foreach ($default_testimonials as $testimonial):
+                    ?>
+                            <div class="review-card">
+                                <div class="review-profile">
+                                    <img src="assets/images/<?php echo $testimonial['company_logo']; ?>" 
+                                         alt="<?php echo htmlspecialchars($testimonial['client_position']); ?>" 
+                                         class="company-logo">
+                                    <div class="rating">
+                                        <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
+                                            <i class="fas fa-star"></i>
+                                        <?php endfor; ?>
+                                    </div>
                                 </div>
+                                <p class="review-text"><?php echo htmlspecialchars($testimonial['review_text']); ?></p>
+                                <h4 class="client-name"><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
+                                <p class="client-position"><?php echo htmlspecialchars($testimonial['client_position']); ?></p>
                             </div>
-                            <p class="review-text"><?php echo htmlspecialchars($testimonial['review_text']); ?></p>
-                            <h4 class="client-name"><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
-                            <p class="client-position"><?php echo htmlspecialchars($testimonial['client_position']); ?></p>
-                        </div>
-                    </div>
-                <?php 
-                    endforeach;
-                else:
-                    foreach ($testimonials as $testimonial):
-                ?>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="review-card">
-                            <div class="review-profile">
-                                <img src="<?php echo htmlspecialchars($testimonial['image_url']); ?>" 
-                                     alt="<?php echo htmlspecialchars($testimonial['client_name']); ?>" 
-                                     class="company-logo">
-                                <div class="rating">
-                                    <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
-                                        <i class="fas fa-star"></i>
-                                    <?php endfor; ?>
+                    <?php 
+                            endforeach;
+                        endfor;
+                    else:
+                        // Print dynamic testimonials twice for seamless loop
+                        for ($i = 0; $i < 2; $i++):
+                            foreach ($testimonials as $testimonial):
+                    ?>
+                            <div class="review-card">
+                                <div class="review-profile">
+                                    <img src="<?php echo htmlspecialchars($testimonial['image_url']); ?>" 
+                                         alt="<?php echo htmlspecialchars($testimonial['client_name']); ?>" 
+                                         class="company-logo">
+                                    <div class="rating">
+                                        <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
+                                            <i class="fas fa-star"></i>
+                                        <?php endfor; ?>
+                                    </div>
                                 </div>
+                                <p class="review-text"><?php echo htmlspecialchars($testimonial['review_text']); ?></p>
+                                <h4 class="client-name"><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
+                                <p class="client-position"><?php echo htmlspecialchars($testimonial['client_position']); ?></p>
                             </div>
-                            <p class="review-text"><?php echo htmlspecialchars($testimonial['review_text']); ?></p>
-                            <h4 class="client-name"><?php echo htmlspecialchars($testimonial['client_name']); ?></h4>
-                            <p class="client-position"><?php echo htmlspecialchars($testimonial['client_position']); ?></p>
-                        </div>
-                    </div>
-                <?php 
-                    endforeach;
-                endif;
-                ?>
+                    <?php 
+                            endforeach;
+                        endfor;
+                    endif;
+                    ?>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Client Logos Section -->
     <section id="clients" class="clients-section section-padding bg-light">
-        <div class="container">
-            <h2 class="section-title">Trusted By</h2>
-            <div class="client-logos">
-                <div class="row align-items-center justify-content-center g-4">
+        <div class="container-fluid">
+            <div class="container">
+                <h2 class="section-title">Trusted By</h2>
+            </div>
+            <div class="client-logos-container">
+                <div class="client-logos-track">
                     <?php if (empty($clients)): 
                         $default_clients = [
                             ['company_name' => 'IDEMIA', 'logo_url' => 'idemia-logo.svg'],
@@ -377,29 +384,32 @@ $clients = get_clients();
                             ['company_name' => 'Cladiator', 'logo_url' => 'cladiator-logo.svg'],
                             ['company_name' => 'Gripphy', 'logo_url' => 'gripphy-logo.svg']
                         ];
-                        foreach ($default_clients as $client):
+                        
+                        // Print logos twice for seamless loop
+                        for ($i = 0; $i < 2; $i++):
+                            foreach ($default_clients as $client):
                     ?>
-                        <div class="col-6 col-md-3">
                             <div class="client-logo-box">
                                 <img src="assets/images/<?php echo $client['logo_url']; ?>" 
                                      alt="<?php echo htmlspecialchars($client['company_name']); ?>" 
                                      class="img-fluid">
                             </div>
-                        </div>
                     <?php 
-                        endforeach;
+                            endforeach;
+                        endfor;
                     else:
-                        foreach ($clients as $client):
+                        // Print dynamic logos twice for seamless loop
+                        for ($i = 0; $i < 2; $i++):
+                            foreach ($clients as $client):
                     ?>
-                        <div class="col-6 col-md-3">
                             <div class="client-logo-box">
                                 <img src="<?php echo htmlspecialchars($client['logo_url']); ?>" 
                                      alt="<?php echo htmlspecialchars($client['company_name']); ?>" 
                                      class="img-fluid">
                             </div>
-                        </div>
                     <?php 
-                        endforeach;
+                            endforeach;
+                        endfor;
                     endif;
                     ?>
                 </div>
