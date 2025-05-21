@@ -1,118 +1,116 @@
 <?php
-// Define database file path with absolute path for server compatibility
-$db_file = $_SERVER['DOCUMENT_ROOT'] . '/database/portfolio.db';
+// MySQL Database Configuration
+$host = 'rakshitm.sg-host.com';
+$port = 3306;
+$username = 'uydaa4xtydxvf';
+$password = 'Riyamakan@1994'; // IMPORTANT: Replace with your actual MySQL password
+$database = 'db4wkbt5d2fpqq';
 
-// Check if SQLite3 extension is available
-if (!class_exists('SQLite3')) {
-    error_log("SQLite3 extension is not available on this server");
+// Display error message if password hasn't been updated
+if ($password === 'YOUR_MYSQL_PASSWORD_HERE') {
+    die("Error: Please update the MySQL password in database/config.php before connecting");
+}
+
+// Connect to MySQL database
+try {
+    $db = new mysqli($host, $username, $password, $database, $port);
     
-    // Create a fallback database class that gracefully handles missing SQLite support
+    // Check for connection errors
+    if ($db->connect_error) {
+        error_log("MySQL connection error: " . $db->connect_error);
+        throw new Exception("Database connection failed: " . $db->connect_error);
+    }
+    
+    // Set character set
+    $db->set_charset('utf8mb4');
+    
+} catch (Exception $e) {
+    error_log("MySQL connection error: " . $e->getMessage());
+    
+    // Create a fallback database class that gracefully handles connection issues
     class FallbackDB {
         private $error_message = "Database functionality is temporarily unavailable.";
         
-        public function exec($query) {
-            error_log("Attempted to execute query but SQLite is unavailable: " . $query);
+        public function query($query) {
+            error_log("Attempted to query but MySQL is unavailable: " . $query);
             return false;
         }
         
         public function prepare($query) {
-            error_log("Attempted to prepare query but SQLite is unavailable: " . $query);
+            error_log("Attempted to prepare query but MySQL is unavailable: " . $query);
             return new FallbackStmt();
         }
         
-        public function query($query) {
-            error_log("Attempted to query but SQLite is unavailable: " . $query);
-            return new FallbackResult();
-        }
-        
-        public function lastErrorMsg() {
+        public function error() {
             return $this->error_message;
         }
     }
     
     class FallbackStmt {
-        public function bindValue($param, $value, $type) {
+        public function bind_param($types, ...$params) {
             return true;
         }
         
         public function execute() {
+            return false;
+        }
+        
+        public function get_result() {
             return new FallbackResult();
         }
     }
     
     class FallbackResult {
-        public function fetchArray($mode = null) {
+        public function fetch_assoc() {
             return false;
+        }
+        
+        public function fetch_all(int $mode = MYSQLI_NUM) {
+            return [];
         }
     }
     
     // Use the fallback database
     $db = new FallbackDB();
-} else {
-    // Normal SQLite operation with improved error handling
-    try {
-        // Check if database directory is writable
-        $db_dir = dirname($db_file);
-        if (!is_writable($db_dir)) {
-            error_log("Database directory is not writable: $db_dir");
-            // Try to set permissions
-            @chmod($db_dir, 0755);
-        }
-        
-        // Check if database file exists, if not, try to create it
-        if (!file_exists($db_file)) {
-            error_log("Database file does not exist, attempting to create: $db_file");
-            touch($db_file);
-            @chmod($db_file, 0644);
-        }
-        
-        $db = new SQLite3($db_file);
-        $db->busyTimeout(5000); // Set timeout for busy database
-        $db->exec('PRAGMA journal_mode = WAL;'); // Use Write-Ahead Logging for better concurrency
-    } catch (Exception $e) {
-        error_log("SQLite connection error: " . $e->getMessage());
-        // Use the fallback database on error
-        $db = new FallbackDB();
-    }
 }
 
 // Create tables if they don't exist
-$db->exec("CREATE TABLE IF NOT EXISTS content (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+$db->query("CREATE TABLE IF NOT EXISTS content (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     section VARCHAR(50),
     title TEXT,
     description TEXT,
     image_url TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )");
 
-$db->exec("CREATE TABLE IF NOT EXISTS testimonials (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+$db->query("CREATE TABLE IF NOT EXISTS testimonials (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     client_name VARCHAR(100),
     client_position VARCHAR(100),
     review_text TEXT,
-    rating INTEGER,
+    rating INT,
     image_url TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )");
 
-$db->exec("CREATE TABLE IF NOT EXISTS clients (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+$db->query("CREATE TABLE IF NOT EXISTS clients (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     company_name VARCHAR(100),
     logo_url TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )");
 
-$db->exec("CREATE TABLE IF NOT EXISTS messages (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+$db->query("CREATE TABLE IF NOT EXISTS messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     email VARCHAR(100),
     message TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )");
 
-$db->exec("CREATE TABLE IF NOT EXISTS case_studies (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+$db->query("CREATE TABLE IF NOT EXISTS case_studies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(200),
     slug VARCHAR(200),
     summary TEXT,
@@ -125,21 +123,25 @@ $db->exec("CREATE TABLE IF NOT EXISTS case_studies (
     challenges TEXT,
     solutions TEXT,
     results TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )");
+
+// Update functions to work with MySQLi
 
 function get_section_content($section) {
     global $db;
-    $stmt = $db->prepare('SELECT * FROM content WHERE section = :section');
-    $stmt->bindValue(':section', $section, SQLITE3_TEXT);
-    return $stmt->execute()->fetchArray(SQLITE3_ASSOC);
+    $stmt = $db->prepare('SELECT * FROM content WHERE section = ?');
+    $stmt->bind_param('s', $section);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
 }
 
 function get_testimonials() {
     global $db;
     $result = $db->query('SELECT * FROM testimonials ORDER BY created_at DESC LIMIT 3');
     $testimonials = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    while ($row = $result->fetch_assoc()) {
         $testimonials[] = $row;
     }
     return $testimonials;
@@ -149,7 +151,7 @@ function get_clients() {
     global $db;
     $result = $db->query('SELECT * FROM clients ORDER BY created_at DESC');
     $clients = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    while ($row = $result->fetch_assoc()) {
         $clients[] = $row;
     }
     return $clients;
@@ -157,10 +159,8 @@ function get_clients() {
 
 function save_message($name, $email, $message) {
     global $db;
-    $stmt = $db->prepare('INSERT INTO messages (name, email, message) VALUES (:name, :email, :message)');
-    $stmt->bindValue(':name', $name, SQLITE3_TEXT);
-    $stmt->bindValue(':email', $email, SQLITE3_TEXT);
-    $stmt->bindValue(':message', $message, SQLITE3_TEXT);
+    $stmt = $db->prepare('INSERT INTO messages (name, email, message) VALUES (?, ?, ?)');
+    $stmt->bind_param('sss', $name, $email, $message);
     return $stmt->execute();
 }
 
@@ -172,7 +172,7 @@ function get_case_studies($limit = null) {
     }
     $result = $db->query($query);
     $cases = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+    while ($row = $result->fetch_assoc()) {
         $cases[] = $row;
     }
     return $cases;
@@ -180,8 +180,10 @@ function get_case_studies($limit = null) {
 
 function get_case_study($slug) {
     global $db;
-    $stmt = $db->prepare('SELECT * FROM case_studies WHERE slug = :slug');
-    $stmt->bindValue(':slug', $slug, SQLITE3_TEXT);
-    return $stmt->execute()->fetchArray(SQLITE3_ASSOC);
+    $stmt = $db->prepare('SELECT * FROM case_studies WHERE slug = ?');
+    $stmt->bind_param('s', $slug);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc();
 }
 ?>
