@@ -36,12 +36,12 @@
                                 <div class="hero-stat-label">Years Experience</div>
                             </div>
                             <div class="hero-stat">
-                                <div class="hero-stat-number">90+</div>
+                                <div class="hero-stat-number">20+</div>
                                 <div class="hero-stat-label">Projects Completed</div>
                             </div>
                             <div class="hero-stat">
-                                <div class="hero-stat-number">95%</div>
-                                <div class="hero-stat-label">Client Satisfaction</div>
+                                <div class="hero-stat-number">8+</div>
+                                <div class="hero-stat-label">Brands</div>
                             </div>
                         </div>
                     </div>
