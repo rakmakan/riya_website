@@ -128,7 +128,7 @@ require_once '../database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="../assets/images/udacity-logo.jpg" alt="Udacity" class="mb-3">
+                        <img src="../assets/images/udacity-logo.svg" alt="Udacity" class="mb-3">
                         <h4>Digital Marketing Nanodegree</h4>
                         <p class="mb-0">Udacity</p>
                     </div>
@@ -136,7 +136,7 @@ require_once '../database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="../assets/images/wes-logo.webp" alt="WES" class="mb-3">
+                        <img src="../assets/images/wes-logo.png" alt="WES" class="mb-3">
                         <h4>WES Certification</h4>
                         <p class="mb-0">Credly by Pearson</p>
                     </div>
