@@ -22,6 +22,84 @@ $clients = get_clients();
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet">
+    
+    <!-- Inline styles for What Working Together Looks Like Section -->
+    <style>
+        /* What Working Together Looks Like Section */
+        .collaboration-section {
+            background-color: var(--bg-color);
+        }
+
+        .collaboration-intro,
+        .collaboration-scenarios {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .collaboration-intro:hover,
+        .collaboration-scenarios:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .outcome-item {
+            position: relative;
+        }
+
+        .outcome-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 700;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .outcome-content h4 {
+            margin-bottom: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .scenario-card {
+            padding: 15px 0;
+            position: relative;
+        }
+
+        .scenario-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(0, 102, 204, 0.1);
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .scenario-icon i {
+            font-size: 1.5rem;
+        }
+
+        .scenario-divider {
+            height: 1px;
+            background: linear-gradient(90deg, var(--primary-color) 0%, transparent 100%);
+            margin-top: 15px;
+        }
+
+        .collaboration-conclusion {
+            font-style: italic;
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
     <?php include 'includes/header.php'; ?>
@@ -256,6 +334,81 @@ If you’re building something worth paying attention to, I’ll help you say th
                             <li>Email flows</li>
                             <li>Sales decks & social messaging</li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Working Together Looks Like Section -->
+    <section id="collaboration" class="collaboration-section section-padding">
+        <div class="container">
+            <h2 class="section-title">What Working Together Looks Like</h2>
+            
+            <div class="row mb-5">
+                <div class="col-md-8 mx-auto text-center">
+                    <p class="lead mb-2">Your brand speaks clearly.</p>
+                    <p class="lead mb-2">Your team knows what to say — and how to say it.</p>
+                    <p class="lead mb-4">Your audience doesn't just understand you — they remember you.</p>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-lg-6">
+                    <div class="collaboration-intro p-4 rounded shadow-sm h-100">
+                        <h3 class="mb-4">After we work together, you'll walk away with:</h3>
+                        <div class="collaboration-outcome-list">
+                            <div class="outcome-item d-flex align-items-start mb-4">
+                                <div class="outcome-number">1</div>
+                                <div class="outcome-content">
+                                    <h4>A clear brand position that sets you apart</h4>
+                                </div>
+                            </div>
+                            <div class="outcome-item d-flex align-items-start mb-4">
+                                <div class="outcome-number">2</div>
+                                <div class="outcome-content">
+                                    <h4>A messaging system your team can actually use</h4>
+                                </div>
+                            </div>
+                            <div class="outcome-item d-flex align-items-start mb-4">
+                                <div class="outcome-number">3</div>
+                                <div class="outcome-content">
+                                    <h4>Copy that sounds like you — and converts like it should</h4>
+                                </div>
+                            </div>
+                            <div class="outcome-item d-flex align-items-start">
+                                <div class="outcome-number">4</div>
+                                <div class="outcome-content">
+                                    <h4>Confidence in how you show up, online and off</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="collaboration-scenarios p-4 rounded shadow-sm h-100">
+                        <div class="scenario-card mb-4">
+                            <div class="scenario-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Pitching Investors</h4>
+                            <div class="scenario-divider"></div>
+                        </div>
+                        <div class="scenario-card mb-4">
+                            <div class="scenario-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <h4>Launching Campaigns</h4>
+                            <div class="scenario-divider"></div>
+                        </div>
+                        <div class="scenario-card">
+                            <div class="scenario-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <h4>Updating Your Site</h4>
+                            <div class="scenario-divider"></div>
+                        </div>
+                        <p class="mt-4 collaboration-conclusion">Whether you're pitching investors, launching a campaign, or updating your site, your message will be sharp, strategic, and unmistakably yours.</p>
                     </div>
                 </div>
             </div>

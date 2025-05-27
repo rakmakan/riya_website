@@ -35,6 +35,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
+    padding-top: 120px; /* Increased padding to account for the fixed header */
 }
 
 /* Navigation */
@@ -43,7 +44,7 @@ body {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 2px 15px var(--shadow-color);
-    padding: 1rem 0;
+    padding: 1.25rem 0; /* Increased padding to make header thicker */
     transition: all 0.3s ease;
     position: fixed;
     top: 0;
@@ -61,7 +62,7 @@ body {
 }
 
 .navbar-brand img {
-    height: 80px;
+    height: 50px; /* Increased logo height */
     width: auto;
     object-fit: contain;
     transition: transform 0.3s ease;
@@ -96,7 +97,7 @@ body {
 
 /* Hero Section */
 .hero-section {
-    padding: 120px 0 80px;
+    padding: 100px 0 80px;
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, var(--light-gray), #fff);
@@ -306,6 +307,12 @@ body {
 /* Utility Classes */
 .section-padding {
     padding: 6rem 0;
+    padding-top: 8rem; /* Increased top padding to account for the fixed header */
+}
+
+/* Specific padding utility for pages that need extra padding */
+.pt-120 {
+    padding-top: 120px !important;
 }
 
 .section-title {
@@ -591,7 +598,9 @@ body {
     flex-grow: 1;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
+    box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 1.6;

@@ -1,0 +1,74 @@
+/* What Working Together Looks Like Section */
+.collaboration-section {
+    background-color: var(--bg-color);
+}
+
+.collaboration-intro,
+.collaboration-scenarios {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.collaboration-intro:hover,
+.collaboration-scenarios:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.outcome-item {
+    position: relative;
+}
+
+.outcome-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 700;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.outcome-content h4 {
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.scenario-card {
+    padding: 15px 0;
+    position: relative;
+}
+
+.scenario-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 102, 204, 0.1);
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.scenario-icon i {
+    font-size: 1.5rem;
+}
+
+.scenario-divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary-color) 0%, transparent 100%);
+    margin-top: 15px;
+}
+
+.collaboration-conclusion {
+    font-style: italic;
+    color: var(--primary-color);
+    font-weight: 500;
+}
