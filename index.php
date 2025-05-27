@@ -32,8 +32,8 @@ $clients = get_clients();
             <div class="row align-items-center">
                 <div class="col-lg-6 order-lg-1 order-2">
                     <div class="hero-content">
-                        <h1 class="hero-heading"><?php echo htmlspecialchars($hero_content['title'] ?? 'Building Brands Through Strategic Storytelling'); ?></h1>
-                        <p class="hero-description"><?php echo htmlspecialchars($hero_content['description'] ?? 'Helping brands cut through the noise with compelling narratives, data-driven strategies, and AI-powered solutions.'); ?></p>
+                        <h1 class="hero-heading"><?php echo htmlspecialchars($hero_content['title'] ?? 'Get eyes on your brand and keep them there.'); ?></h1>
+                        <p class="hero-description"><?php echo htmlspecialchars($hero_content['description'] ?? 'Brand strategy, Messaging & Copy that turn attention into trust.'); ?></p>
                         
                         <div class="hero-cta-group">
                             <a href="#contact" class="btn btn-primary btn-hero-primary">Start a Project</a>
@@ -110,8 +110,24 @@ $clients = get_clients();
                     <img src="assets/images/about-image.png" alt="About Image" class="img-fluid rounded shadow">
                 </div>
                 <div class="col-lg-6">
-                    <h3 class="mb-4">Building Brands Through Strategic Storytelling</h3>
-                    <p class="lead mb-4">I didn't stumble into marketing. I built it. Layer by layer, over seven years of learning how people think, what makes them feel, and why they act.</p>
+                    <h3 class="mb-4">Where strategy meets storytelling.</h3>
+                    <p class="lead mb-4">
+                        I help brands find their voice, define their positioning, and communicate with clarity across every touchpoint — from pitch decks to product pages.
+                    </p>
+                    <p class="lead mb-4">
+
+My work lives at the intersection of strategy and storytelling. I partner with founders, marketing teams, and creative leads to turn scattered ideas into sharp narratives — the kind that actually land with the people you’re trying to reach.
+                    </p>
+                    <p class="lead mb-4">
+I'm a brand strategist and messaging specialist with 6+ years of experience across agencies, startups, and global brands. With a Master’s in English and a degree in marketing and brand direction, I bring both critical thinking and creative instinct to how brands show up in the world.
+                    </p>
+                    <p class="lead mb-4">
+Through audience research, competitive analysis, and structured messaging systems, I help brands communicate with purpose — not just polish.
+                    </p>
+                    <p class="lead mb-4">
+If you’re building something worth paying attention to, I’ll help you say the thing that makes people stop and listen.
+
+                    </p>
                     <p class="mb-4">With a foundation in English Literature and specialized training in Marketing & Brand Direction, I bring both the art and science of communication to every project.</p>
                     <div class="d-flex align-items-center mb-4">
                         <div class="experience-highlight me-4">
@@ -119,7 +135,7 @@ $clients = get_clients();
                             <p class="mb-0">Years Experience</p>
                         </div>
                         <div class="experience-highlight">
-                            <h4 class="mb-0">90+</h4>
+                            <h4 class="mb-0">20+</h4>
                             <p class="mb-0">Projects Completed</p>
                         </div>
                     </div>
