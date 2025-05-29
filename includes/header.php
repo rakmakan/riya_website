@@ -28,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container">
             <a class="navbar-brand" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? '../index.php' : 'index.php'; ?>">
-                <img src="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? '../assets/images/airy-alps-logo.svg' : 'assets/images/airy-alps-logo.png'; ?>" alt="AIRYALPS" height="30">
+                <img src="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? '../assets/images/airy-alps-logo-6.png' : 'assets/images/airy-alps-logo-6.png'; ?>" alt="AIRYALPS" height="40">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

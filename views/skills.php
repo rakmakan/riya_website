@@ -112,7 +112,9 @@ require_once '../database/config.php';
             <div class="row g-4">
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="../assets/images/hubspot-logo.svg" alt="Hubspot Academy" class="mb-3">
+                        <div class="image-text-container">
+                            <img src="../assets/images/hubspot-logo.svg" alt="Hubspot Academy" class="mb-3 hover-color-image">
+                        </div>
                         <h4>Email Marketing Certification</h4>
                         <p class="mb-0">Hubspot Academy</p>
                     </div>
@@ -120,7 +122,9 @@ require_once '../database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="../assets/images/meta-logo.png" alt="Meta" class="mb-3">
+                        <div class="image-text-container">
+                            <img src="../assets/images/meta-logo.png" alt="Meta" class="mb-3 hover-color-image">
+                        </div>
                         <h4>Marketing Analytics</h4>
                         <p class="mb-0">Meta</p>
                     </div>
@@ -128,7 +132,9 @@ require_once '../database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="../assets/images/udacity-logo.svg" alt="Udacity" class="mb-3">
+                        <div class="image-text-container">
+                            <img src="../assets/images/udacity-logo.svg" alt="Udacity" class="mb-3 hover-color-image">
+                        </div>
                         <h4>Digital Marketing Nanodegree</h4>
                         <p class="mb-0">Udacity</p>
                     </div>
@@ -136,7 +142,9 @@ require_once '../database/config.php';
                 
                 <div class="col-md-6 col-lg-3">
                     <div class="certification-card text-center">
-                        <img src="../assets/images/wes-logo.png" alt="WES" class="mb-3">
+                        <div class="image-text-container">
+                            <img src="../assets/images/wes-logo.png" alt="WES" class="mb-3 hover-color-image">
+                        </div>
                         <h4>WES Certification</h4>
                         <p class="mb-0">Credly by Pearson</p>
                     </div>
@@ -150,5 +158,6 @@ require_once '../database/config.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/hover-animation.js"></script>
 </body>
 </html>

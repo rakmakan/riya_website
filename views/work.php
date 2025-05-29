@@ -119,7 +119,9 @@ require_once '../database/config.php';
                     <div class="row g-4 align-items-center">
                         <div class="col-lg-4">
                             <div class="company-info">
-                                <img src="../assets/images/clients/gripphy-logo.svg" alt="Gripphy" class="company-logo">
+                                <div class="image-text-container">
+                                    <img src="../assets/images/clients/gripphy-logo.svg" alt="Gripphy" class="company-logo hover-color-image">
+                                </div>
                                 <h3 class="h4">Brand Strategy & Marketing Manager</h3>
                                 <p class="company-name fw-bold mb-2">Gripphy</p>
                                 <p class="duration">Jan 2025 - Present</p>
@@ -143,7 +145,9 @@ require_once '../database/config.php';
                     <div class="row g-4 align-items-center">
                         <div class="col-lg-4">
                             <div class="company-info">
-                                <img src="../assets/images/clients/opensense-logo.svg" alt="OpenSense Labs" class="company-logo">
+                                <div class="image-text-container">
+                                    <img src="../assets/images/clients/opensense-logo.svg" alt="OpenSense Labs" class="company-logo hover-color-image">
+                                </div>
                                 <h3 class="h4">Marketing Lead</h3>
                                 <p class="company-name fw-bold mb-2">OpenSense Labs</p>
                                 <p class="duration">May 2023 - Mar 2024</p>
@@ -169,7 +173,9 @@ require_once '../database/config.php';
                     <div class="row g-4 align-items-center">
                         <div class="col-lg-4">
                             <div class="company-info">
-                                <img src="../assets/images/clients/hubsell-logo.svg" alt="Hubsell" class="company-logo">
+                                <div class="image-text-container">
+                                    <img src="../assets/images/clients/hubsell-logo.svg" alt="Hubsell" class="company-logo hover-color-image">
+                                </div>
                                 <h3 class="h4">Marketing Communications Strategist</h3>
                                 <p class="company-name fw-bold mb-2">Hubsell</p>
                                 <p class="duration">Jun 2021 - May 2023</p>
@@ -195,7 +201,9 @@ require_once '../database/config.php';
                     <div class="row g-4 align-items-center">
                         <div class="col-lg-4">
                             <div class="company-info">
-                                <img src="../assets/images/clients/idemia-logo.svg" alt="IDEMIA" class="company-logo">
+                                <div class="image-text-container">
+                                    <img src="../assets/images/clients/idemia-logo.svg" alt="IDEMIA" class="company-logo hover-color-image">
+                                </div>
                                 <h3 class="h4">Branding & Communications Executive</h3>
                                 <p class="company-name fw-bold mb-2">IDEMIA</p>
                                 <p class="duration">Jun 2018 - Jun 2021</p>
@@ -225,6 +233,7 @@ require_once '../database/config.php';
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/hover-animation.js"></script>
     <script>
         // Add animation when elements come into view
         const observer = new IntersectionObserver((entries) => {

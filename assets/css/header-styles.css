@@ -1,0 +1,10 @@
+/* Custom header styles */
+header {
+  margin-bottom: 0;
+  padding-bottom: 20px; /* keep it minimal */
+}
+
+.navbar {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
