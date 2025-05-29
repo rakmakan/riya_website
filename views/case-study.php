@@ -209,9 +209,9 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
                             <div class="col-md-4" data-aos="fade-up" data-aos-delay="<?php echo ($index * 100); ?>">
                                 <a href="<?php echo htmlspecialchars(trim($image)); ?>" 
                                 data-lightbox="gallery" 
-                                class="gallery-item">
+                                class="gallery-item image-text-container">
                                     <img src="<?php echo htmlspecialchars(trim($image)); ?>" 
-                                        class="img-fluid rounded" 
+                                        class="img-fluid rounded hover-color-image" 
                                         alt="Gallery Image">
                                 </a>
                             </div>
@@ -260,6 +260,7 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/hover-animation.js"></script>
     
     <!-- Initialize Lightbox -->
     <script>

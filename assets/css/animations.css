@@ -1,0 +1,326 @@
+/**
+ * Animations for Airy Alps Website
+ * 
+ * This file contains all custom animations used on the About page:
+ * 1. Heartbeat Animation - Symbolizes care through gentle pulsing and glowing
+ * 2. Pen Drawing Animation - Represents intentionality with flowing gradient underlines
+ * 3. SVG Shape Animations - Enhances visual appeal with floating elements that respond to user interactions
+ * 
+ * PERFORMANCE NOTES:
+ * - All animations use transform and opacity properties which are optimized for GPU acceleration
+ * - Animations are paused when not in viewport to conserve resources
+ * - Reduced motion preferences are respected for accessibility
+ * - JavaScript enhancements are loaded asynchronously
+ */
+
+/**
+ * 1. Heartbeat animation for the "I treat your brand like my own" heading
+ * - Subtle scale effect (1.05x max) with coordinated text-shadow glow
+ * - Double beat pattern (similar to actual heartbeat) for added organic feel
+ * - 4-second loop with ease-in-out timing for a gentle, natural motion
+ */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+    text-shadow: 0 0 0 rgba(224, 122, 95, 0);
+  }
+  25% {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(224, 122, 95, 0.3);
+  }
+  50% {
+    transform: scale(1);
+    text-shadow: 0 0 0 rgba(224, 122, 95, 0);
+  }
+  75% {
+    transform: scale(1.03);
+    text-shadow: 0 0 8px rgba(224, 122, 95, 0.2);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 0 rgba(224, 122, 95, 0);
+  }
+}
+
+/* Gentle floating animation for SVG shapes */
+@keyframes float {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(5px, -5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Pulse animation that syncs with heartbeat */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.heartbeat-animation {
+  display: inline-block;
+  animation: heartbeat 4s ease-in-out infinite;
+  transform-origin: center;
+  position: relative;
+}
+
+/* Add a subtle highlight effect to emphasize care */
+.heartbeat-animation::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -4px;
+  right: -4px;
+  bottom: -2px;
+  background: radial-gradient(ellipse at center, rgba(224, 122, 95, 0.08) 0%, rgba(224, 122, 95, 0) 70%);
+  z-index: -1;
+  opacity: 0;
+  animation: subtle-glow 4s ease-in-out infinite;
+}
+
+@keyframes subtle-glow {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/**
+ * 2. Gentle "hand-crafted" pen animation for links or buttons
+ * - Creates appearance of text being underlined intentionally like writing with a pen
+ * - Uses gradient colors to create a flowing ink effect from left to right
+ * - Triggered when elements come into view for a sequential storytelling effect
+ * - Interactive on hover to reinforce the element's importance
+ */
+@keyframes pen-drawing {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Ink flow animation for pen effect */
+@keyframes ink-flow {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.pen-animation {
+  position: relative;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pen-animation::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background: linear-gradient(90deg, 
+    var(--secondary-accent) 0%, 
+    var(--accent-color) 50%, 
+    var(--secondary-accent) 100%);
+  background-size: 200% 100%;
+  animation: pen-drawing 4s ease infinite;
+  transition: width 0.5s ease, opacity 0.5s ease;
+}
+
+/* Start with no underline, add when visible class is added by JS */
+.pen-animation.visible::after {
+  animation: ink-flow 1.5s forwards, pen-drawing 4s ease 1.5s infinite;
+}
+
+.pen-animation:hover::after {
+  width: 100%;
+  opacity: 1;
+  animation-play-state: paused;
+  background-position: 100% 50%;
+}
+
+/* Apply the pen animation to CTA buttons */
+.cta-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 24px;
+  font-weight: 600;
+  color: var(--accent-color);
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.cta-button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--secondary-accent) 0%, 
+    var(--accent-color) 50%, 
+    var(--secondary-accent) 100%);
+  background-size: 200% 100%;
+  animation: pen-drawing 4s ease infinite;
+}
+
+.cta-button:hover {
+  background-color: rgba(29, 53, 87, 0.05);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(29, 53, 87, 0.1);
+}
+
+.cta-button .cta-text {
+  margin-right: 8px;
+}
+
+.cta-button .cta-arrow {
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+/* Special focus effect for pen animation spans */
+span.pen-animation {
+  position: relative;
+  display: inline-block;
+  padding: 0 2px;
+  transition: all 0.3s ease;
+}
+
+span.pen-animation:hover {
+  color: var(--secondary-accent);
+}
+
+/* Additional styling for active links with pen animation */
+a.pen-animation:focus, 
+button.pen-animation:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+/**
+ * SVG Animation Enhancements
+ * - Provides organic, floating movement to decorative SVG shapes
+ * - Staggered timing creates more natural, less mechanical feel
+ * - Shape paths gradually draw in to reinforce crafted, intentional aesthetic
+ * - Interacts with heartbeat and pen animations for a cohesive experience
+ */
+.floating-shape {
+  animation-name: float;
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-play-state: paused; /* Start paused, JS will play when in view */
+}
+
+/* Create staggered timing for more natural movement */
+.shape-1 {
+  animation-duration: 7s;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  animation-duration: 5s;
+  animation-delay: 0.5s;
+}
+
+.shape-3 {
+  animation-duration: 8s;
+  animation-delay: 1s;
+}
+
+.shape-4 {
+  animation-duration: 9s;
+  animation-delay: 1.5s;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: float 9s ease-in-out infinite, drawPath 4s ease-in-out forwards;
+}
+
+.shape-5 {
+  animation-duration: 6s;
+  animation-delay: 2s;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: float 6s ease-in-out infinite, drawPath 4s ease-in-out forwards;
+}
+
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Visual effect when heartbeat animation happens */
+.heartbeat-animation:hover ~ .about-visual-column .animated-svg circle {
+  animation: pulse 1s ease-in-out;
+}
+
+/* Staggered animation for groups of pen animations */
+.about-paragraph .pen-animation:nth-child(1) { animation-delay: 0s; }
+.about-paragraph .pen-animation:nth-child(2) { animation-delay: 0.5s; }
+.about-paragraph .pen-animation:nth-child(3) { animation-delay: 1s; }
+
+/**
+ * Accessibility: Reduced Motion Preferences
+ * - Respects user preference for reduced motion (important for vestibular disorders)
+ * - Disables all animations when prefers-reduced-motion is set to 'reduce'
+ * - Maintains site functionality and visual design without motion effects
+ * - Ensures content remains accessible to all users regardless of motion sensitivity
+ */
+@media (prefers-reduced-motion: reduce) {
+  .heartbeat-animation {
+    animation: none;
+  }
+  
+  .heartbeat-animation::before {
+    animation: none;
+    opacity: 0;
+  }
+  
+  .pen-animation::after,
+  .cta-button::after {
+    animation: none;
+  }
+  
+  .floating-shape {
+    animation: none;
+  }
+  
+  .shape-4, .shape-5 {
+    stroke-dashoffset: 0;
+  }
+}

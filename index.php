@@ -99,6 +99,20 @@ $clients = get_clients();
             color: var(--primary-color);
             font-weight: 500;
         }
+        
+        /* Extra Gap section styles for consistent alignment */
+        .canvas-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        @media (max-width: 767px) {
+            .canvas-container {
+                justify-content: center;
+                margin-top: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -179,13 +193,15 @@ $clients = get_clients();
         </div>
     </section>
 
+    <!-- Removed duplicate The Gap Section -->
+
     <!-- About Section -->
     <section id="about" class="about-section section-padding bg-light">
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="assets/images/about-image.png" alt="About Image" class="img-fluid rounded shadow">
+                    <img src="assets/images/about-image.png" alt="About Image" class="img-fluid rounded shadow hover-color-image">
                 </div>
                 <div class="col-lg-6">
                     <h3 class="mb-4">Where strategy meets storytelling.</h3>
@@ -193,18 +209,16 @@ $clients = get_clients();
                         I help brands find their voice, define their positioning, and communicate with clarity across every touchpoint — from pitch decks to product pages.
                     </p>
                     <p class="lead mb-4">
-
-My work lives at the intersection of strategy and storytelling. I partner with founders, marketing teams, and creative leads to turn scattered ideas into sharp narratives — the kind that actually land with the people you’re trying to reach.
+                        My work lives at the intersection of strategy and storytelling. I partner with founders, marketing teams, and creative leads to turn scattered ideas into sharp narratives — the kind that actually land with the people you're trying to reach.
                     </p>
                     <p class="lead mb-4">
-I'm a brand strategist and messaging specialist with 6+ years of experience across agencies, startups, and global brands. With a Master’s in English and a degree in marketing and brand direction, I bring both critical thinking and creative instinct to how brands show up in the world.
+                        I treat your brand like my own. That means I care where every word lands.
                     </p>
                     <p class="lead mb-4">
-Through audience research, competitive analysis, and structured messaging systems, I help brands communicate with purpose — not just polish.
+                        Through audience research, competitive analysis, and structured messaging systems, I help brands communicate with purpose — not just polish.
                     </p>
                     <p class="lead mb-4">
-If you’re building something worth paying attention to, I’ll help you say the thing that makes people stop and listen.
-
+                        If you're building something worth paying attention to, I'll help you say the thing that makes people stop and listen.
                     </p>
                     <p class="mb-4">With a foundation in English Literature and specialized training in Marketing & Brand Direction, I bring both the art and science of communication to every project.</p>
                     <div class="d-flex align-items-center mb-4">
@@ -218,6 +232,51 @@ If you’re building something worth paying attention to, I’ll help you say th
                         </div>
                     </div>
                     <a href="views/about.php" class="btn btn-primary">Learn More About Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Gap Section -->
+    <section id="the-gap" class="the-gap-section section-padding bg-gray-50">
+        <div class="container">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Left: Text Column -->
+                <div class="text-left max-w-prose space-y-6">
+                    <h2 class="section-title text-left" data-aos="fade-up">The Gap</h2>
+                    
+                    <div class="intro-paragraph" data-aos="fade-up" data-aos-delay="100">
+                        <p class="intro-text">Most brands have something valuable to offer.</p>
+                        <p class="intro-text">But they struggle to explain it in a way that sticks.</p>
+                    </div>
+                    
+                    <div class="problem-list space-y-3">
+                        <div class="problem-item fade-in">
+                            <p class="problem-text">Messaging feels scattered.</p>
+                        </div>
+                        <div class="problem-item fade-in">
+                            <p class="problem-text">Voice shifts from channel to channel.</p>
+                        </div>
+                        <div class="problem-item fade-in">
+                            <p class="problem-text">Their difference gets buried under buzzwords or borrowed lines.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="highlight-block mb-5 fade-in">
+                        <p class="highlight-text mb-3">I help brands get clear on what makes them matter.</p>
+                        <p class="supporting-text">I shape messaging that's focused, consistent, and easy to rally around — inside and out.</p>
+                    </div>
+                    
+                    <div class="emphasis-block fade-in">
+                        <p class="emphasis-text">For founders, marketers, and creative leads at early-stage to growth-stage brands who want to sound as sharp as they think.</p>
+                    </div>
+                </div>
+                
+                <!-- Right: Canvas Animation -->
+                <div class="flex justify-end canvas-container">
+                    <div class="canvas-wrapper">
+                        <canvas id="scatterCanvas" width="400" height="400" class="w-full max-w-md"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
@@ -438,8 +497,13 @@ If you’re building something worth paying attention to, I’ll help you say th
                             <div class="case-study-card">
                                 <div class="row align-items-center">
                                     <div class="col-lg-6">
-                                        <img src="<?php echo htmlspecialchars($case['featured_image']); ?>" 
-                                             class="img-fluid" alt="<?php echo htmlspecialchars($case['title']); ?>">
+                                        <div class="image-text-container">
+                                            <img src="<?php echo htmlspecialchars($case['featured_image']); ?>" 
+                                                 class="img-fluid hover-color-image" alt="<?php echo htmlspecialchars($case['title']); ?>">
+                                            <div class="overlay-text">
+                                                <span class="badge bg-light text-dark"><?php echo htmlspecialchars($case['category'] ?? 'Case Study'); ?></span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <h3><?php echo htmlspecialchars($case['title']); ?></h3>
@@ -490,9 +554,11 @@ If you’re building something worth paying attention to, I’ll help you say th
                     ?>
                             <div class="review-card">
                                 <div class="review-profile">
-                                    <img src="assets/images/<?php echo $testimonial['company_logo']; ?>" 
-                                         alt="<?php echo htmlspecialchars($testimonial['client_position']); ?>" 
-                                         class="company-logo">
+                                    <div class="image-text-container">
+                                        <img src="assets/images/<?php echo $testimonial['company_logo']; ?>" 
+                                             alt="<?php echo htmlspecialchars($testimonial['client_position']); ?>" 
+                                             class="company-logo hover-color-image">
+                                    </div>
                                     <div class="rating">
                                         <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
                                             <i class="fas fa-star"></i>
@@ -513,9 +579,11 @@ If you’re building something worth paying attention to, I’ll help you say th
                     ?>
                             <div class="review-card">
                                 <div class="review-profile">
-                                    <img src="<?php echo htmlspecialchars($testimonial['image_url']); ?>" 
-                                         alt="<?php echo htmlspecialchars($testimonial['client_name']); ?>" 
-                                         class="company-logo">
+                                    <div class="image-text-container">
+                                        <img src="<?php echo htmlspecialchars($testimonial['image_url']); ?>" 
+                                             alt="<?php echo htmlspecialchars($testimonial['client_name']); ?>" 
+                                             class="company-logo hover-color-image">
+                                    </div>
                                     <div class="rating">
                                         <?php for ($i = 0; $i < $testimonial['rating']; $i++): ?>
                                             <i class="fas fa-star"></i>
@@ -559,9 +627,11 @@ If you’re building something worth paying attention to, I’ll help you say th
                             foreach ($default_clients as $client):
                     ?>
                             <div class="client-logo-box">
-                                <img src="assets/images/<?php echo $client['logo_url']; ?>" 
-                                     alt="<?php echo htmlspecialchars($client['company_name']); ?>" 
-                                     class="img-fluid">
+                                <div class="image-text-container">
+                                    <img src="assets/images/<?php echo $client['logo_url']; ?>" 
+                                         alt="<?php echo htmlspecialchars($client['company_name']); ?>" 
+                                         class="img-fluid hover-color-image">
+                                </div>
                             </div>
                     <?php 
                             endforeach;
@@ -572,9 +642,11 @@ If you’re building something worth paying attention to, I’ll help you say th
                             foreach ($clients as $client):
                     ?>
                             <div class="client-logo-box">
-                                <img src="<?php echo htmlspecialchars($client['logo_url']); ?>" 
-                                     alt="<?php echo htmlspecialchars($client['company_name']); ?>" 
-                                     class="img-fluid">
+                                <div class="image-text-container">
+                                    <img src="<?php echo htmlspecialchars($client['logo_url']); ?>" 
+                                         alt="<?php echo htmlspecialchars($client['company_name']); ?>" 
+                                         class="img-fluid hover-color-image">
+                                </div>
                             </div>
                     <?php 
                             endforeach;
@@ -712,8 +784,42 @@ If you’re building something worth paying attention to, I’ll help you say th
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/gap-animation.js"></script>
+    <script src="assets/js/reduced-motion.js"></script>
+    <!-- Load hover animation script -->
+    <script src="assets/js/hover-animation.js"></script>
     <script>
         $(document).ready(function() {
+            // Initialize AOS animation
+            initAOS();
+            
+            // Problem items animation with IntersectionObserver
+            const problemItems = document.querySelectorAll('.js-animate-problem');
+            
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    root: null,
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -50px 0px'
+                });
+                
+                problemItems.forEach(item => {
+                    observer.observe(item);
+                });
+            } else {
+                // Fallback for browsers without IntersectionObserver support
+                problemItems.forEach(item => {
+                    item.classList.add('visible');
+                });
+            }
+            
             // Contact form submission for homepage
             $('#contactFormHome').on('submit', function(e) {
                 if (!$(this).find('input[name="redirect"]').val()) {
@@ -746,6 +852,78 @@ If you’re building something worth paying attention to, I’ll help you say th
                 }
             });
         });
+
+        // Canvas Animation for The Gap section        // Canvas Animation for The Gap section has been moved to gap-animation.js
+        // This ensures proper initialization after DOM is loaded
+        
+        // Intersection Observer for fade-in effects
+        const fadeElements = document.querySelectorAll('.fade-in');
+        if (fadeElements.length > 0 && 'IntersectionObserver' in window) {
+            // Adjust threshold based on device type for better mobile performance
+            const isMobileDevice = window.innerWidth < 768;
+            const observerThreshold = isMobileDevice ? 0.2 : 0.1;
+            const observerMargin = isMobileDevice ? '10px' : '20px';
+            
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add visible class with a slight delay on mobile to stagger animations
+                        if (isMobileDevice) {
+                            const index = Array.from(fadeElements).indexOf(entry.target);
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, index * 150); // 150ms delay between each element
+                        } else {
+                            entry.target.classList.add('visible');
+                        }
+                        fadeObserver.unobserve(entry.target); // Stop observing once animation is triggered
+                    }
+                });
+            }, { 
+                threshold: observerThreshold,
+                rootMargin: observerMargin 
+            });
+            
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+            
+            // Update observer settings on window resize
+            window.addEventListener('resize', () => {
+                const wasIsMobile = isMobileDevice;
+                const newIsMobile = window.innerWidth < 768;
+                
+                // Only reinitialize if device type changed
+                if (wasIsMobile !== newIsMobile) {
+                    fadeElements.forEach(element => {
+                        if (!element.classList.contains('visible')) {
+                            fadeObserver.unobserve(element);
+                            fadeObserver.observe(element);
+                        }
+                    });
+                }
+            });
+        }
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        if (fadeElements.length > 0 && 'IntersectionObserver' in window) {
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            fadeElements.forEach(element => {
+                element.classList.add('visible');
+            });
+        }
     </script>
 </body>
 </html>

@@ -28,6 +28,57 @@
     --input-border: #444444;
 }
 
+/* Image Hover Animation - B&W to Color */
+.hover-color-image {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease;
+    opacity: 0.9;
+}
+
+.hover-color-image:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Container for images that need text color transition on hover */
+.image-text-container {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    opacity: 0.95;
+}
+
+.image-text-container img {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease-in-out, transform 0.3s ease;
+}
+
+.image-text-container:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.image-text-container:hover img {
+    filter: grayscale(0%);
+}
+
+.image-text-container .overlay-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+    transition: all 0.5s ease-in-out;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    opacity: 0.8;
+    transform: translateY(0);
+}
+
+.image-text-container:hover .overlay-text {
+    color: var(--primary-color);
+    opacity: 1;
+    transform: translateY(-5px);
+}
+
 /* Apply variables to elements */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -333,6 +384,16 @@ body {
     height: 3px;
     background: var(--secondary-color);
     border-radius: 2px;
+}
+
+/* Section Title with text-left modifier */
+.section-title.text-left {
+    text-align: left;
+}
+
+.section-title.text-left::after {
+    left: 0;
+    transform: none;
 }
 
 /* Content Blocks */
@@ -965,389 +1026,446 @@ body {
     }
 }
 
-/* Mobile-specific styles for client logos */
-@media (max-width: 768px) {
-    .client-logos-container {
-        padding: 20px 0;
-    }
-    
-    .client-logos-track {
-        gap: 20px;
-        animation: mobileMarquee 20s linear infinite;
-    }
-    
-    .client-logo-box {
-        padding: 10px 20px;
-        min-width: 120px;
-        max-width: 140px;
-    }
-    
-    .client-logo-box img {
-        max-height: 30px;
-    }
-
-    @keyframes mobileMarquee {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(-100% - 20px));
-        }
-    }
+/* The Gap Section Styles */
+.the-gap-section .gap-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
 }
 
-/* Touch screen slide controls */
-@media (max-width: 768px) {
-    .reviews-container {
-        position: relative;
-        touch-action: pan-x;
-    }
-
-    .reviews-container::before,
-    .reviews-container::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 40px;
-        z-index: 2;
-        pointer-events: none;
-    }
-
-    .reviews-container::before {
-        left: 0;
-        background: linear-gradient(to right, var(--bg-color), transparent);
-    }
-
-    .reviews-container::after {
-        right: 0;
-        background: linear-gradient(to left, var(--bg-color), transparent);
-    }
+.pain-points-container {
+    max-width: 650px;
+    margin-bottom: 4rem;
 }
 
-/* Apply the same styling to review section company logos */
-.review-profile .company-logo {
-    max-width: 120px;
-    max-height: 40px;
-    object-fit: contain;
-    filter: brightness(0) saturate(100%);
-    opacity: 0.85;
-    transition: all 0.3s ease;
-    margin-bottom: 1rem;
+.pain-point {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.review-card:hover .company-logo {
-    filter: none;
-    opacity: 1;
+.pain-point:last-child {
+    border-bottom: none;
 }
 
-/* Dark Mode Toggle Button */
-#darkModeToggle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 15px;
-    font-size: 1.2rem;
-    color: var(--text-color);
-    transition: all 0.3s ease;
+.pain-point-text {
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin-bottom: 0;
+    font-weight: 500;
 }
 
-#darkModeToggle:hover {
-    transform: rotate(15deg);
+.highlight-block {
+    max-width: 650px;
+    background-color: rgba(0, 77, 153, 0.05);
+    border-left: 4px solid var(--secondary-color);
+    padding: 2rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 3rem;
 }
 
-/* Dark Mode Specific Overrides */
-.dark-mode .service-card,
-.dark-mode .case-study-card,
-.dark-mode .review-card,
-.dark-mode .certification-card,
-.dark-mode .contact-section form,
-.dark-mode .client-logo-box {
-    background-color: var(--card-bg);
-    box-shadow: 0 4px 20px var(--shadow-color);
-}
-
-.dark-mode .navbar-light .navbar-nav .nav-link {
-    color: var(--text-color);
-}
-
-.dark-mode .form-control {
-    background-color: var(--input-bg);
-    border-color: var(--input-border);
-    color: var(--text-color);
-}
-
-.dark-mode .client-logo-box img,
-.dark-mode .certification-card img,
-.dark-mode .review-profile .company-logo {
-    filter: brightness(0.8) invert(1);
-    opacity: 0.9;
-}
-
-.dark-mode .orbital-background {
-    background: radial-gradient(circle at center, rgba(30, 30, 30, 0.8), transparent);
-}
-
-.dark-mode .lead-text {
-    background: linear-gradient(135deg, #e0e0e0 60%, #a0a0a0);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-/* Fix for gradient text in dark mode */
-.dark-mode .focus-text,
-.dark-mode .impact-text {
-    background: linear-gradient(135deg, #a363d9, #6c5ce7);
-    -webkit-background-clip: text;
-    background-clip: text;
-}
-
-/* How I Work Section */
-.how-i-work-section {
-    padding: 6rem 0;
-}
-
-.process-step {
-    text-align: center;
-    position: relative;
-    padding: 2rem 1.5rem;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-.step-number {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-    border-radius: 50%;
-    background-color: #f8f9fa;
-    color: var(--primary-color);
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.step-icon-circle {
-    width: 100px;
-    height: 100px;
-    line-height: 100px;
-    border-radius: 50%;
-    background-color: #f8f9fa;
-    color: var(--primary-color);
-    font-size: 2.5rem;
-    margin: 0 auto 1.5rem;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.process-step:hover .step-icon-circle {
-    transform: translateY(-5px);
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.08), 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.step-title {
+.highlight-text {
+    font-size: 1.5rem;
     font-weight: 700;
+    color: var(--secondary-color);
     margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    line-height: 1.4;
 }
 
-.step-description {
-    color: var(--dark-gray);
-    margin-bottom: 1.5rem;
+.supporting-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 0;
 }
 
-.step-tags {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.emphasis-block {
+    max-width: 650px;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
     text-align: center;
 }
 
-.step-tags li {
-    margin-bottom: 0.5rem;
-    color: var(--dark-gray);
-    font-size: 0.9rem;
+.emphasis-text {
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 0;
 }
 
-.step-connector {
-    position: absolute;
-    top: 100px; /* Adjusted from 50px to 100px to align with icon centers */
-    right: -20%;
-    width: 40%;
-    height: 2px;
-    border-top: 2px dotted var(--primary-color);
-    z-index: 1;
+/* Enhanced Problem Items */
+.the-gap-section .problem-item {
+    position: relative;
+    padding-left: 1rem;
+    border-left: 3px solid var(--secondary-color);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
-.step-connector:after {
+.the-gap-section .highlight-text {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.the-gap-section .supporting-text {
+    font-size: 1.1rem;
+}
+
+.the-gap-section .emphasis-text {
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+/* The Gap Section - Two-column Layout */
+.the-gap-section {
+    background-color: #f9fafb; /* bg-gray-50 equivalent */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    overflow: hidden; /* Prevent any animation overflow */
+    position: relative;
+}
+
+/* Add subtle background pattern for visual interest */
+.the-gap-section::before {
     content: '';
     position: absolute;
+    top: 0;
+    left: 0;
     right: 0;
-    top: -5px;
-    width: 0;
-    height: 0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 8px solid var(--primary-color);
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 20%, rgba(0, 102, 204, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 102, 204, 0.03) 0%, transparent 50%);
+    z-index: 0;
+    pointer-events: none;
 }
 
-/* Dark mode overrides for How I Work section */
-.dark-mode .step-number,
-.dark-mode .step-icon-circle {
-    background-color: var(--card-bg);
-    color: var(--primary-color);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+.the-gap-section .container {
+    max-width: 1280px; /* max-w-7xl equivalent */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
 }
 
-.dark-mode .step-connector {
-    border-top-color: var(--primary-color);
+.grid {
+    display: grid;
 }
 
-.dark-mode .step-connector:after {
-    border-left-color: var(--primary-color);
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
-/* Responsive adjustments */
-@media (max-width: 767.98px) {
-    .step-connector {
-        display: none;
-    }
-    
-    .process-step {
-        margin-bottom: 3rem;
+@media (min-width: 768px) {
+    .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-/* Responsive adjustments for hero section */
-@media (max-width: 991.98px) {
-    .hero-section {
-        padding: 100px 0 60px;
-    }
-    
-    .hero-content {
-        padding-right: 0;
-        text-align: center;
-        margin-top: 3rem;
-    }
-    
-    .hero-heading {
-        font-size: 2.5rem;
-    }
-    
-    .hero-cta-group {
-        justify-content: center;
-    }
-    
-    .hero-stats {
-        justify-content: center;
-    }
-    
-    .hero-stat {
-        text-align: center;
-    }
-    
-    .hero-image-container {
-        height: 400px;
-        margin-bottom: 2rem;
-    }
-    
-    .orbital-container {
-        width: 320px;
-        height: 320px;
-    }
+.gap-12 {
+    gap: 3rem;
 }
 
-/* Client Logos Section */
-.client-logos-container {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 40px 0;
-}
-
-.client-logos-track {
-    display: flex;
-    animation: marquee 40s linear infinite;
-    width: max-content;
-    gap: 60px; /* Increased gap between logos */
-}
-
-.client-logo-box {
-    flex-shrink: 0;
-    padding: 20px 40px;
-    display: flex;
+.items-center {
     align-items: center;
-    justify-content: center;
-    background-color: #ffffff;
+}
+
+.max-w-prose {
+    max-width: 65ch;
+}
+
+.space-y-6 > * + * {
+    margin-top: 1.5rem;
+}
+
+.space-y-3 > * + * {
+    margin-top: 0.75rem;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.the-gap-section .section-title.text-left {
+    text-align: left;
+}
+
+.the-gap-section .section-title.text-left::after {
+    left: 0;
+    transform: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-end {
+    justify-content: end;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.max-w-md {
+    max-width: 28rem;
+}
+
+/* Fade-in animation styles */
+.fade-in {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.6s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 28rem;
+    overflow: hidden;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced highlight and emphasis blocks */
+.the-gap-section .highlight-block {
+    background-color: #f3f4f6; /* bg-gray-100 */
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.the-gap-section .emphasis-block {
+    background-color: #fef3c7; /* bg-yellow-100 */
+    padding: 1rem;
+    border-radius: 0.375rem;
+    text-align: left;
+}
+
+.intro-text {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.problem-text {
+    font-weight: 500;
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Enhanced mobile view for The Gap section */
+/* Tablet view transition styles */
+@media (min-width: 576px) and (max-width: 767px) {
+    .the-gap-section .problem-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin: 0 auto 2rem auto;
+        max-width: 80%;
+    }
+    
+    .the-gap-section .problem-item {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .the-gap-section .highlight-block,
+    .the-gap-section .emphasis-block {
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .canvas-container {
+        padding-top: 1.5rem;
+    }
+}
+
+/* Mobile view styles */
+@media (max-width: 767px) {
+    .the-gap-section .section-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .the-gap-section .section-title::after {
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 0.75rem;
+    }
+    
+    .the-gap-section .intro-paragraph {
+        text-align: center;
+        margin-bottom: 2rem;
+        padding: 0 0.5rem;
+    }
+    
+    .the-gap-section .intro-text {
+        font-size: 1.125rem;
+        text-align: center;
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
+    }
+    
+    .the-gap-section .problem-list {
+        margin-bottom: 2rem;
+        padding: 0 0.75rem;
+    }
+    
+    .the-gap-section .problem-item {
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        border-left-width: 3px;
+        text-align: center;
+        border-radius: 4px;
+        background-color: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .the-gap-section .problem-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .the-gap-section .problem-text {
+        font-size: 1rem;
+        text-align: center;
+        line-height: 1.5;
+    }
+    
+    .the-gap-section .highlight-block {
+        padding: 1.5rem;
+        margin: 0 0.5rem 1.5rem 0.5rem;
+        text-align: center;
+        border-left: none;
+        border-top: 3px solid var(--secondary-color);
+        border-radius: 0 0 8px 8px;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+    }
+    
+    .the-gap-section .emphasis-block {
+        padding: 1.5rem;
+        text-align: center;
+        margin: 0 0.5rem;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 8px;
+    }
+    
+    .the-gap-section .highlight-text {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        line-height: 1.5;
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+    
+    .the-gap-section .supporting-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    .the-gap-section .emphasis-text {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        font-style: italic;
+        color: var(--dark-gray);
+    }
+    
+    .the-gap-section .canvas-container {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Canvas container for mobile */
+    .the-gap-section .flex.justify-end {
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    /* Center the grid on mobile */
+    .the-gap-section .grid {
+        justify-content: center;
+    }
+    
+    /* Add some breathing room for the canvas */
+    #scatterCanvas {
+        height: 300px !important;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+    
+    .canvas-container {
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* Add a subtle background effect behind the canvas on mobile */
+    .canvas-container::before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: 10%;
+        right: 10%;
+        bottom: -10px;
+        background: radial-gradient(circle, rgba(0, 102, 204, 0.08) 0%, rgba(249, 250, 251, 0) 70%);
+        border-radius: 50%;
+        z-index: -1;
+    }
+}
+
+/* Canvas animation styles for The Gap section */
+#scatterCanvas {
+    display: block;
+    width: 100%;
+    height: 400px;
     border-radius: 8px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
-    min-width: 200px; /* Set minimum width for consistency */
+    background: transparent;
 }
 
-.client-logo-box img {
-    max-height: 50px;
-    width: auto;
-    filter: brightness(0);
-    transition: all 0.3s ease;
+.canvas-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 28rem;
+    height: 400px; 
+    overflow: hidden;
 }
 
-.client-logo-box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+.the-gap-section .canvas-container {
+    min-height: 400px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
-.client-logo-box:hover img {
-    filter: brightness(1);
-}
-
-@keyframes marquee {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-50% - 30px)); /* Adjusted to account for gap */
-    }
-}
-
-/* Pause animation on hover */
-.client-logos-container:hover .client-logos-track {
-    animation-play-state: paused;
-}
-
-/* Dark mode adjustments */
-.dark-mode .client-logo-box {
-    background-color: var(--card-bg);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .client-logos-track {
-        gap: 40px;
-        animation-duration: 30s;
+@media (max-width: 767px) {
+    #scatterCanvas {
+        height: 300px !important;
     }
     
-    .client-logo-box {
-        padding: 15px 30px;
-        min-width: 160px;
+    .canvas-wrapper {
+        height: 300px;
     }
     
-    .client-logo-box img {
-        max-height: 40px;
+    .the-gap-section .canvas-container {
+        min-height: 300px;
+        justify-content: center;
     }
 }

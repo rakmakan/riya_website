@@ -41,9 +41,10 @@ $case_studies = get_case_studies();
                 <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="case-study-card">
                         <!-- Top Section (Visual) -->
-                        <div class="image-container">
+                        <div class="image-container image-text-container">
                             <img src="<?php echo htmlspecialchars($case['featured_image']); ?>" 
-                                 alt="<?php echo htmlspecialchars($case['title']); ?>">
+                                 alt="<?php echo htmlspecialchars($case['title']); ?>"
+                                 class="hover-color-image">
                             <div class="card-overlay">
                                 <span class="badge bg-primary">Case Study</span>
                             </div>
@@ -94,5 +95,6 @@ $case_studies = get_case_studies();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/hover-animation.js"></script>
 </body>
 </html>

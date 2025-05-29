@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation Stress Test - Airy Alps</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/animations.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 2rem;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .section {
+            padding: 50px 0;
+            min-height: 400px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .stress-controls {
+            position: sticky;
+            top: 10px;
+            z-index: 1000;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .airy-ui-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .airy-ui-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        #animation-count {
+            font-weight: bold;
+        }
+        
+        .indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        
+        .indicator-good {
+            background-color: #28a745;
+        }
+        
+        .indicator-warning {
+            background-color: #ffc107;
+        }
+        
+        .indicator-bad {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Animation Stress Test</h1>
+        <p class="lead">This page tests how animations perform under heavy load and user interaction.</p>
+        
+        <div class="stress-controls">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <span>Animation Elements: <span id="animation-count">0</span></span>
+                        <div class="ms-3">
+                            Performance: 
+                            <span class="indicator indicator-good" id="perf-good"></span>
+                            <span class="indicator indicator-warning" id="perf-warning" style="opacity: 0.3"></span>
+                            <span class="indicator indicator-bad" id="perf-bad" style="opacity: 0.3"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary me-2" id="add-animations">Add 10 Elements</button>
+                        <button class="btn btn-warning me-2" id="stress-test">Run Stress Test</button>
+                        <button class="btn btn-danger" id="reset">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <section class="section">
+            <h2>Heartbeat Animation Stress Test</h2>
+            <p>This section tests how multiple heartbeat animations affect performance.</p>
+            
+            <div class="row" id="heartbeat-container">
+                <!-- Heartbeat animations will be added here -->
+                <div class="col-md-4">
+                    <div class="airy-ui-card">
+                        <h3 class="heartbeat-animation">I treat your brand like my own</h3>
+                        <p>This is the base animation we're testing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Pen Animation Stress Test</h2>
+            <p>This section tests how multiple pen animations affect performance.</p>
+            
+            <div class="row" id="pen-container">
+                <!-- Pen animations will be added here -->
+                <div class="col-md-4">
+                    <div class="airy-ui-card">
+                        <h3><span class="pen-animation visible">Pen Animation Demo</span></h3>
+                        <p>This is the base animation we're testing.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>SVG Animation Stress Test</h2>
+            <p>This section tests how multiple SVG animations affect performance.</p>
+            
+            <div class="row">
+                <div class="col-12" id="svg-container" style="height: 400px; border: 1px dashed #ccc; position: relative; overflow: hidden;">
+                    <!-- SVG animations will be added here -->
+                    <svg width="100%" height="100%">
+                        <defs>
+                            <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#1D3557" stop-opacity="0.8"/>
+                                <stop offset="100%" stop-color="#E07A5F" stop-opacity="0.6"/>
+                            </linearGradient>
+                            <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#E07A5F" stop-opacity="0.8"/>
+                                <stop offset="100%" stop-color="#1D3557" stop-opacity="0.6"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Base SVG Shape -->
+                        <circle class="floating-shape shape-1" cx="100" cy="150" r="50" fill="url(#gradient1)" opacity="0.7" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Scroll Interaction Test</h2>
+            <p>This section tests how scrolling affects animation performance.</p>
+            
+            <div class="row" id="scroll-container">
+                <!-- Content that appears on scroll -->
+                <div class="col-md-6">
+                    <div class="airy-ui-card">
+                        <h3><span class="pen-animation">Scroll-Triggered Animation</span></h3>
+                        <p>This animation should only start when scrolled into view.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="airy-ui-card">
+                        <h3 class="heartbeat-animation">Continuous Animation</h3>
+                        <p>This animation runs regardless of scroll position.</p>
+                    </div>
+                </div>
+                
+                <!-- Add more scroll-triggered items -->
+                <div class="col-12 mt-5">
+                    <div class="row">
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="airy-ui-card">
+                                <h4><span class="pen-animation">First Element</span></h4>
+                                <p>Scroll-triggered element 1.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="airy-ui-card">
+                                <h4><span class="pen-animation">Second Element</span></h4>
+                                <p>Scroll-triggered element 2.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="airy-ui-card">
+                                <h4><span class="pen-animation">Third Element</span></h4>
+                                <p>Scroll-triggered element 3.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section">
+            <h2>Mouse Interaction Test</h2>
+            <p>This section tests how mouse movements affect animation performance.</p>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div id="mouse-interaction-area" style="height: 300px; border: 1px dashed #ccc; position: relative; overflow: hidden;">
+                        <p class="text-center mt-5">Move your mouse over this area to test hover interactions.</p>
+                        <div id="mouse-follower" style="position: absolute; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(224,122,95,0.3) 0%, rgba(255,255,255,0) 70%); pointer-events: none; transform: translate(-50%, -50%);"></div>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-4">
+                    <div class="row" id="hover-items-container">
+                        <!-- Hover items will be added here -->
+                        <div class="col-md-3">
+                            <div class="airy-ui-card">
+                                <h5 class="heartbeat-animation">Hover Me</h5>
+                                <p>Tests hover interaction with heartbeat animation.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="airy-ui-card">
+                                <h5><span class="pen-animation visible">Hover Me</span></h5>
+                                <p>Tests hover interaction with pen animation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/animations.js"></script>
+    <script src="../assets/js/animation-compatibility.js"></script>
+    <script src="../assets/js/animation-performance.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize performance monitor
+            const performance = window.airyAlpsPerformance;
+            const perfMeter = performance.createPerformanceMeter('body');
+            performance.start();
+            
+            // Element counters
+            let heartbeatCount = 1; // We start with one
+            let penCount = 1; // We start with one
+            let svgCount = 1; // We start with one
+            
+            // Update animation count
+            function updateAnimationCount() {
+                const total = heartbeatCount + penCount + svgCount;
+                document.getElementById('animation-count').textContent = total;
+                
+                // Update performance indicators based on count
+                if (total < 20) {
+                    document.getElementById('perf-good').style.opacity = '1';
+                    document.getElementById('perf-warning').style.opacity = '0.3';
+                    document.getElementById('perf-bad').style.opacity = '0.3';
+                } else if (total < 50) {
+                    document.getElementById('perf-good').style.opacity = '0.3';
+                    document.getElementById('perf-warning').style.opacity = '1';
+                    document.getElementById('perf-bad').style.opacity = '0.3';
+                } else {
+                    document.getElementById('perf-good').style.opacity = '0.3';
+                    document.getElementById('perf-warning').style.opacity = '0.3';
+                    document.getElementById('perf-bad').style.opacity = '1';
+                }
+            }
+            
+            // Add heartbeat animations
+            function addHeartbeatAnimations(count = 1) {
+                const container = document.getElementById('heartbeat-container');
+                
+                for (let i = 0; i < count; i++) {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    
+                    const card = document.createElement('div');
+                    card.className = 'airy-ui-card';
+                    
+                    const heading = document.createElement('h3');
+                    heading.className = 'heartbeat-animation';
+                    heading.textContent = `Heartbeat ${heartbeatCount + i + 1}`;
+                    
+                    const text = document.createElement('p');
+                    text.textContent = 'Added heartbeat animation.';
+                    
+                    card.appendChild(heading);
+                    card.appendChild(text);
+                    col.appendChild(card);
+                    container.appendChild(col);
+                }
+                
+                heartbeatCount += count;
+                updateAnimationCount();
+            }
+            
+            // Add pen animations
+            function addPenAnimations(count = 1) {
+                const container = document.getElementById('pen-container');
+                
+                for (let i = 0; i < count; i++) {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-4';
+                    
+                    const card = document.createElement('div');
+                    card.className = 'airy-ui-card';
+                    
+                    const heading = document.createElement('h3');
+                    
+                    const span = document.createElement('span');
+                    span.className = 'pen-animation visible';
+                    span.textContent = `Pen ${penCount + i + 1}`;
+                    
+                    heading.appendChild(span);
+                    
+                    const text = document.createElement('p');
+                    text.textContent = 'Added pen animation.';
+                    
+                    card.appendChild(heading);
+                    card.appendChild(text);
+                    col.appendChild(card);
+                    container.appendChild(col);
+                }
+                
+                penCount += count;
+                updateAnimationCount();
+            }
+            
+            // Add SVG animations
+            function addSvgAnimations(count = 1) {
+                const svg = document.querySelector('#svg-container svg');
+                const width = svg.clientWidth;
+                const height = svg.clientHeight;
+                
+                for (let i = 0; i < count; i++) {
+                    // Randomize position and properties
+                    const cx = Math.random() * (width - 100) + 50;
+                    const cy = Math.random() * (height - 100) + 50;
+                    const r = Math.random() * 30 + 10;
+                    const opacity = Math.random() * 0.5 + 0.2;
+                    const fill = i % 2 === 0 ? 'url(#gradient1)' : 'url(#gradient2)';
+                    
+                    // Create circle
+                    const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                    circle.setAttribute('class', `floating-shape shape-${(svgCount + i) % 3 + 1}`);
+                    circle.setAttribute('cx', cx);
+                    circle.setAttribute('cy', cy);
+                    circle.setAttribute('r', r);
+                    circle.setAttribute('fill', fill);
+                    circle.setAttribute('opacity', opacity);
+                    
+                    svg.appendChild(circle);
+                }
+                
+                svgCount += count;
+                updateAnimationCount();
+            }
+            
+            // Handle mouse follower
+            const mouseInteractionArea = document.getElementById('mouse-interaction-area');
+            const mouseFollower = document.getElementById('mouse-follower');
+            
+            mouseInteractionArea.addEventListener('mousemove', function(e) {
+                const rect = mouseInteractionArea.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                mouseFollower.style.left = `${x}px`;
+                mouseFollower.style.top = `${y}px`;
+            });
+            
+            // Add hover items
+            function addHoverItems(count = 1) {
+                const container = document.getElementById('hover-items-container');
+                
+                for (let i = 0; i < count; i++) {
+                    const col = document.createElement('div');
+                    col.className = 'col-md-3';
+                    
+                    const card = document.createElement('div');
+                    card.className = 'airy-ui-card';
+                    
+                    // Alternate between heartbeat and pen animations
+                    if (i % 2 === 0) {
+                        const heading = document.createElement('h5');
+                        heading.className = 'heartbeat-animation';
+                        heading.textContent = `Hover Me`;
+                        card.appendChild(heading);
+                        heartbeatCount++;
+                    } else {
+                        const heading = document.createElement('h5');
+                        const span = document.createElement('span');
+                        span.className = 'pen-animation visible';
+                        span.textContent = `Hover Me`;
+                        heading.appendChild(span);
+                        card.appendChild(heading);
+                        penCount++;
+                    }
+                    
+                    const text = document.createElement('p');
+                    text.textContent = 'Hover interaction test item.';
+                    
+                    card.appendChild(text);
+                    col.appendChild(card);
+                    container.appendChild(col);
+                }
+                
+                updateAnimationCount();
+            }
+            
+            // Add animations button
+            document.getElementById('add-animations').addEventListener('click', function() {
+                // Add 10 animations (mix of types)
+                addHeartbeatAnimations(3);
+                addPenAnimations(3);
+                addSvgAnimations(4);
+                
+                // Update the performance monitor to find the new elements
+                setTimeout(() => {
+                    performance.findAnimationElements();
+                }, 100);
+            });
+            
+            // Run stress test
+            document.getElementById('stress-test').addEventListener('click', function() {
+                this.disabled = true;
+                this.textContent = 'Running Test...';
+                
+                // Add a larger number of animations
+                addHeartbeatAnimations(10);
+                addPenAnimations(10);
+                addSvgAnimations(15);
+                addHoverItems(8);
+                
+                // Simulate scroll events
+                const scrollInterval = setInterval(() => {
+                    window.scrollBy(0, 50);
+                    
+                    // Stop when we reach the bottom
+                    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                        clearInterval(scrollInterval);
+                        window.scrollTo(0, 0);
+                    }
+                }, 100);
+                
+                // Re-enable button after test
+                setTimeout(() => {
+                    this.disabled = false;
+                    this.textContent = 'Run Stress Test';
+                }, 5000);
+                
+                // Update the performance monitor
+                setTimeout(() => {
+                    performance.findAnimationElements();
+                }, 100);
+            });
+            
+            // Reset button
+            document.getElementById('reset').addEventListener('click', function() {
+                // Remove added elements
+                const heartbeatContainer = document.getElementById('heartbeat-container');
+                while (heartbeatContainer.children.length > 1) {
+                    heartbeatContainer.removeChild(heartbeatContainer.lastChild);
+                }
+                
+                const penContainer = document.getElementById('pen-container');
+                while (penContainer.children.length > 1) {
+                    penContainer.removeChild(penContainer.lastChild);
+                }
+                
+                const svg = document.querySelector('#svg-container svg');
+                const baseShapes = svg.querySelectorAll('.floating-shape');
+                for (let i = 1; i < baseShapes.length; i++) {
+                    svg.removeChild(baseShapes[i]);
+                }
+                
+                const hoverContainer = document.getElementById('hover-items-container');
+                while (hoverContainer.children.length > 2) {
+                    hoverContainer.removeChild(hoverContainer.lastChild);
+                }
+                
+                // Reset counters
+                heartbeatCount = 1;
+                penCount = 1;
+                svgCount = 1;
+                updateAnimationCount();
+                
+                // Update the performance monitor
+                setTimeout(() => {
+                    performance.findAnimationElements();
+                }, 100);
+            });
+            
+            // Initialize animation count
+            updateAnimationCount();
+            
+            // Initialize scroll animations
+            const scrollAnimations = document.querySelectorAll('#scroll-container .pen-animation');
+            scrollAnimations.forEach(el => {
+                // Start with no visible class
+                el.classList.remove('visible');
+            });
+            
+            // Detect visible elements on scroll
+            function handleScrollAnimations() {
+                scrollAnimations.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    const isVisible = rect.top <= window.innerHeight * 0.8 && rect.bottom >= 0;
+                    
+                    if (isVisible && !el.classList.contains('visible')) {
+                        el.classList.add('visible');
+                    }
+                });
+            }
+            
+            // Listen for scroll
+            window.addEventListener('scroll', handleScrollAnimations);
+            
+            // Initial check
+            setTimeout(handleScrollAnimations, 500);
+        });
+    </script>
+</body>
+</html>
