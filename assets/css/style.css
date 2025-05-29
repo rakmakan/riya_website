@@ -119,9 +119,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-.navbar-brand:hover img {
-    transform: scale(1.05);
-}
+/* Navbar logo scale effect removed for cleaner UX */
 
 .nav-link {
     color: var(--text-color) !important;
@@ -301,7 +299,7 @@ body {
 }
 
 .orbital-tag:hover {
-    transform: scale(1.1);
+    /* Removed scale effect for cleaner UI */
 }
 
 .orbital-tag:hover::after {
@@ -560,7 +558,7 @@ body {
 }
 
 .service-card:hover .service-icon {
-    transform: rotate(0deg) scale(1.1);
+    transform: rotate(0deg);
 }
 
 /* Case Studies Section */
@@ -927,9 +925,7 @@ body {
     height: 100%;
 }
 
-.certification-card:hover {
-    transform: translateY(-5px);
-}
+/* Certification card popup effect removed for logo stability */
 
 .certification-card img {
     width: 120px;
@@ -959,7 +955,7 @@ body {
     display: flex;
     animation: marquee 40s linear infinite;
     width: max-content;
-    gap: 60px; /* Increased gap between logos */
+    gap: 60px;
 }
 
 .client-logo-box {
@@ -970,24 +966,12 @@ body {
     justify-content: center;
     background-color: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
-    min-width: 200px; /* Set minimum width for consistency */
+    min-width: 200px;
 }
 
 .client-logo-box img {
     max-height: 50px;
     width: auto;
-    filter: brightness(0);
-    transition: all 0.3s ease;
-}
-
-.client-logo-box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-}
-
-.client-logo-box:hover img {
-    filter: brightness(1);
 }
 
 @keyframes marquee {
@@ -995,18 +979,13 @@ body {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-50% - 30px)); /* Adjusted to account for gap */
+        transform: translateX(calc(-50% - 30px));
     }
 }
 
 /* Pause animation on hover */
 .client-logos-container:hover .client-logos-track {
     animation-play-state: paused;
-}
-
-/* Dark mode adjustments */
-.dark-mode .client-logo-box {
-    background-color: var(--card-bg);
 }
 
 /* Responsive adjustments */
