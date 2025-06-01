@@ -131,9 +131,9 @@ function applyFallbackStyles() {
             width: 100%;
             height: 2px;
             background: linear-gradient(90deg, 
-                var(--secondary-accent) 0%, 
-                var(--accent-color) 50%, 
-                var(--secondary-accent) 100%);
+                var(--muted-gold) 0%, 
+                var(--secondary-color) 50%, 
+                var(--muted-gold) 100%);
         `;
         el.style.position = 'relative';
         el.appendChild(underline);

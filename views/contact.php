@@ -13,9 +13,9 @@ require_once '../database/config.php';
     <link href="../assets/css/style.css" rel="stylesheet">
     <style>
         .contact-header {
-            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(to right, var(--primary-bg), var(--card-bg));
             padding: 6rem 0 4rem;
-            color: #fff;
+            color: var(--primary-text);
             margin-bottom: 3rem;
             position: relative;
         }
@@ -27,13 +27,13 @@ require_once '../database/config.php';
             left: 0;
             right: 0;
             height: 50px;
-            background: linear-gradient(to right bottom, transparent 49%, #fff 50%);
+            background: linear-gradient(to right bottom, transparent 49%, var(--card-bg) 50%);
         }
         
         .contact-form-container {
-            background-color: white;
+            background-color: var(--card-bg);
             border-radius: 1rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px var(--shadow-color);
             padding: 3rem;
             margin-bottom: 5rem;
         }

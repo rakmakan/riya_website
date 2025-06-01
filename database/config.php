@@ -149,18 +149,25 @@ $db->query('CREATE TABLE IF NOT EXISTS stats (
 function get_section_content($section) {
     global $db;
     $stmt = $db->prepare('SELECT * FROM content WHERE section = ?');
-    $stmt->bind_param('s', $section);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_assoc();
+    if ($stmt) {
+        $stmt->bind_param('s', $section);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result && $result !== false) {
+            return $result->fetch_assoc();
+        }
+    }
+    return false;
 }
 
 function get_testimonials() {
     global $db;
     $result = $db->query('SELECT * FROM testimonials ORDER BY created_at DESC');
     $testimonials = [];
-    while ($row = $result->fetch_assoc()) {
-        $testimonials[] = $row;
+    if ($result && $result !== false) {
+        while ($row = $result->fetch_assoc()) {
+            $testimonials[] = $row;
+        }
     }
     return $testimonials;
 }
@@ -169,8 +176,10 @@ function get_clients() {
     global $db;
     $result = $db->query('SELECT * FROM clients ORDER BY created_at DESC');
     $clients = [];
-    while ($row = $result->fetch_assoc()) {
-        $clients[] = $row;
+    if ($result && $result !== false) {
+        while ($row = $result->fetch_assoc()) {
+            $clients[] = $row;
+        }
     }
     return $clients;
 }
@@ -190,8 +199,10 @@ function get_case_studies($limit = null) {
     }
     $result = $db->query($query);
     $cases = [];
-    while ($row = $result->fetch_assoc()) {
-        $cases[] = $row;
+    if ($result && $result !== false) {
+        while ($row = $result->fetch_assoc()) {
+            $cases[] = $row;
+        }
     }
     return $cases;
 }
@@ -199,18 +210,25 @@ function get_case_studies($limit = null) {
 function get_case_study($slug) {
     global $db;
     $stmt = $db->prepare('SELECT * FROM case_studies WHERE slug = ?');
-    $stmt->bind_param('s', $slug);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_assoc();
+    if ($stmt) {
+        $stmt->bind_param('s', $slug);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result && $result !== false) {
+            return $result->fetch_assoc();
+        }
+    }
+    return false;
 }
 
 function get_services() {
     global $db;
     $result = $db->query('SELECT * FROM services ORDER BY display_order ASC');
     $services = [];
-    while ($row = $result->fetch_assoc()) {
-        $services[] = $row;
+    if ($result && $result !== false) {
+        while ($row = $result->fetch_assoc()) {
+            $services[] = $row;
+        }
     }
     return $services;
 }
@@ -219,8 +237,10 @@ function get_homepage_stats() {
     global $db;
     $result = $db->query('SELECT * FROM stats WHERE section = "homepage" LIMIT 3');
     $stats = [];
-    while ($row = $result->fetch_assoc()) {
-        $stats[] = $row;
+    if ($result && $result !== false) {
+        while ($row = $result->fetch_assoc()) {
+            $stats[] = $row;
+        }
     }
     return $stats;
 }

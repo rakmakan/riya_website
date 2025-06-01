@@ -43,7 +43,7 @@ require_once '../database/config.php';
     </section>
 
     <!-- Education Section -->
-    <section class="section-padding bg-light">
+    <section class="section-padding" style="background-color: var(--background-dark);">
         <div class="container">
             <h2 class="section-title">Education</h2>
             <div class="row g-4">

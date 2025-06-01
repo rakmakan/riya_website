@@ -65,20 +65,20 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
         }
         .service-tag {
             display: inline-block;
-            background-color: #f8f9fa;
+            background-color: var(--card-bg);
             padding: 0.4rem 1rem;
             border-radius: 30px;
             margin: 0 0.5rem 0.5rem 0;
             font-size: 0.9rem;
-            color: var(--primary-color);
-            border: 1px solid #dee2e6;
+            color: var(--primary-text);
+            border: 1px solid var(--border-color);
         }
         .detail-section {
             position: relative;
             padding: 2rem;
             border-radius: 10px;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            background: var(--card-bg);
+            box-shadow: 0 5px 15px var(--shadow-color);
             height: 100%;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -133,7 +133,7 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         .case-info-box {
-            background: #f8f9fa;
+            background: var(--card-bg);
             border-radius: 10px;
             padding: 2rem;
             margin-bottom: 2rem;
@@ -238,14 +238,14 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
                         <div class="case-info-box text-center">
                             <h3 class="h4 mb-4">Ready to Create Something Amazing?</h3>
                             <p>Let's discuss how I can help your business achieve similar results.</p>
-                            <a href="contact.php" class="btn btn-primary">Start a Conversation</a>
+                            <a href="contact.php" class="btn btn-secondary">Start a Conversation</a>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="text-center mt-5 mb-5" data-aos="fade-up">
-                <a href="case-studies.php" class="btn btn-outline-primary back-button">
+                <a href="case-studies.php" class="btn btn-outline-secondary back-button">
                     <i class="fas fa-arrow-left me-2"></i> Back to Case Studies
                 </a>
             </div>

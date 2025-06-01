@@ -25,7 +25,7 @@
 </head>
 <body>
 <header class="header fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? '../index.php' : 'index.php'; ?>">
                 <img src="<?php echo strpos($_SERVER['PHP_SELF'], 'views/') !== false ? '../assets/images/airy-alps-logo-6.png' : 'assets/images/airy-alps-logo-6.png'; ?>" alt="AIRYALPS" height="40">

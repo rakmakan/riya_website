@@ -80,7 +80,7 @@ $case_studies = get_case_studies();
                             </div>
                             
                             <a href="case-study.php?slug=<?php echo urlencode($case['slug']); ?>" 
-                               class="btn btn-primary view-case-btn">View Details <i class="fas fa-arrow-right"></i></a>
+                               class="btn btn-secondary view-case-btn">View Details <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

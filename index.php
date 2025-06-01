@@ -27,12 +27,14 @@ $clients = get_clients();
     <style>
         /* What Working Together Looks Like Section */
         .collaboration-section {
-            background-color: var(--bg-color);
+            background-color: var(--button-bg);
+            color: var(--button-text);
         }
 
         .collaboration-intro,
         .collaboration-scenarios {
-            background-color: var(--card-bg);
+            background-color: var(--bg-color);
+            color: var(--primary-text);
             border: 1px solid var(--border-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -40,7 +42,7 @@ $clients = get_clients();
         .collaboration-intro:hover,
         .collaboration-scenarios:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(51, 51, 51, 0.3);
         }
 
         .outcome-item {
@@ -54,8 +56,8 @@ $clients = get_clients();
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
+            background-color: var(--warm-beige);
+            color: var(--bg-color);
             font-weight: 700;
             margin-right: 15px;
             flex-shrink: 0;
@@ -65,6 +67,7 @@ $clients = get_clients();
             margin-bottom: 0;
             font-size: 1.1rem;
             font-weight: 600;
+            color: var(--primary-text);
         }
 
         .scenario-card {
@@ -79,8 +82,8 @@ $clients = get_clients();
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: rgba(0, 102, 204, 0.1);
-            color: var(--primary-color);
+            background-color: var(--muted-gold);
+            color: var(--bg-color);
             margin-bottom: 15px;
         }
 
@@ -90,13 +93,13 @@ $clients = get_clients();
 
         .scenario-divider {
             height: 1px;
-            background: linear-gradient(90deg, var(--primary-color) 0%, transparent 100%);
+            background: linear-gradient(90deg, var(--border-color) 0%, transparent 100%);
             margin-top: 15px;
         }
 
         .collaboration-conclusion {
             font-style: italic;
-            color: var(--primary-color);
+            color: var(--button-text);
             font-weight: 500;
         }
         
@@ -118,10 +121,10 @@ $clients = get_clients();
 <body>
     <?php include 'includes/header.php'; ?>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
+    <!-- Hero Section - Black Background -->
+    <section id="home" class="hero-section full-screen-section snap-section" style="background-color: var(--bg-color);">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center h-100">
                 <div class="col-lg-6 order-lg-1 order-2">
                     <div class="hero-content">
                         <h1 class="hero-heading"><?php echo htmlspecialchars($hero_content['title'] ?? 'Get eyes on your brand and keep them there.'); ?></h1>
@@ -195,8 +198,8 @@ $clients = get_clients();
 
     <!-- Removed duplicate The Gap Section -->
 
-    <!-- About Section -->
-    <section id="about" class="about-section section-padding bg-light">
+    <!-- About Section - White Background -->
+    <section id="about" class="about-section section-padding snap-section section-fade-in" style="background-color: var(--button-bg); color: var(--button-text);">
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="row">
@@ -237,8 +240,8 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- The Gap Section -->
-    <section id="the-gap" class="the-gap-section section-padding bg-gray-50">
+    <!-- The Gap Section - Black Background -->
+    <section id="the-gap" class="the-gap-section section-padding snap-section section-fade-in" style="background-color: var(--bg-color);">
         <div class="container">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <!-- Left: Text Column -->
@@ -282,8 +285,8 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services-section section-padding">
+    <!-- Services Section - White Background -->
+    <section id="services" class="services-section section-padding snap-section section-fade-in" style="background-color: var(--button-bg); color: var(--button-text);">
         <div class="container">
             <h2 class="section-title">My Services</h2>
             <div class="row g-4">
@@ -338,8 +341,8 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- How I Work Section -->
-    <section id="how-i-work" class="how-i-work-section section-padding">
+    <!-- How I Work Section - Black Background -->
+    <section id="how-i-work" class="how-i-work-section section-padding" style="background-color: var(--bg-color);">
         <div class="container">
             <h2 class="section-title">How I Work</h2>
             <div class="row g-4">
@@ -399,8 +402,8 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- What Working Together Looks Like Section -->
-    <section id="collaboration" class="collaboration-section section-padding">
+    <!-- What Working Together Looks Like Section - White Background -->
+    <section id="collaboration" class="collaboration-section section-padding" style="background-color: var(--button-bg); color: var(--button-text);">
         <div class="container">
             <h2 class="section-title">What Working Together Looks Like</h2>
             
@@ -474,8 +477,8 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- Case Studies Section -->
-    <section id="case-studies" class="case-studies-section section-padding bg-light">
+    <!-- Case Studies Section - Black Background -->
+    <section id="case-studies" class="case-studies-section section-padding snap-section section-fade-in" style="background-color: var(--bg-color);">
         <div class="container">
             <h2 class="section-title">Case Studies</h2>
             <div class="case-study-slider">
@@ -501,7 +504,7 @@ $clients = get_clients();
                                             <img src="<?php echo htmlspecialchars($case['featured_image']); ?>" 
                                                  class="img-fluid hover-color-image" alt="<?php echo htmlspecialchars($case['title']); ?>">
                                             <div class="overlay-text">
-                                                <span class="badge bg-light text-dark"><?php echo htmlspecialchars($case['category'] ?? 'Case Study'); ?></span>
+                                                <span class="badge" style="background-color: var(--button-bg); color: var(--bg-color);"><?php echo htmlspecialchars($case['category'] ?? 'Case Study'); ?></span>
                                             </div>
                                         </div>
                                     </div>
@@ -524,14 +527,14 @@ $clients = get_clients();
                     </button>
                 </div>
                 <div class="text-center mt-5">
-                    <a href="views/case-studies.php" class="btn btn-outline-primary">View All Case Studies</a>
+                    <a href="views/case-studies.php" class="btn btn-outline-secondary">View All Case Studies</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Client Review Section -->
-    <section id="reviews" class="reviews-section section-padding">
+    <!-- Client Review Section - White Background -->
+    <section id="reviews" class="reviews-section section-padding" style="background-color: var(--button-bg); color: var(--button-text);">
         <div class="container">
             <h2 class="section-title">Client Reviews</h2>
             <div class="reviews-container">
@@ -604,8 +607,8 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- Client Logos Section -->
-    <section id="clients" class="clients-section section-padding bg-light">
+    <!-- Client Logos Section - Black Background -->
+    <section id="clients" class="clients-section section-padding" style="background-color: var(--bg-color);">
         <div class="container-fluid">
             <div class="container">
                 <h2 class="section-title">Trusted By</h2>
@@ -658,8 +661,8 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills-section section-padding">
+    <!-- Skills Section - White Background -->
+    <section id="skills" class="skills-section section-padding" style="background-color: var(--button-bg); color: var(--button-text);">
         <div class="container">
             <h2 class="section-title">Skills & Expertise</h2>
             <div class="row g-4">
@@ -729,13 +732,13 @@ $clients = get_clients();
                 </div>
             </div>
             <div class="text-center mt-4">
-                <a href="views/skills.php" class="btn btn-outline-primary">View Full Skills & Experience</a>
+                <a href="views/skills.php" class="btn btn-outline-secondary">View Full Skills & Experience</a>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section section-padding">
+    <!-- Contact Section - Black Background -->
+    <section id="contact" class="contact-section section-padding snap-section section-fade-in" style="background-color: var(--bg-color);">
         <div class="container">
             <h2 class="section-title">Contact Me</h2>
             <form id="contactFormHome" action="services/process_contact.php" method="POST">
@@ -924,6 +927,73 @@ $clients = get_clients();
                 element.classList.add('visible');
             });
         }
+    </script>
+
+    <!-- Scroll Navigation Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-dot" data-target="home" data-tooltip="Home"></div>
+        <div class="scroll-dot" data-target="about" data-tooltip="About Me"></div>
+        <div class="scroll-dot" data-target="services" data-tooltip="My Services"></div>
+        <div class="scroll-dot" data-target="case-studies" data-tooltip="Case Studies"></div>
+        <div class="scroll-dot" data-target="contact" data-tooltip="Contact Me"></div>
+    </div>
+
+    <script>
+        // Enhanced scroll indicator and section visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollDots = document.querySelectorAll('.scroll-dot');
+            const sections = document.querySelectorAll('.snap-section');
+            const fadeElements = document.querySelectorAll('.section-fade-in');
+            
+            // Section visibility observer
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Update active scroll dot
+                        const sectionId = entry.target.id;
+                        scrollDots.forEach(dot => {
+                            dot.classList.toggle('active', dot.dataset.target === sectionId);
+                        });
+                        
+                        // Add fade-in animation
+                        if (entry.target.classList.contains('section-fade-in')) {
+                            entry.target.classList.add('visible');
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            // Observe all sections
+            sections.forEach(section => sectionObserver.observe(section));
+            
+            // Scroll dot click handlers
+            scrollDots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Enhanced fade-in animation observer
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.2 });
+            
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+        });
     </script>
 </body>
 </html>

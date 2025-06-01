@@ -19,17 +19,17 @@ require_once '../database/config.php';
     <style>
         /* About Page Specific Styles */
         :root {
-            --bg-color: #FFFFFF;
-            --bg-alt: #F9F9F9;
-            --text-color: #1A1A1A;
-            --accent-color: #1D3557;
-            --accent-light: rgba(29, 53, 87, 0.1);
-            --secondary-accent: #E07A5F;
+            --bg-color: #121212;           /* Soft Black - Primary Background */
+            --bg-alt: #1E1E1E;            /* Charcoal Grey - Card/Section BG */
+            --text-color: #FFFFFF;         /* Pure White - Primary Text */
+            --accent-color: #D8CAB8;       /* Changed from blue to warm beige for better contrast */
+            --accent-light: rgba(216, 202, 184, 0.1);
+            --secondary-accent: #D8CAB8;   /* Warm Beige - Subtle elegance */
             --section-spacing: 64px;
             --text-padding: 60px;
             --heading-spacing: 24px;
             --paragraph-spacing: 20px;
-            --divider-color: #E0E0E0;
+            --divider-color: #333333;     /* Graphite Grey - Dividers */
             --transition-standard: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
@@ -137,8 +137,8 @@ require_once '../database/config.php';
             position: absolute;
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
-            color: var(--accent-color);
-            opacity: 0.15;
+            color: var(--secondary-accent);
+            opacity: 0.3;
             pointer-events: none;
             transition: transform 0.3s ease;
         }
@@ -167,7 +167,8 @@ require_once '../database/config.php';
             font-family: 'Inter', sans-serif;
             font-size: 1.5rem;
             margin-bottom: var(--heading-spacing);
-            color: var(--accent-color);
+            color: var(--text-color);
+            opacity: 0.8;
             font-weight: 400;
         }
         
@@ -226,9 +227,9 @@ require_once '../database/config.php';
         .cta-button {
             display: inline-flex;
             align-items: center;
-            background-color: var(--bg-color);
+            background-color: var(--accent-color);
             border: 2px solid var(--accent-color);
-            color: var(--accent-color);
+            color: var(--bg-color);
             font-family: 'Inter', sans-serif;
             padding: 15px 30px;
             font-size: 1rem;
@@ -238,7 +239,7 @@ require_once '../database/config.php';
             overflow: hidden;
             transition: var(--transition-standard);
             border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(29, 53, 87, 0.1);
+            box-shadow: 0 4px 12px rgba(216, 202, 184, 0.2);
         }
         
         .cta-text {
@@ -261,14 +262,16 @@ require_once '../database/config.php';
             left: 0;
             width: 100%;
             height: 0%;
-            background-color: var(--accent-color);
+            background-color: var(--text-color);
             transition: var(--transition-standard);
             z-index: 1;
         }
         
         .cta-button:hover,
         .cta-button.hover {
-            color: #FFFFFF;
+            color: var(--bg-color);
+            background-color: var(--text-color);
+            border-color: var(--text-color);
             transform: translateY(-3px);
         }
         

@@ -32,8 +32,8 @@ require_once '../database/config.php';
         .thank-you-icon {
             width: 100px;
             height: 100px;
-            background-color: #e9f9f0;
-            color: #28a745;
+            background-color: var(--card-bg);
+            color: var(--muted-gold);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -43,11 +43,11 @@ require_once '../database/config.php';
         }
         
         .dark-mode .thank-you-container {
-            background-color: #2d3436;
+            background-color: var(--primary-bg);
         }
         
         .dark-mode .thank-you-icon {
-            background-color: rgba(40, 167, 69, 0.1);
+            background-color: var(--accent-divider);
         }
     </style>
 </head>
@@ -73,7 +73,7 @@ require_once '../database/config.php';
                             <a href="../index.php" class="btn btn-primary me-3">
                                 <i class="fas fa-home me-2"></i> Back to Home
                             </a>
-                            <a href="case-studies.php" class="btn btn-outline-primary">
+                            <a href="case-studies.php" class="btn btn-outline-secondary">
                                 <i class="fas fa-briefcase me-2"></i> View Case Studies
                             </a>
                         </div>

@@ -11,6 +11,7 @@ require_once '../database/config.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="../assets/css/style.css" rel="stylesheet">
     <style>
+        /* Work page contrast fixes for better visibility */
         .timeline {
             position: relative;
             padding: 50px 0;
@@ -23,7 +24,7 @@ require_once '../database/config.php';
             transform: translateX(-50%);
             width: 2px;
             height: 100%;
-            background: var(--bs-primary);
+            background: var(--secondary-color);
         }
         
         .work-experience-item {
@@ -40,10 +41,10 @@ require_once '../database/config.php';
         }
         
         .company-info {
-            background: #fff;
+            background: var(--card-bg);
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px var(--shadow-color);
             transition: transform 0.3s ease;
         }
         
@@ -58,10 +59,10 @@ require_once '../database/config.php';
         }
         
         .role-description {
-            background: #fff;
+            background: var(--card-bg);
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px var(--shadow-color);
         }
         
         .responsibility-list {
@@ -80,13 +81,13 @@ require_once '../database/config.php';
             content: '→';
             position: absolute;
             left: 0;
-            color: var(--bs-primary);
+            color: var(--secondary-color);
         }
         
         .duration {
             display: inline-block;
-            background: var(--bs-primary);
-            color: white;
+            background: var(--secondary-color);
+            color: var(--button-text);
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.9rem;

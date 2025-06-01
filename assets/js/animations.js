@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Find nearby text to slightly animate
                 const paragraph = el.closest('p');
                 if (paragraph) {
-                    paragraph.style.color = 'var(--accent-color)';
+                    paragraph.style.color = 'var(--muted-gold)';
                     paragraph.style.transition = 'color 0.5s ease';
                 }
             });

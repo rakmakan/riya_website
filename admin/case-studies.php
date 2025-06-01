@@ -268,7 +268,7 @@ $case_studies = get_case_studies();
                                 </button>
                             </form>
                             <a href="../case-study.php?slug=<?php echo urlencode($case['slug']); ?>" 
-                               class="btn btn-outline-primary btn-sm" target="_blank">
+                               class="btn btn-outline-secondary btn-sm" target="_blank">
                                 <i class="fas fa-external-link-alt"></i> View
                             </a>
                         </div>
