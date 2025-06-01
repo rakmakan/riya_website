@@ -45,15 +45,27 @@
     --input-border: #D1D1D1;
 }
 
-/* Image Hover Animation - B&W to Color */
-.hover-color-image {
+/* Image Hover Animation - B&W to Color (Client Logos Only) */
+.client-logo.hover-color-image,
+.clients-section .hover-color-image {
     filter: grayscale(100%);
     transition: filter 0.5s ease-in-out, transform 0.3s ease-in-out, opacity 0.3s ease;
     opacity: 0.9;
 }
 
-.hover-color-image:hover {
+.client-logo.hover-color-image:hover,
+.clients-section .hover-color-image:hover {
     filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* Default styling for other hover-color-image elements (no grayscale) */
+.hover-color-image {
+    transition: opacity 0.3s ease;
+    opacity: 0.95;
+}
+
+.hover-color-image:hover {
     opacity: 1;
 }
 
@@ -61,13 +73,23 @@
 .image-text-container {
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease-in-out;
+    transition: opacity 0.3s ease;
     opacity: 0.95;
 }
 
-.image-text-container img {
+/* Apply grayscale only to client logos inside image-text-container */
+.clients-section .image-text-container img {
     filter: grayscale(100%);
     transition: filter 0.5s ease-in-out, transform 0.3s ease;
+}
+
+.clients-section .image-text-container:hover img {
+    filter: grayscale(0%);
+}
+
+/* Default styling for other images in image-text-container (no grayscale) */
+.image-text-container img {
+    transition: transform 0.3s ease;
 }
 
 .image-text-container:hover {
@@ -75,7 +97,7 @@
 }
 
 .image-text-container:hover img {
-    filter: grayscale(0%);
+    opacity: 0.9;
 }
 
 .image-text-container .overlay-text {
@@ -94,6 +116,17 @@
     color: var(--primary-color);
     opacity: 1;
     transform: translateY(-5px);
+}
+
+/* Review profile image container styling */
+.review-profile .image-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.review-profile .image-text-container:hover {
+    transform: none; /* Remove the scale effect for company logos in reviews */
 }
 
 /* Apply variables to elements */
@@ -203,7 +236,7 @@ body {
 }
 
 .hero-heading {
-    font-size: 3rem;
+    font-size: 5rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
     line-height: 1.2;
@@ -225,6 +258,35 @@ body {
 .btn-hero-primary {
     padding: 0.75rem 1.5rem;
     font-weight: 600;
+}
+
+/* Hero CTA Button Fixes */
+.hero-cta-group .btn-outline-dark {
+    border: 2px solid var(--muted-gold);
+    color: var(--muted-gold);
+    background-color: transparent;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hero-cta-group .btn-outline-dark:hover {
+    background-color: var(--muted-gold);
+    color: var(--primary-bg);
+    border-color: var(--muted-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(198, 161, 91, 0.3);
+}
+
+.hero-cta-group .btn-outline-dark:focus {
+    box-shadow: 0 0 0 3px rgba(198, 161, 91, 0.25);
+    border-color: var(--muted-gold);
+    color: var(--muted-gold);
+}
+
+.hero-cta-group .btn-outline-dark:active {
+    background-color: var(--muted-gold);
+    color: var(--primary-bg);
+    border-color: var(--muted-gold);
 }
 
 /* Hero Stats Section */
@@ -285,7 +347,9 @@ body {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, var(--accent-divider), var(--muted-gold));
+    background: linear-gradient(45deg, #c77100, #272323, #ffbb56, #e4a34e);
+    background-size: 400% 400%;
+    animation: colorTransition 6s ease-in-out infinite;
     box-shadow: 
         inset 0 0 20px rgba(255,255,255,0.8),
         0 5px 15px rgba(0,0,0,0.3),
@@ -385,6 +449,22 @@ body {
     }
     to {
         transform: rotate(-360deg);
+    }
+}
+
+/* Color transition animation for hero heading and orbital ball */
+@keyframes colorTransition {
+    0% {
+        background-position: 0% 50%;
+    }
+    33% {
+        background-position: 50% 50%;
+    }
+    66% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
     }
 }
 
@@ -591,6 +671,79 @@ body {
     will-change: transform, opacity;
     visibility: visible;
     border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+/* Service Icon Styling */
+.service-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem auto;
+    background: linear-gradient(135deg, var(--secondary-color), var(--muted-gold));
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-icon:hover::before {
+    opacity: 1;
+}
+
+.service-icon i {
+    font-size: 2.5rem;
+    color: var(--button-text);
+    z-index: 1;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    transform: rotate(5deg);
+    box-shadow: 0 8px 20px rgba(216, 202, 184, 0.3);
+}
+
+.service-card:hover .service-icon i {
+    opacity: 1;
+}
+
+/* Service Card Content */
+.service-card h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+    line-height: 1.3;
+}
+
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--secondary-text);
+    margin-bottom: 0;
+    text-align: left;
+}
+
+/* Hover effects for service cards */
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px var(--shadow-color);
 }
 
 /* White section overrides for service cards */
@@ -611,413 +764,111 @@ body {
 }
 
 .services-section[style*="background-color: var(--button-bg)"] .service-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* Case Studies Section */
-.case-study-card {
-    background: var(--card-bg);
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 4px 12px var(--shadow-color);
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--border-color);
+.services-section[style*="background-color: var(--button-bg)"] .service-icon {
+    background: linear-gradient(135deg, var(--button-text), var(--dark-gray));
 }
 
-.case-study-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(51, 51, 51, 0.4);
+.services-section[style*="background-color: var(--button-bg)"] .service-icon i {
+    color: var(--primary-text);
 }
 
-.image-container {
+/* Services Section Layout and Spacing */
+.services-section {
     position: relative;
     overflow: hidden;
-    height: 200px;
 }
 
-.image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-.case-study-card:hover .image-container img {
-    transform: scale(1.05);
-}
-
-.card-overlay {
+.services-section::before {
+    content: '';
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(0,0,0,0.7));
-    padding: 20px;
-    color: white;
-    transition: all 0.3s ease;
-    opacity: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 25% 25%, rgba(216, 202, 184, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(216, 202, 184, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
 }
 
-.case-study-card:hover .card-overlay {
-    opacity: 1;
-}
-
-.card-body {
-    padding: 2rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--dark-gray);
-}
-
-.service-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.service-tag {
-    display: inline-flex;
-    align-items: center;
-    background-color: var(--card-bg);
-    padding: 0.375rem 0.875rem;
-    border-radius: 30px;
-    font-size: 0.75rem;
-    color: var(--primary-color);
-    border: none;
-    font-weight: 500;
-}
-
-.service-tag i {
-    font-size: 0.625rem;
-    margin-right: 0.375rem;
-}
-
-.card-text {
-    color: var(--tertiary-text);
-    margin-bottom: 2rem;
-    flex-grow: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.6;
-}
-
-.card-footer {
-    border-top: 1px solid var(--accent-divider);
-    padding: 1.5rem 2rem;
-    background-color: var(--card-bg);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.meta-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.client-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-}
-
-.client-info i {
-    color: var(--primary-color);
-}
-
-.date-completed {
-    color: var(--tertiary-text);
-    font-size: 0.8125rem;
-    display: flex;
-    align-items: center;
-    gap: 0.375rem;
-    padding-left: 0.25rem;
-}
-
-.view-case-btn {
-    padding: 0.625rem 1.5rem;
-    border-radius: 50px;
-    font-weight: 500;
-    font-size: 0.875rem;
-    transition: all 0.3s ease;
-}
-
-.view-case-btn i {
-    margin-left: 0.25rem;
-    transition: transform 0.2s ease;
-}
-
-.view-case-btn:hover i {
-    transform: translateX(3px);
-}
-
-/* Reviews Section */
-.reviews-container {
-    width: 100%;
-    overflow: hidden;
+.services-section .container {
     position: relative;
-    padding: 40px 0;
+    z-index: 1;
 }
 
-.review-track {
-    display: flex;
-    animation: reviewMarquee 25s linear infinite;
-    width: max-content;
-    gap: 2rem;
+.services-section .section-title {
+    margin-bottom: 3rem;
+    position: relative;
 }
 
-.review-card {
-    flex: 0 0 auto;
-    width: 400px;
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px var(--shadow-color);
-    transition: transform 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    min-height: 300px;
+/* Enhanced grid spacing for different screen sizes */
+.services-section .row {
+    --bs-gutter-x: 2rem;
+    --bs-gutter-y: 2rem;
 }
 
-/* White section overrides for review cards */
-.reviews-section[style*="background-color: var(--button-bg)"] .review-card {
-    background: var(--primary-text);
-    color: var(--button-text);
-    border: 1px solid var(--hover-state);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.reviews-section[style*="background-color: var(--button-bg)"] .review-card .review-text {
-    color: var(--button-text);
-    opacity: 0.8;
-}
-
-.reviews-section[style*="background-color: var(--button-bg)"] .review-card .client-name {
-    color: var(--button-text);
-}
-
-.reviews-section[style*="background-color: var(--button-bg)"] .review-card .client-position {
-    color: var(--button-text);
-    opacity: 0.6;
-}
-
-.reviews-section[style*="background-color: var(--button-bg)"] .review-card .rating i {
-    color: var(--muted-gold);
-}
-
-.review-profile {
-    margin-bottom: 1.5rem;
-}
-
-.review-profile .company-logo {
-    max-width: 120px;
-    height: auto;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-.rating {
-    margin-bottom: 1rem;
-}
-
-.review-text {
-    flex-grow: 1;
-    margin-bottom: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-.client-name {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-.client-position {
-    color: var(--text-color);
-    opacity: 0.8;
-    margin-bottom: 0;
-}
-
-@keyframes reviewMarquee {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-50% - 1rem));
-    }
-}
-
-.reviews-container:hover .review-track {
-    animation-play-state: paused;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .review-card {
-        width: 320px;
-        padding: 1.5rem;
+@media (min-width: 1440px) {
+    .services-section .row {
+        --bs-gutter-x: 3rem;
+        --bs-gutter-y: 3rem;
     }
     
-    .review-track {
-        animation-duration: 20s;
-        gap: 1.5rem;
+    .services-section .section-title {
+        margin-bottom: 4rem;
+        font-size: 3rem;
     }
 }
 
-/* Mobile-specific styles for reviews */
+@media (min-width: 1920px) {
+    .services-section .row {
+        --bs-gutter-x: 4rem;
+        --bs-gutter-y: 4rem;
+    }
+    
+    .services-section .section-title {
+        margin-bottom: 5rem;
+        font-size: 3.5rem;
+    }
+}
+
 @media (max-width: 768px) {
-    .reviews-container {
-        padding: 20px 0;
-    }
-
-    .review-track {
-        display: flex;
-        animation: none;
-        transition: transform 0.3s ease;
-        gap: 1rem;
-    }
-
-    .review-card {
-        width: 280px;
-        min-height: 250px;
-        padding: 1.25rem;
-        margin: 0 0.5rem;
-        flex: 0 0 auto;
-    }
-
-    .review-text {
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
-
-    .client-name {
-        font-size: 1rem;
-    }
-
-    .client-position {
-        font-size: 0.875rem;
+    .services-section .row {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 2rem;
     }
 }
 
-/* Contact Section */
-.contact-section {
-    background-color: var(--primary-bg);
+/* Service card animation and loading states */
+.service-card {
+    animation: serviceCardFadeIn 0.6s ease-out forwards;
+    animation-delay: calc(var(--animation-order, 0) * 0.1s);
+    opacity: 0;
+    transform: translateY(30px);
 }
 
-.form-control {
-    padding: 0.8rem;
-    border-radius: 8px;
-    border: 2px solid var(--border-color);
-    background-color: var(--input-bg);
-    color: var(--primary-text);
-    transition: all 0.3s ease;
-}
-
-.form-control:focus {
-    border-color: var(--secondary-color);
-    box-shadow: 0 0 0 4px rgba(216, 202, 184, 0.1);
-}
-
-/* Contact Form */
-.contact-section form {
-    max-width: 800px;
-    margin: 0 auto;
-    background: var(--card-bg);
-    padding: 3rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px var(--shadow-color);
-    border: 1px solid var(--border-color);
-}
-
-.btn-primary {
-    background: var(--button-bg);
-    color: var(--button-text);
-    border: none;
-    padding: 0.8rem 2rem;
-    border-radius: 8px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-/* Enhanced button contrast for better visibility */
-.btn-primary {
-    background-color: var(--secondary-color) !important;
-    border-color: var(--secondary-color) !important;
-    color: var(--button-text) !important;
-}
-
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-    background-color: var(--muted-gold) !important;
-    border-color: var(--muted-gold) !important;
-    color: var(--bg-color) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(216, 202, 184, 0.3);
-}
-
-.btn-outline-secondary {
-    border-color: var(--secondary-color) !important;
-    color: var(--secondary-color) !important;
-}
-
-.btn-outline-secondary:hover, .btn-outline-secondary:focus, .btn-outline-secondary:active {
-    background-color: var(--secondary-color) !important;
-    border-color: var(--secondary-color) !important;
-    color: var(--button-text) !important;
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
+@keyframes serviceCardFadeIn {
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 10px;
+/* Add animation delays via CSS custom properties */
+.services-section .col-md-4:nth-child(1) .service-card {
+    --animation-order: 1;
 }
 
-::-webkit-scrollbar-track {
-    background: var(--light-bg);
+.services-section .col-md-4:nth-child(2) .service-card {
+    --animation-order: 2;
 }
 
-::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color);
+.services-section .col-md-4:nth-child(3) .service-card {
+    --animation-order: 3;
 }
 
 /* Certifications Section */
@@ -1038,14 +889,13 @@ body {
     object-fit: contain;
     margin: 0 auto;
     display: block;
-    filter: brightness(0) saturate(100%);
-    opacity: 0.85;
+    opacity: 0.95;
     transition: all 0.3s ease;
 }
 
 .certification-card:hover img {
-    filter: none;
     opacity: 1;
+    /* Scale effect removed */
 }
 
 /* Client Logos Section */
@@ -1624,14 +1474,12 @@ html {
 .scroll-dot.active {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
-    transform: scale(1.3);
     box-shadow: 0 0 15px rgba(216, 202, 184, 0.4);
 }
 
 .scroll-dot:hover {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
-    transform: scale(1.2);
 }
 
 /* Responsive adjustments for full-screen sections */
@@ -1688,4 +1536,410 @@ html {
 .btn, .nav-link, .scroll-dot, .progress-bar {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reviews Section Styles */
+.reviews-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.review-track {
+    display: flex;
+    gap: 30px;
+    padding: 0 20px;
+    animation: marquee 30s linear infinite;
+    width: max-content;
+}
+
+.review-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.review-card {
+    background: #FFFFFF;
+    border-radius: 15px;
+    padding: 25px;
+    min-width: 300px;
+    max-width: 350px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--hover-state);
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.review-card .stars,
+.review-card .rating {
+    color: var(--muted-gold);
+    font-size: 18px;
+    margin-bottom: 15px;
+    display: flex;
+    gap: 2px;
+}
+
+.review-card .rating i {
+    color: var(--muted-gold);
+}
+
+.review-card .review-text {
+    color: var(--button-text);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.review-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.review-profile .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--muted-gold);
+}
+
+.review-profile .profile-info {
+    flex: 1;
+}
+
+.review-profile .profile-name,
+.review-card .client-name {
+    color: var(--button-text);
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+.review-profile .profile-title,
+.review-card .client-position {
+    color: var(--dark-gray);
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.company-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 8px;
+    background: rgba(216, 202, 184, 0.1);
+}
+
+.review-card:hover .company-logo {
+    opacity: 1;
+    /* Scale effect removed */
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .review-track {
+        animation: none;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        gap: 20px;
+        padding: 0 15px;
+    }
+
+    .review-track::-webkit-scrollbar {
+        display: none;
+    }
+
+    .review-card {
+        scroll-snap-align: start;
+        min-width: 280px;
+        max-width: 300px;
+        padding: 20px;
+    }
+
+    .reviews-container {
+        padding: 15px 0;
+    }
+
+    .review-profile .profile-image {
+        width: 45px;
+        height: 45px;
+    }
+
+    .review-profile .profile-name {
+        font-size: 15px;
+    }
+
+    .review-profile .profile-title {
+        font-size: 12px;
+    }
+
+    .review-card .review-text {
+        font-size: 14px;
+    }
+}
+
+/* Dark theme adjustments for reviews */
+.dark-theme .review-card {
+    background: var(--card-bg-dark);
+    border-color: var(--border-color-dark);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .review-card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.dark-theme .review-card .review-text {
+    color: var(--text-color-dark);
+}
+
+.dark-theme .review-profile .profile-name {
+    color: var(--text-color-dark);
+}
+
+.dark-theme .review-profile .profile-title {
+    color: var(--text-muted-dark);
+}
+
+/* Reviews section title and background color overrides */
+
+/* Case Studies Page Styles */
+.case-study-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    min-height: 500px; /* Ensure consistent minimum height */
+}
+
+.case-study-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.case-study-card .image-container {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.case-study-card .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.case-study-card .card-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2;
+}
+
+.case-study-card .badge {
+    background-color: var(--secondary-color) !important;
+    color: var(--button-text) !important;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px;
+}
+
+.case-study-card .card-body {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.case-study-card .card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.6rem; /* Reserve space for 2 lines */
+}
+
+.case-study-card .service-tags {
+    margin-bottom: 1rem;
+    min-height: 2.5rem; /* Reserve space for tags */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.case-study-card .card-text {
+    color: var(--secondary-text);
+    line-height: 1.6;
+    margin-bottom: 0;
+    flex-grow: 1;
+    font-size: 0.95rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 4.8rem; /* Reserve space for 3 lines of text */
+}
+
+.case-study-card .card-footer {
+    padding: 1.5rem 2rem;
+    background: transparent;
+    border-top: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.case-study-card .meta-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--tertiary-text);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.case-study-card .client-info,
+.case-study-card .date-completed {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.case-study-card .client-info i,
+.case-study-card .date-completed i {
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+}
+
+.case-study-card .view-case-btn {
+    background: var(--secondary-color);
+    color: var(--button-text);
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+}
+
+.case-study-card .view-case-btn:hover {
+    background: var(--muted-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(198, 161, 91, 0.3);
+    color: var(--button-text);
+    text-decoration: none;
+}
+
+.case-study-card .view-case-btn i {
+    transition: transform 0.3s ease;
+}
+
+.case-study-card .view-case-btn:hover i {
+    transform: translateX(3px);
+}
+
+/* Service Tags Styling for Case Study Cards */
+.case-study-card .service-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, rgba(216, 202, 184, 0.15), rgba(216, 202, 184, 0.08));
+    color: var(--secondary-color);
+    padding: 0.5rem 0.8rem;
+    border-radius: 12px;
+    margin: 0 0.4rem 0.4rem 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(216, 202, 184, 0.25);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.case-study-card .service-tag i {
+    font-size: 0.7rem;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.case-study-card .service-tag:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--muted-gold));
+    color: var(--button-text);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(216, 202, 184, 0.3);
+}
+
+.case-study-card .service-tag:hover i {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments for service tags */
+@media (max-width: 768px) {
+    .case-study-card .service-tag {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.7rem;
+        margin: 0 0.3rem 0.3rem 0;
+    }
+    
+    .case-study-card .service-tag i {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .case-study-card .service-tag {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.6rem;
+        border-radius: 10px;
+    }
 }

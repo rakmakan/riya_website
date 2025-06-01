@@ -25,6 +25,49 @@ $clients = get_clients();
     
     <!-- Inline styles for What Working Together Looks Like Section -->
     <style>
+        /* Hero Heading Color Animation */
+        .hero-heading {
+            animation: colorTransition 6s ease-in-out infinite;
+            background: linear-gradient(45deg, #D8CAB8, #FFFFFF, #A1A1A1, #D8CAB8);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+        }
+
+        @keyframes colorTransition {
+            0% {
+                background-position: 0% 50%;
+            }
+            33% {
+                background-position: 50% 50%;
+            }
+            66% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Fallback for browsers that don't support background-clip: text */
+        @supports not (-webkit-background-clip: text) {
+            .hero-heading {
+                animation: colorTransitionFallback 6s ease-in-out infinite;
+                background: none;
+                -webkit-text-fill-color: initial;
+                text-fill-color: initial;
+            }
+            
+            @keyframes colorTransitionFallback {
+                0% { color: #D8CAB8; }
+                33% { color: #FFFFFF; }
+                66% { color: #A1A1A1; }
+                100% { color: #D8CAB8; }
+            }
+        }
+
         /* What Working Together Looks Like Section */
         .collaboration-section {
             background-color: var(--button-bg);
@@ -196,95 +239,6 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- Removed duplicate The Gap Section -->
-
-    <!-- About Section - White Background -->
-    <section id="about" class="about-section section-padding snap-section section-fade-in" style="background-color: var(--button-bg); color: var(--button-text);">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="row">
-                <div class="col-lg-6">
-                    <img src="assets/images/about-image.png" alt="About Image" class="img-fluid rounded shadow hover-color-image">
-                </div>
-                <div class="col-lg-6">
-                    <h3 class="mb-4">Where strategy meets storytelling.</h3>
-                    <p class="lead mb-4">
-                        I help brands find their voice, define their positioning, and communicate with clarity across every touchpoint — from pitch decks to product pages.
-                    </p>
-                    <p class="lead mb-4">
-                        My work lives at the intersection of strategy and storytelling. I partner with founders, marketing teams, and creative leads to turn scattered ideas into sharp narratives — the kind that actually land with the people you're trying to reach.
-                    </p>
-                    <p class="lead mb-4">
-                        I treat your brand like my own. That means I care where every word lands.
-                    </p>
-                    <p class="lead mb-4">
-                        Through audience research, competitive analysis, and structured messaging systems, I help brands communicate with purpose — not just polish.
-                    </p>
-                    <p class="lead mb-4">
-                        If you're building something worth paying attention to, I'll help you say the thing that makes people stop and listen.
-                    </p>
-                    <p class="mb-4">With a foundation in English Literature and specialized training in Marketing & Brand Direction, I bring both the art and science of communication to every project.</p>
-                    <div class="d-flex align-items-center mb-4">
-                        <div class="experience-highlight me-4">
-                            <h4 class="mb-0">7+</h4>
-                            <p class="mb-0">Years Experience</p>
-                        </div>
-                        <div class="experience-highlight">
-                            <h4 class="mb-0">20+</h4>
-                            <p class="mb-0">Projects Completed</p>
-                        </div>
-                    </div>
-                    <a href="views/about.php" class="btn btn-primary">Learn More About Me</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- The Gap Section - Black Background -->
-    <section id="the-gap" class="the-gap-section section-padding snap-section section-fade-in" style="background-color: var(--bg-color);">
-        <div class="container">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <!-- Left: Text Column -->
-                <div class="text-left max-w-prose space-y-6">
-                    <h2 class="section-title text-left" data-aos="fade-up">The Gap</h2>
-                    
-                    <div class="intro-paragraph" data-aos="fade-up" data-aos-delay="100">
-                        <p class="intro-text">Most brands have something valuable to offer.</p>
-                        <p class="intro-text">But they struggle to explain it in a way that sticks.</p>
-                    </div>
-                    
-                    <div class="problem-list space-y-3">
-                        <div class="problem-item fade-in">
-                            <p class="problem-text">Messaging feels scattered.</p>
-                        </div>
-                        <div class="problem-item fade-in">
-                            <p class="problem-text">Voice shifts from channel to channel.</p>
-                        </div>
-                        <div class="problem-item fade-in">
-                            <p class="problem-text">Their difference gets buried under buzzwords or borrowed lines.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="highlight-block mb-5 fade-in">
-                        <p class="highlight-text mb-3">I help brands get clear on what makes them matter.</p>
-                        <p class="supporting-text">I shape messaging that's focused, consistent, and easy to rally around — inside and out.</p>
-                    </div>
-                    
-                    <div class="emphasis-block fade-in">
-                        <p class="emphasis-text">For founders, marketers, and creative leads at early-stage to growth-stage brands who want to sound as sharp as they think.</p>
-                    </div>
-                </div>
-                
-                <!-- Right: Canvas Animation -->
-                <div class="flex justify-end canvas-container">
-                    <div class="canvas-wrapper">
-                        <canvas id="scatterCanvas" width="400" height="400" class="w-full max-w-md"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Services Section - White Background -->
     <section id="services" class="services-section section-padding snap-section section-fade-in" style="background-color: var(--button-bg); color: var(--button-text);">
         <div class="container">
@@ -341,141 +295,6 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- How I Work Section - Black Background -->
-    <section id="how-i-work" class="how-i-work-section section-padding" style="background-color: var(--bg-color);">
-        <div class="container">
-            <h2 class="section-title">How I Work</h2>
-            <div class="row g-4">
-                <!-- Step 1: LISTEN -->
-                <div class="col-md-4">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <div class="step-icon-circle">
-                            <i class="fas fa-comments"></i>
-                        </div>
-                        <h3 class="step-title">LISTEN</h3>
-                        <p class="step-description">We start with interviews, surveys, and a little (friendly) stalking to understand what your audience really thinks and wants.</p>
-                        <ul class="step-tags">
-                            <li>Voice-of-customer research</li>
-                            <li>Stakeholder interviews</li>
-                            <li>Message audit (AI-supported)</li>
-                        </ul>
-                        <div class="step-connector"></div>
-                    </div>
-                </div>
-
-                <!-- Step 2: FRAME -->
-                <div class="col-md-4">
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <div class="step-icon-circle">
-                            <i class="fas fa-puzzle-piece"></i>
-                        </div>
-                        <h3 class="step-title">FRAME</h3>
-                        <p class="step-description">We shape your message, tone, and position with a clear POV. Strategy before copy.</p>
-                        <ul class="step-tags">
-                            <li>Positioning + personality</li>
-                            <li>Messaging framework</li>
-                            <li>Voice & tone system</li>
-                        </ul>
-                        <div class="step-connector"></div>
-                    </div>
-                </div>
-
-                <!-- Step 3: WRITE -->
-                <div class="col-md-4">
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <div class="step-icon-circle">
-                            <i class="fas fa-pen-nib"></i>
-                        </div>
-                        <h3 class="step-title">WRITE</h3>
-                        <p class="step-description">Words that sound human — and sell. AI helps move faster, not sound robotic.</p>
-                        <ul class="step-tags">
-                            <li>Website copy</li>
-                            <li>Email flows</li>
-                            <li>Sales decks & social messaging</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What Working Together Looks Like Section - White Background -->
-    <section id="collaboration" class="collaboration-section section-padding" style="background-color: var(--button-bg); color: var(--button-text);">
-        <div class="container">
-            <h2 class="section-title">What Working Together Looks Like</h2>
-            
-            <div class="row mb-5">
-                <div class="col-md-8 mx-auto text-center">
-                    <p class="lead mb-2">Your brand speaks clearly.</p>
-                    <p class="lead mb-2">Your team knows what to say — and how to say it.</p>
-                    <p class="lead mb-4">Your audience doesn't just understand you — they remember you.</p>
-                </div>
-            </div>
-            
-            <div class="row mb-5">
-                <div class="col-lg-6">
-                    <div class="collaboration-intro p-4 rounded shadow-sm h-100">
-                        <h3 class="mb-4">After we work together, you'll walk away with:</h3>
-                        <div class="collaboration-outcome-list">
-                            <div class="outcome-item d-flex align-items-start mb-4">
-                                <div class="outcome-number">1</div>
-                                <div class="outcome-content">
-                                    <h4>A clear brand position that sets you apart</h4>
-                                </div>
-                            </div>
-                            <div class="outcome-item d-flex align-items-start mb-4">
-                                <div class="outcome-number">2</div>
-                                <div class="outcome-content">
-                                    <h4>A messaging system your team can actually use</h4>
-                                </div>
-                            </div>
-                            <div class="outcome-item d-flex align-items-start mb-4">
-                                <div class="outcome-number">3</div>
-                                <div class="outcome-content">
-                                    <h4>Copy that sounds like you — and converts like it should</h4>
-                                </div>
-                            </div>
-                            <div class="outcome-item d-flex align-items-start">
-                                <div class="outcome-number">4</div>
-                                <div class="outcome-content">
-                                    <h4>Confidence in how you show up, online and off</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="collaboration-scenarios p-4 rounded shadow-sm h-100">
-                        <div class="scenario-card mb-4">
-                            <div class="scenario-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div>
-                            <h4>Pitching Investors</h4>
-                            <div class="scenario-divider"></div>
-                        </div>
-                        <div class="scenario-card mb-4">
-                            <div class="scenario-icon">
-                                <i class="fas fa-bullhorn"></i>
-                            </div>
-                            <h4>Launching Campaigns</h4>
-                            <div class="scenario-divider"></div>
-                        </div>
-                        <div class="scenario-card">
-                            <div class="scenario-icon">
-                                <i class="fas fa-laptop"></i>
-                            </div>
-                            <h4>Updating Your Site</h4>
-                            <div class="scenario-divider"></div>
-                        </div>
-                        <p class="mt-4 collaboration-conclusion">Whether you're pitching investors, launching a campaign, or updating your site, your message will be sharp, strategic, and unmistakably yours.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Case Studies Section - Black Background -->
     <section id="case-studies" class="case-studies-section section-padding snap-section section-fade-in" style="background-color: var(--bg-color);">
@@ -548,7 +367,27 @@ $clients = get_clients();
                                 'rating' => 5,
                                 'review_text' => 'I highly recommend Riya to anybody needing help in marketing, corporate communications and PR. She is a self-starter with commendable storytelling, analytical and writing skills, all of which make her an excellent marketer.'
                             ],
-                            // ... other default testimonials
+                            [
+                                'client_name' => 'Sarah Johnson',
+                                'client_position' => 'Marketing Director, IDEMIA',
+                                'company_logo' => 'idemia-logo.svg',
+                                'rating' => 5,
+                                'review_text' => 'Riya transformed our content strategy completely. Her ability to simplify complex technical concepts into compelling stories is exceptional. Our engagement rates increased by 40% under her guidance.'
+                            ],
+                            [
+                                'client_name' => 'Michael Chen',
+                                'client_position' => 'CEO, OpenSense Labs',
+                                'company_logo' => 'opensense-logo.svg',
+                                'rating' => 5,
+                                'review_text' => 'Working with Riya was a game-changer for our startup. She not only delivered exceptional content but also helped us define our brand voice. Her strategic approach to marketing is remarkable.'
+                            ],
+                            [
+                                'client_name' => 'Emma Rodriguez',
+                                'client_position' => 'Brand Manager, Parimatch',
+                                'company_logo' => 'parimatch-logo.svg',
+                                'rating' => 5,
+                                'review_text' => 'Riya\'s expertise in both B2B and B2C marketing is impressive. She helped us launch our new product line with compelling campaigns that drove real results. Professional and creative!'
+                            ]
                         ];
                         
                         // Print testimonials twice for seamless loop
@@ -661,81 +500,7 @@ $clients = get_clients();
         </div>
     </section>
 
-    <!-- Skills Section - White Background -->
-    <section id="skills" class="skills-section section-padding" style="background-color: var(--button-bg); color: var(--button-text);">
-        <div class="container">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="skill-category">
-                        <h3 class="mb-4">Marketing & Communications</h3>
-                        <div class="skill-bar mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Brand Strategy & Positioning</span>
-                                <span>95%</span>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="skill-bar mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Content Strategy</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="skill-bar mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Digital Marketing</span>
-                                <span>88%</span>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 88%" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="skill-category">
-                        <h3 class="mb-4">Digital Tools & Analytics</h3>
-                        <div class="skill-bar mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>SEO & Google Analytics</span>
-                                <span>92%</span>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 92%" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="skill-bar mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Email Marketing</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="skill-bar mb-4">
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Social Media Marketing</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <a href="views/skills.php" class="btn btn-outline-secondary">View Full Skills & Experience</a>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Contact Section - Black Background -->
     <section id="contact" class="contact-section section-padding snap-section section-fade-in" style="background-color: var(--bg-color);">

@@ -170,14 +170,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Add hover effect to service icons
+    // Add hover effect to service icons (scale effect removed)
     const serviceIcons = document.querySelectorAll('.service-icon');
     serviceIcons.forEach(icon => {
         icon.addEventListener('mouseover', function() {
-            this.style.transform = 'rotate(0deg) scale(1.1)';
+            this.style.transform = 'rotate(0deg)';
         });
         icon.addEventListener('mouseout', function() {
-            this.style.transform = 'rotate(-5deg) scale(1)';
+            this.style.transform = 'rotate(-5deg)';
         });
     });
 });

@@ -19,14 +19,16 @@ document.addEventListener('DOMContentLoaded', function() {
             image.style.opacity = '1';
         }, 100);
         
-        // For accessibility, add focus events too
-        image.addEventListener('focus', function() {
-            this.style.filter = 'grayscale(0%)';
-        });
-        
-        image.addEventListener('blur', function() {
-            this.style.filter = 'grayscale(100%)';
-        });
+        // For accessibility, add focus events only for client logos
+        if (image.classList.contains('client-logo') || image.closest('.clients-section')) {
+            image.addEventListener('focus', function() {
+                this.style.filter = 'grayscale(0%)';
+            });
+            
+            image.addEventListener('blur', function() {
+                this.style.filter = 'grayscale(100%)';
+            });
+        }
     });
     
     // Add event listeners for image-text containers
@@ -36,9 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
             container.style.opacity = '1';
         }, 100);
         
-        // Optional: Add subtle scale effect on hover
+        // Optional: Add subtle hover effect without scale
         container.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.03)';
+            // Scale effect removed for better UX
             
             // Find any overlay text and animate it
             const overlayText = this.querySelector('.overlay-text');
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         container.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
+            // Scale effect removed for better UX
             
             // Reset overlay text animation
             const overlayText = this.querySelector('.overlay-text');

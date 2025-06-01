@@ -115,7 +115,7 @@ $services = !empty($case_study['services']) ? explode(',', $case_study['services
             transition: transform 0.3s ease;
         }
         .gallery-item:hover img {
-            transform: scale(1.05);
+            /* Scale effect removed for better UX */
         }
         .project-description {
             font-size: 1.1rem;
