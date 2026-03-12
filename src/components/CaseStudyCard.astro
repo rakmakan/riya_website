@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+  category: string;
+  summary: string;
+  metrics?: string;
+  slug: string;
+  index?: number;
+}
+
+const { title, category, summary, metrics, slug, index = 0 } = Astro.props;
+const num = String(index + 1).padStart(2, '0');
+---
+
+<article
+  style={`border:1.5px solid var(--border); background:var(--parchment); overflow:hidden; transition:border-color 0.3s ease; transition-delay:${index * 80}ms;`}
+  data-reveal
+  onmouseenter="this.style.borderColor='var(--sienna)'"
+  onmouseleave="this.style.borderColor='var(--border)'"
+>
+  <!-- Header row -->
+  <div style="border-bottom:1px solid var(--border); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between;">
+    <span class="t-label" style="color:var(--taupe);">{num}</span>
+    <span class="t-label" style="color:var(--taupe);">{category}</span>
+  </div>
+
+  <!-- Content -->
+  <div style="padding:2rem;">
+    <h3
+      style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.25rem,2vw,1.625rem); font-weight:500; letter-spacing:-0.01em; color:var(--espresso); line-height:1.25; transition:color 0.3s ease;"
+      class="cs-card-title"
+    >
+      {title}
+    </h3>
+    <p style="font-family:'Jost',sans-serif; font-size:0.875rem; line-height:1.7; margin-top:1rem; color:color-mix(in srgb, var(--espresso) 60%, transparent);">
+      {summary}
+    </p>
+
+    {metrics && (
+      <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+        <p class="t-label" style="margin-bottom:0.375rem; color:var(--sienna);">Key result</p>
+        <p style="font-family:'Jost',sans-serif; font-size:0.875rem; font-weight:500; color:var(--espresso);">
+          {metrics}
+        </p>
+      </div>
+    )}
+
+    <a
+      href={`/case-studies/${slug}`}
+      style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:1.5rem; font-family:'Jost',sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--espresso); text-decoration:none; transition:color 0.2s ease; cursor:none;"
+      onmouseenter="this.style.color='var(--sienna)'"
+      onmouseleave="this.style.color='var(--espresso)'"
+    >
+      Read case study
+      <svg style="width:14px; height:14px; transition:transform 0.2s ease;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </a>
+  </div>
+</article>

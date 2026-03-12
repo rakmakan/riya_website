@@ -1,0 +1,107 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  tagline: string;
+  price: string;
+  priceNote: string;
+  description: string;
+  deliverables: string[];
+  cta: string;
+  ctaHref: string;
+  featured?: boolean;
+  note?: string;
+}
+
+const { number, title, tagline, price, priceNote, description, deliverables, cta, ctaHref, featured = false, note } = Astro.props;
+---
+
+<div
+  style={`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1.5px solid ${featured ? 'var(--sienna)' : 'var(--border)'};
+    background: ${featured ? 'var(--espresso)' : 'var(--parchment)'};
+    transition: border-color 0.3s ease, transform 0.2s ease;
+  `}
+  data-reveal
+>
+  <!-- Top bar -->
+  <div style={`
+    border-bottom: 1px solid ${featured ? 'rgba(250,247,242,0.1)' : 'var(--border)'};
+    padding: 1.125rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  `}>
+    <span class="t-label" style={`color: ${featured ? 'var(--sienna)' : 'var(--taupe)'};`}>{number}</span>
+    {featured && (
+      <span style="font-family:'Jost',sans-serif; font-size:0.625rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--sienna); border:1px solid rgba(196,96,58,0.4); padding:0.2rem 0.625rem;">
+        Most popular
+      </span>
+    )}
+  </div>
+
+  <!-- Body -->
+  <div style="padding: 2rem; flex: 1; display: flex; flex-direction: column;">
+
+    <h3 class="t-h3" style={`font-size: 1.5rem; color: ${featured ? 'var(--parchment)' : 'var(--espresso)'};`}>
+      {title}
+    </h3>
+    <p style={`font-family:'Jost',sans-serif; font-size:0.8125rem; line-height:1.6; margin-top:0.375rem; color: ${featured ? 'rgba(250,247,242,0.55)' : 'var(--taupe)'};`}>
+      {tagline}
+    </p>
+
+    <!-- Price -->
+    <div style={`margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid ${featured ? 'rgba(250,247,242,0.1)' : 'var(--border)'};`}>
+      <div style="display:flex; align-items:baseline; gap:0.625rem; flex-wrap:wrap;">
+        <span style={`font-family:'Cormorant Garamond',serif; font-size:2.25rem; font-weight:600; letter-spacing:-0.02em; color: ${featured ? 'var(--parchment)' : 'var(--espresso)'};`}>
+          {price}
+        </span>
+        <span style={`font-family:'Jost',sans-serif; font-size:0.8125rem; color: ${featured ? 'rgba(250,247,242,0.45)' : 'var(--taupe)'};`}>
+          {priceNote}
+        </span>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <p style={`font-family:'Jost',sans-serif; font-size:0.875rem; line-height:1.7; margin-top:1.25rem; color: ${featured ? 'rgba(250,247,242,0.7)' : 'color-mix(in srgb, var(--espresso) 65%, transparent)'};`}>
+      {description}
+    </p>
+
+    <!-- Deliverables -->
+    <ul style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.625rem; flex:1; list-style:none; padding:0; margin-bottom:0;">
+      {deliverables.map((item) => (
+        <li style="display:flex; align-items:flex-start; gap:0.75rem;">
+          <svg
+            style={`width:14px; height:14px; margin-top:3px; flex-shrink:0; color:${featured ? 'var(--sienna)' : 'var(--sienna)'};`}
+            viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"
+          >
+            <path d="M3 8l3.5 3.5L13 4"/>
+          </svg>
+          <span style={`font-family:'Jost',sans-serif; font-size:0.8125rem; line-height:1.6; color: ${featured ? 'rgba(250,247,242,0.75)' : 'color-mix(in srgb, var(--espresso) 65%, transparent)'};`}>
+            {item}
+          </span>
+        </li>
+      ))}
+    </ul>
+
+    <!-- CTA -->
+    <div style="margin-top:2rem;">
+      <a
+        href={ctaHref}
+        class={`btn ${featured ? 'btn-ghost' : 'btn-secondary'}`}
+        style="width:100%; justify-content:center; cursor:none;"
+      >
+        {cta}
+      </a>
+    </div>
+
+    {note && (
+      <p style={`margin-top:0.75rem; font-family:'Jost',sans-serif; font-size:0.6875rem; font-style:italic; text-align:center; color: ${featured ? 'rgba(250,247,242,0.3)' : 'var(--taupe)'};`}>
+        {note}
+      </p>
+    )}
+  </div>
+</div>

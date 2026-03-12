@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Riya Uppal',
+  jobTitle: 'Brand Positioning Consultant',
+  description: 'Brand positioning consultant helping solopreneurs and DTC founders build narrative foundations and AI-powered content systems.',
+  url: 'https://airyalps.com/about',
+  sameAs: ['https://linkedin.com/in/riya-uppal01'],
+  address: { '@type': 'PostalAddress', addressLocality: 'Toronto', addressRegion: 'ON', addressCountry: 'CA' },
+  worksFor: [
+    { '@type': 'Organization', name: 'Airy Alps', url: 'https://airyalps.com' },
+    { '@type': 'Organization', name: 'Storied Inc' },
+  ],
+  alumniOf: [
+    { '@type': 'Organization', name: 'IDEMIA' },
+    { '@type': 'Organization', name: 'hubsell' },
+    { '@type': 'Organization', name: 'OpenSense Labs' },
+    { '@type': 'Organization', name: 'Griphhy' },
+    { '@type': 'Organization', name: 'Parimatch' },
+    { '@type': 'Organization', name: 'Cladiator' },
+  ],
+};
+
+const credentials = [
+  'Executive Diploma in Marketing and Brand Direction',
+  'Corporate Communications — UC Irvine',
+  'Generative AI — IBM',
+  'Scrum Certification',
+  'Marketing Analytics — Meta',
+];
+---
+
+<BaseLayout
+  title="About Riya Uppal — Brand Positioning Consultant | Airy Alps"
+  description="Riya Uppal is a brand positioning consultant who helps solopreneurs and DTC founders build narrative foundations and AI-powered content systems. 7+ years across enterprise and founder-led brands."
+  schema={personSchema}
+>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-label="About hero" style="padding-top:clamp(3rem,6vw,5rem); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div style="max-width:42rem;">
+      <span class="t-label" style="display:block; margin-bottom:1rem;" data-reveal>About</span>
+      <h1 class="t-h1" data-reveal>
+        I've spent 7 years building messaging systems for enterprise brands. Now I build them for founders.
+      </h1>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     STORY + SIDEBAR
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Riya's story">
+  <div class="wrap">
+    <div style="display:grid; grid-template-columns:1fr 18rem; gap:clamp(3rem,8vw,7rem); align-items:start;" class="story-grid">
+
+      <!-- Main copy -->
+      <div>
+        <span class="t-label" style="display:block; margin-bottom:1.5rem;" data-reveal>The story</span>
+
+        <div style="display:flex; flex-direction:column; gap:1.25rem;" data-stagger>
+          <p class="t-body" style="font-size:1.0625rem;">Here's what I kept seeing:</p>
+          <p class="t-body" style="font-size:1.0625rem;">
+            Founders with genuinely great products and services — invisible. Not because they lacked effort, but because their positioning was soft. No one had helped them figure out who they were, what made them different, and how to say it in a way that cut through.
+          </p>
+          <p class="t-body" style="font-size:1.0625rem;">
+            Meanwhile, I was doing exactly that work at scale — building narrative frameworks for global tech companies, writing positioning that shaped how enterprises entered markets and how executives communicated to the world.
+          </p>
+          <p class="t-body" style="font-size:1.0625rem;">
+            The gap seemed obvious. So I built Airy Alps to close it.
+          </p>
+        </div>
+
+        <!-- Pull quote -->
+        <blockquote
+          data-reveal
+          style="border-left:3px solid var(--sienna); padding:1.5rem 2rem 1.5rem 2rem; margin:2.5rem 0;"
+        >
+          <p class="t-quote">
+            Brand positioning isn't about finding a catchy tagline. It's about building the strategic foundation that every piece of content, every sales conversation, and every campaign should flow from.
+          </p>
+        </blockquote>
+
+        <div style="display:flex; flex-direction:column; gap:1rem;" data-stagger>
+          <p class="t-body">
+            I call it a <strong style="font-weight:500; color:var(--espresso);">narrative foundation</strong> — the layer most consultants skip and most founders never get.
+          </p>
+          <p class="t-body">
+            Before working with founders, I spent years inside global enterprise environments — including IDEMIA, a multinational operating across markets and languages — where I saw firsthand what it takes to build messaging that holds at scale. That standard is what I bring to every engagement, regardless of the size of the business.
+          </p>
+          <p class="t-body">
+            Between 2023 and 2026, I worked independently with founders and growing brands — Griphhy, Parimatch, Cladiator, and others — doing positioning and messaging work directly. That's where Airy Alps was really built, engagement by engagement.
+          </p>
+          <p class="t-body">
+            Today I also work as a Narrative Analyst at Storied Inc, designing the kind of structured frameworks and evaluation rubrics that most brand consultants don't know exist. That rigour is what I bring to every founder I work with.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside data-reveal>
+        <div style="border:1.5px solid var(--border); padding:1.75rem; margin-bottom:1.25rem;">
+          <span class="t-label" style="display:block; margin-bottom:1.25rem; color:var(--taupe);">Credentials</span>
+          <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:0.75rem;">
+            {credentials.map((c) => (
+              <li style="display:flex; align-items:flex-start; gap:0.75rem;">
+                <svg style="width:13px; height:13px; margin-top:3px; flex-shrink:0; color:var(--sienna);" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8l3.5 3.5L13 4"/>
+                </svg>
+                <span class="t-body" style="font-size:0.8125rem;">{c}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div style="border:1.5px solid var(--border); padding:1.75rem;">
+          <span class="t-label" style="display:block; margin-bottom:1rem; color:var(--taupe);">Location</span>
+          <p style="font-family:'Jost',sans-serif; font-size:0.875rem; color:var(--espresso);">Toronto, Canada</p>
+          <p style="font-family:'Jost',sans-serif; font-size:0.8125rem; color:var(--taupe); margin-top:0.25rem;">Working globally</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     WHAT'S DIFFERENT — Dark
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-labelledby="diff-h" style="background:var(--mahogany);">
+  <div class="wrap">
+    <div style="max-width:40rem;">
+      <span class="t-label" style="display:block; margin-bottom:1rem; color:color-mix(in srgb, var(--parchment) 40%, transparent);" data-reveal>What's different</span>
+      <h2
+        id="diff-h"
+        style="font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4.5vw,3.5rem); font-weight:500; letter-spacing:-0.02em; line-height:1.1; color:var(--parchment); margin-bottom:2.5rem;"
+        data-reveal
+      >
+        What makes Airy Alps different
+      </h2>
+
+      <div style="display:flex; flex-direction:column; gap:1.25rem;" data-stagger>
+        <p style="font-family:'Jost',sans-serif; font-size:1.0625rem; line-height:1.75; color:color-mix(in srgb, var(--parchment) 75%, transparent);">
+          Most brand consultants stop at the deck. I don't.
+        </p>
+        <p style="font-family:'Jost',sans-serif; font-size:1.0625rem; line-height:1.75; color:color-mix(in srgb, var(--parchment) 75%, transparent);">
+          Every Narrative Foundation Sprint client also gets their brand configured inside an AI-powered content platform — connected to their social channels, loaded with their brand voice, and ready to generate and schedule on-brand content from day one.
+        </p>
+        <p style="font-family:'Jost',sans-serif; font-size:1.0625rem; line-height:1.75; color:color-mix(in srgb, var(--parchment) 75%, transparent);">
+          You don't just know what your brand stands for. You have a system that shows up for you every week.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ══════════════════════════════════════════════
+     A BIT MORE + CTAs
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-label="More about Riya" style="background:var(--sand);">
+  <div class="wrap">
+    <div style="max-width:40rem;">
+      <span class="t-label" style="display:block; margin-bottom:1.25rem;" data-reveal>A bit more</span>
+      <div style="display:flex; flex-direction:column; gap:1.125rem;" data-stagger>
+        <p class="t-body" style="font-size:1.0625rem;">
+          I'm based in Toronto, originally from India, and I've lived and worked across three continents. I hold an Executive Diploma in Marketing and Brand Direction, a certification in Corporate Communications from UC Irvine, and certifications in Generative AI (IBM), Scrum, and Marketing Analytics (Meta).
+        </p>
+        <p class="t-body" style="font-size:1.0625rem;">
+          I work with a small number of clients at a time — because rigorous positioning work can't be templated or rushed.
+        </p>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-top:2.5rem;" data-reveal>
+        <a href="/work-with-me" class="btn btn-primary" style="cursor:none;">Work With Me</a>
+        <a href="/case-studies" class="btn btn-secondary" style="cursor:none;">Read My Case Studies</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style>
+  @media (max-width: 768px) {
+    .story-grid { grid-template-columns: 1fr !important; }
+  }
+</style>

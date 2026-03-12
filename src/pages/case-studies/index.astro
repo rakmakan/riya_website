@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CaseStudyCard from '../../components/CaseStudyCard.astro';
+import { getCaseStudies } from '../../lib/queries';
+
+const fallbackCaseStudies = [
+  {
+    title: 'From Stalled to Shipped: Unblocking a Website After a Year-Long Standstill',
+    category: 'Brand Architecture',
+    summary: "A technology company's website had been stuck in limbo for over 12 months. Multiple teams, competing opinions, and no clear messaging architecture. A positioning-first rewrite unblocked everything within weeks.",
+    metrics: '18% increase in time on page · SEMrush authority score 80+',
+    slug: 'stalled-to-shipped',
+  },
+  {
+    title: 'No More Spray and Pray: How CRM Data Turned Generic Outreach into Targeted Wins',
+    category: 'Messaging Strategy',
+    summary: 'A B2B company was running outreach campaigns that cast a wide net and caught very little. By mapping CRM data to real buyer psychology, precision targeting replaced volume spray — and the sales team adopted the new framework as their default.',
+    metrics: '2 major account wins attributed directly to repositioned sequences',
+    slug: 'crm-precision-messaging',
+  },
+  {
+    title: 'Strategy Before Send: Turning Cold Emails into Warm Leads',
+    category: 'Cold Outreach Repositioning',
+    summary: 'Cold email campaigns for a B2B platform were generating opens but no replies. Rebuilding buyer personas from scratch and repositioning around actual buyer tension — not product features — changed everything.',
+    metrics: 'Increased reply rates · Improved pipeline quality — fewer time-wasters, more qualified conversations',
+    slug: 'cold-email-repositioning',
+  },
+];
+
+const sanityData = await getCaseStudies();
+const caseStudies = sanityData.length > 0
+  ? sanityData.map(cs => ({
+      title: cs.title,
+      category: cs.category,
+      summary: cs.summary,
+      metrics: cs.metrics,
+      slug: cs.slug.current,
+    }))
+  : fallbackCaseStudies;
+---
+
+<BaseLayout
+  title="Brand Positioning Case Studies | Airy Alps"
+  description="Real positioning and messaging work by Riya Uppal of Airy Alps — from stalled websites to cold email strategy to CRM-driven brand campaigns."
+>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Case studies hero" style="padding-top:clamp(3rem,6vw,5rem); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div style="max-width:42rem;">
+      <span class="t-label" style="display:block; margin-bottom:1rem;" data-reveal>Case studies</span>
+      <h1 class="t-h1" style="margin-bottom:1.5rem;" data-reveal>The work</h1>
+      <p class="t-body" style="max-width:42ch;" data-reveal>
+        Real engagements. Real outcomes. The kind of results that come from getting the positioning right first.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CASE STUDY LIST
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Case study list">
+  <div class="wrap">
+    <div style="display:grid; grid-template-columns:1fr; gap:1.5rem;">
+      {caseStudies.map((cs, i) => (
+        <CaseStudyCard {...cs} index={i} />
+      ))}
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CTA
+════════════════════════════════════════════════ -->
+<section
+  class="section-pad"
+  aria-label="Work with me CTA"
+  style="background:var(--espresso); text-align:center;"
+>
+  <div class="wrap" data-reveal>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.5rem); font-weight:500; letter-spacing:-0.02em; color:var(--parchment); max-width:18ch; margin-inline:auto; margin-bottom:2rem;">
+      Your brand deserves this kind of thinking.
+    </h2>
+    <a href="/work-with-me" class="btn btn-ghost" style="cursor:none;">Work With Me →</a>
+  </div>
+</section>
+
+</BaseLayout>

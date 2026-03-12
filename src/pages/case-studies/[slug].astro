@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getAllCaseStudySlugs, getCaseStudyBySlug } from '../../lib/queries';
+
+export async function getStaticPaths() {
+  // Merge Sanity slugs with hardcoded fallback slugs
+  const sanitySlugs = await getAllCaseStudySlugs();
+  const fallbackSlugs = ['stalled-to-shipped', 'crm-precision-messaging', 'cold-email-repositioning'];
+  const allSlugs = [...new Set([...sanitySlugs, ...fallbackSlugs])];
+  return allSlugs.map(slug => ({ params: { slug } }));
+}
+
+const caseStudyData: Record<string, {
+  title: string;
+  client: string;
+  category: string;
+  summary: string;
+  problem: string;
+  whatIDid: string;
+  outcome: string;
+  metrics: string;
+  prevSlug?: string;
+  nextSlug?: string;
+  prevTitle?: string;
+  nextTitle?: string;
+}> = {
+  'stalled-to-shipped': {
+    title: 'From Stalled to Shipped: Unblocking a Website After a Year-Long Standstill',
+    client: 'Technology Company (name available on request)',
+    category: 'Brand Architecture',
+    summary: 'A technology company\'s website had been stuck in limbo for over 12 months. Positioning-first rewrite unblocked everything.',
+    problem: 'A technology company\'s website had been stuck in limbo for over 12 months. Multiple teams, competing opinions, and no clear messaging architecture. The project was stalled — and it was costing the business.\n\nThe real issue wasn\'t design or development. The site was trying to speak to two completely different audiences — founders and enterprise procurement leads — with one unfocused message. Nobody was willing to say it out loud.',
+    whatIDid: 'Ran stakeholder workshops to surface the real positioning decisions that needed to be made. Rewrote the entire site from a clear messaging hierarchy — one that addressed both audiences without diluting the core message. Built a content structure that could scale as the company grew.',
+    outcome: 'Site launched within weeks of my involvement. On-site conversion improved, time on page increased, and SEMrush authority score reached 80+.',
+    metrics: '18% increase in time on page · SEMrush authority score 80+',
+    nextSlug: 'crm-precision-messaging',
+    nextTitle: 'No More Spray and Pray: CRM Data to Precision Messaging',
+  },
+  'crm-precision-messaging': {
+    title: 'No More Spray and Pray: How CRM Data Turned Generic Outreach into Targeted Wins',
+    client: 'B2B Technology Company (name available on request)',
+    category: 'Messaging Strategy',
+    summary: 'A B2B company\'s outreach campaigns were casting a wide net and catching very little. Precision targeting replaced volume spray.',
+    problem: 'A B2B company was running outreach campaigns that cast a wide net and caught very little. High volume, low conversion, frustrated sales team.\n\nThe messaging was product-first, not buyer-first. There was no differentiation between segments — everyone got the same pitch regardless of where they were, what they cared about, or what stage they were at.',
+    whatIDid: 'Mapped the CRM data to real buyer behaviors and pain points. Built distinct positioning for each segment. Rewrote outreach sequences so every message spoke directly to a specific trigger, tension, and outcome.',
+    outcome: 'Precision targeting replaced volume spray. Two major account wins attributed directly to the repositioned sequences. Sales team adopted the new framework as their default.',
+    metrics: '2 major account wins attributed to repositioned sequences · Framework adopted as sales team standard',
+    prevSlug: 'stalled-to-shipped',
+    prevTitle: 'From Stalled to Shipped',
+    nextSlug: 'cold-email-repositioning',
+    nextTitle: 'Strategy Before Send: Cold Emails into Warm Leads',
+  },
+  'cold-email-repositioning': {
+    title: 'Strategy Before Send: Turning Cold Emails into Warm Leads',
+    client: 'B2B Platform (name available on request)',
+    category: 'Cold Outreach Repositioning',
+    summary: 'Cold email campaigns were generating opens but no replies. Repositioning around buyer tension changed the pipeline quality.',
+    problem: 'Cold email campaigns for a B2B platform were generating opens but no replies. The pipeline was stalled at the top.\n\nThe emails led with features. Nobody cared. The real pain point — the reason anyone would actually stop scrolling and reply — was buried or missing entirely.',
+    whatIDid: 'Rebuilt buyer personas from scratch. Repositioned the messaging around the tension buyers were actually feeling, not the product capabilities. Rewrote email sequences with short, sharp copy built around a single, relevant idea per email.',
+    outcome: 'Open rates held. Reply rates increased. Pipeline quality improved — fewer time-wasters, more qualified conversations.',
+    metrics: 'Increased reply rates · Improved pipeline quality',
+    prevSlug: 'crm-precision-messaging',
+    prevTitle: 'No More Spray and Pray: CRM Data to Precision Messaging',
+  },
+};
+
+const { slug } = Astro.params;
+
+// Try Sanity first, fall back to hardcoded data
+const sanityCs = await getCaseStudyBySlug(slug as string);
+const cs = sanityCs
+  ? {
+      title: sanityCs.title,
+      client: sanityCs.client,
+      category: sanityCs.category,
+      summary: sanityCs.summary,
+      problem: sanityCs.problem,
+      whatIDid: sanityCs.whatIDid,
+      outcome: sanityCs.outcome,
+      metrics: sanityCs.metrics ?? '',
+    }
+  : caseStudyData[slug as string];
+
+if (!cs) {
+  return Astro.redirect('/case-studies');
+}
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: cs.title,
+  description: cs.summary,
+  author: { '@type': 'Person', name: 'Riya Uppal' },
+  publisher: { '@type': 'Organization', name: 'Airy Alps', url: 'https://airyalps.com' },
+};
+---
+
+<BaseLayout
+  title={`${cs.title} | Airy Alps Case Study`}
+  description={cs.summary}
+  schema={articleSchema}
+>
+
+<!-- ══════════════════════════════════════════════
+     BREADCRUMB
+════════════════════════════════════════════════ -->
+<nav aria-label="Breadcrumb" style="border-bottom:1px solid var(--border); padding:1rem 0;">
+  <div class="wrap">
+    <ol style="list-style:none; padding:0; margin:0; display:flex; align-items:center; gap:0.5rem;">
+      <li>
+        <a href="/" style="font-family:'Jost',sans-serif; font-size:0.75rem; color:var(--taupe); text-decoration:none; transition:color 0.2s; cursor:none;"
+          onmouseenter="this.style.color='var(--espresso)'" onmouseleave="this.style.color='var(--taupe)'">Home</a>
+      </li>
+      <li style="font-family:'Jost',sans-serif; font-size:0.75rem; color:var(--taupe);">/</li>
+      <li>
+        <a href="/case-studies" style="font-family:'Jost',sans-serif; font-size:0.75rem; color:var(--taupe); text-decoration:none; transition:color 0.2s; cursor:none;"
+          onmouseenter="this.style.color='var(--espresso)'" onmouseleave="this.style.color='var(--taupe)'">Case Studies</a>
+      </li>
+      <li style="font-family:'Jost',sans-serif; font-size:0.75rem; color:var(--taupe);">/</li>
+      <li style="font-family:'Jost',sans-serif; font-size:0.75rem; color:var(--espresso); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:20rem;">{cs.title}</li>
+    </ol>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Case study header" style="padding-top:clamp(3rem,6vw,5rem); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div style="max-width:52rem;">
+      <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;" data-reveal>
+        <span class="t-label" style="color:var(--sienna);">{cs.category}</span>
+        <span style="font-family:'Jost',sans-serif; font-size:0.6875rem; color:var(--taupe);">·</span>
+        <span class="t-label" style="color:var(--taupe);">{cs.client}</span>
+      </div>
+
+      <h1 class="t-h1" data-reveal>{cs.title}</h1>
+
+      {cs.metrics && (
+        <div
+          data-reveal
+          style="display:inline-flex; align-items:center; gap:0.875rem; margin-top:2rem; border:1.5px solid var(--border); padding:1rem 1.5rem; background:var(--sand);"
+        >
+          <svg style="width:14px; height:14px; flex-shrink:0; color:var(--sienna);" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 10l4-4 3 3 5-6"/>
+          </svg>
+          <span style="font-family:'Jost',sans-serif; font-size:0.875rem; font-weight:500; color:var(--espresso);">{cs.metrics}</span>
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     CASE STUDY BODY
+════════════════════════════════════════════════ -->
+<article class="section-pad">
+  <div class="wrap">
+    <div class="cs-body">
+
+      <!-- The situation -->
+      <section aria-labelledby="problem-h" data-reveal>
+        <span class="t-label" style="display:block; margin-bottom:0.75rem; color:var(--sienna);">The situation</span>
+        <h2 id="problem-h" class="t-h2" style="margin-bottom:1.75rem;">The positioning problem</h2>
+        <div style="display:flex; flex-direction:column; gap:1.25rem;" data-stagger>
+          {cs.problem.split('\n\n').map((para) => (
+            <p class="t-body" style="font-size:1.0625rem;">{para}</p>
+          ))}
+        </div>
+      </section>
+
+      <div style="border-top:1px solid var(--border); margin:3.5rem 0;"></div>
+
+      <!-- What I did -->
+      <section aria-labelledby="solution-h" data-reveal>
+        <span class="t-label" style="display:block; margin-bottom:0.75rem; color:var(--sienna);">What I did</span>
+        <h2 id="solution-h" class="t-h2" style="margin-bottom:1.75rem;">The approach</h2>
+        <p class="t-body" style="font-size:1.0625rem;">{cs.whatIDid}</p>
+      </section>
+
+      <div style="border-top:1px solid var(--border); margin:3.5rem 0;"></div>
+
+      <!-- The outcome -->
+      <section aria-labelledby="outcome-h" data-reveal>
+        <span class="t-label" style="display:block; margin-bottom:0.75rem; color:var(--sienna);">The result</span>
+        <h2 id="outcome-h" class="t-h2" style="margin-bottom:1.75rem;">The outcome</h2>
+        <p class="t-body" style="font-size:1.0625rem;">{cs.outcome}</p>
+
+        {cs.metrics && (
+          <div
+            data-reveal
+            style="margin-top:2.5rem; border:1.5px solid rgba(196,96,58,0.25); background:rgba(196,96,58,0.04); padding:2rem 2.5rem;"
+          >
+            <span class="t-label" style="display:block; margin-bottom:0.625rem; color:var(--sienna);">Key metric</span>
+            <p style="font-family:'Cormorant Garamond',serif; font-size:1.375rem; font-weight:500; color:var(--espresso);">{cs.metrics}</p>
+          </div>
+        )}
+      </section>
+
+    </div>
+  </div>
+</article>
+
+
+<!-- ══════════════════════════════════════════════
+     PREV / NEXT NAVIGATION
+════════════════════════════════════════════════ -->
+<nav aria-label="Case study navigation" style="border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:2.5rem 0;">
+  <div class="wrap">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:2rem;" class="cs-nav-row">
+      {cs.prevSlug ? (
+        <a
+          href={`/case-studies/${cs.prevSlug}`}
+          style="display:flex; align-items:center; gap:0.75rem; font-family:'Jost',sans-serif; font-size:0.8125rem; color:var(--taupe); text-decoration:none; transition:color 0.2s; cursor:none; max-width:20rem;"
+          onmouseenter="this.style.color='var(--espresso)'" onmouseleave="this.style.color='var(--taupe)'"
+        >
+          <svg style="width:14px; height:14px; flex-shrink:0; transition:transform 0.2s;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"
+            onmouseenter="this.style.transform='translateX(-2px)'" onmouseleave="this.style.transform=''"
+          >
+            <path d="M13 8H3M7 4L3 8l4 4"/>
+          </svg>
+          <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{cs.prevTitle}</span>
+        </a>
+      ) : <div></div>}
+
+      {cs.nextSlug ? (
+        <a
+          href={`/case-studies/${cs.nextSlug}`}
+          style="display:flex; align-items:center; gap:0.75rem; font-family:'Jost',sans-serif; font-size:0.8125rem; color:var(--taupe); text-decoration:none; transition:color 0.2s; cursor:none; max-width:20rem; text-align:right;"
+          onmouseenter="this.style.color='var(--espresso)'" onmouseleave="this.style.color='var(--taupe)'"
+        >
+          <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{cs.nextTitle}</span>
+          <svg style="width:14px; height:14px; flex-shrink:0;" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+      ) : <div></div>}
+    </div>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     CTA
+════════════════════════════════════════════════ -->
+<section class="section-pad" style="background:var(--espresso); text-align:center;" aria-label="Work with me CTA">
+  <div class="wrap" data-reveal>
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3.25rem); font-weight:500; letter-spacing:-0.02em; color:var(--parchment); max-width:20ch; margin-inline:auto; margin-bottom:1rem; line-height:1.15;">
+      Want results like these for your brand?
+    </h2>
+    <p style="font-family:'Jost',sans-serif; font-size:1rem; color:color-mix(in srgb, var(--parchment) 55%, transparent); margin-bottom:2rem; max-width:38ch; margin-inline:auto;">
+      Let's figure out where your positioning is breaking down — and build something that actually works.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
+      <a href="/contact" class="btn btn-ghost" style="cursor:none;">Book a Free Call</a>
+      <a href="/work-with-me" class="btn btn-ghost" style="cursor:none; opacity:0.5;">See Services</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style>
+  .cs-body {
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+  @media (max-width: 768px) {
+    .cs-nav-row { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+  }
+</style>

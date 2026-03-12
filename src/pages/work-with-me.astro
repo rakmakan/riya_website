@@ -1,0 +1,290 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PricingCard from '../components/PricingCard.astro';
+
+const offers = [
+  {
+    number: '01',
+    title: 'Positioning Audit',
+    tagline: 'Best for founders who want clarity before committing to a full engagement',
+    price: '$500',
+    priceNote: '· 90 min · Video call + written summary',
+    description: "You're getting traction but something in your messaging isn't landing. You can feel the gap — you just can't name it. In 90 minutes, we dig into your brand, your audience, your current positioning, and your content.",
+    deliverables: [
+      'Precise diagnosis of your positioning gaps',
+      'Current vs. ideal audience definition',
+      'Clear differentiation statement',
+      'Prioritized action plan — what to fix first',
+    ],
+    cta: 'Book a Positioning Audit',
+    ctaHref: '/contact',
+    featured: false,
+    note: 'Natural first step before a Narrative Foundation Sprint.',
+  },
+  {
+    number: '02',
+    title: 'Narrative Foundation Sprint',
+    tagline: 'Best for founders ready to build their positioning foundation and execution system',
+    price: 'From $2,500',
+    priceNote: '· 3–4 weeks · Done-with-you',
+    description: 'The full build. Over 3–4 weeks, we work together to build the complete narrative foundation your brand has been missing — and I set up the AI-powered system that executes it for you every week.',
+    deliverables: [
+      'Brand positioning statement',
+      'Ideal customer profile — psychology, not demographics',
+      'Competitive white space mapping',
+      'Core brand narrative and founding story',
+      'Messaging hierarchy: 1 line, 1 paragraph, 1 page',
+      'Brand voice guide — tone, language rules, what you never say',
+      'Content pillar framework (4–5 themes)',
+      'Platform-specific direction for Instagram, Facebook, YouTube Shorts, GMB',
+      'AI platform setup and first content calendar',
+    ],
+    cta: 'Apply for a Sprint',
+    ctaHref: '/contact',
+    featured: true,
+    note: 'Spots are limited. I work with a small number of clients at a time.',
+  },
+  {
+    number: '03',
+    title: 'Monthly Positioning Advisory',
+    tagline: 'Best for Sprint alumni who want ongoing strategic support as they grow',
+    price: '$700',
+    priceNote: '/ month · Cancel anytime',
+    description: "Your positioning isn't static. As your business evolves, your message needs to keep up. Available to Narrative Foundation Sprint clients only.",
+    deliverables: [
+      '1 × 60-minute strategy session/month',
+      'Positioning review of new copy, campaigns, or offers',
+      'Brand consistency feedback on content and messaging',
+      'Priority email access for quick questions',
+    ],
+    cta: 'Learn More',
+    ctaHref: '/contact',
+    featured: false,
+    note: 'Available to Narrative Foundation Sprint clients only.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'How is this different from hiring a copywriter?',
+    answer: 'A copywriter writes words. I build the strategic framework those words should come from. Without the foundation, even great copy underperforms.',
+  },
+  {
+    question: 'How is this different from a brand coach?',
+    answer: "Brand coaches work on mindset and confidence. I work on strategy and systems. If you need to figure out what your brand stands for and how to say it consistently — that's positioning work, not coaching.",
+  },
+  {
+    question: 'Do I need a big audience or existing brand?',
+    answer: "No. Most clients come to me with a working business and a fuzzy message. You don't need scale — you need clarity.",
+  },
+  {
+    question: "What if I'm just starting out?",
+    answer: 'The Positioning Audit is a low-risk way to get expert eyes on your brand before investing further.',
+  },
+];
+
+const serviceSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Positioning Audit',
+    description: '90-minute brand positioning diagnosis with written action plan.',
+    provider: { '@type': 'Person', name: 'Riya Uppal' },
+    offers: { '@type': 'Offer', price: '500', priceCurrency: 'USD' },
+    serviceType: 'Brand Positioning Consulting',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Narrative Foundation Sprint',
+    description: '3–4 week brand positioning foundation build including brand voice, messaging hierarchy, and AI content system setup.',
+    provider: { '@type': 'Person', name: 'Riya Uppal' },
+    offers: { '@type': 'Offer', price: '2500', priceCurrency: 'USD' },
+    serviceType: 'Brand Positioning Consulting',
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+---
+
+<BaseLayout
+  title="Brand Positioning Services for Solopreneurs & DTC Founders | Airy Alps"
+  description="Positioning Audit, Narrative Foundation Sprint, and AI-powered content system setup. Fixed-scope, outcomes-focused brand positioning for solopreneurs and DTC founders."
+  schema={[...serviceSchema, faqSchema]}
+>
+
+<!-- ══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Services hero" style="padding-top:clamp(3rem,6vw,5rem);">
+  <div class="wrap">
+    <div style="max-width:42rem;">
+      <span class="t-label" style="display:block; margin-bottom:1rem;" data-reveal>Work with me</span>
+      <h1 class="t-h1" style="margin-bottom:1.5rem;" data-reveal>
+        Three ways to<br />work together
+      </h1>
+      <p class="t-body" style="max-width:38ch;" data-reveal>
+        All engagements are 1:1, fixed-scope, and outcomes-focused. No retainers that stretch forever. No vague deliverables.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     PRICING CARDS
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Pricing" style="padding-top:0; border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; align-items:start;" class="pricing-grid">
+      {offers.map((offer) => (
+        <PricingCard {...offer} />
+      ))}
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     SPRINT BREAKDOWN
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-labelledby="sprint-h" style="background:var(--sand);">
+  <div class="wrap">
+    <div style="max-width:48rem; margin-inline:auto;">
+      <span class="t-label" style="display:block; margin-bottom:1rem;" data-reveal>Sprint breakdown</span>
+      <h2 id="sprint-h" class="t-h2" style="margin-bottom:3rem;" data-reveal>
+        What the Narrative Foundation Sprint actually builds
+      </h2>
+
+      <div style="display:flex; flex-direction:column; gap:3rem;" data-stagger>
+        {[
+          {
+            phase: 'Phase 1',
+            weeks: 'Weeks 1–2',
+            title: 'Foundation',
+            items: [
+              'Brand positioning statement (category + audience + tension + differentiation)',
+              'Ideal customer profile — not demographics, but psychology',
+              'Competitive white space mapping — the position no one else owns',
+              'Core brand narrative and founding story',
+              'Messaging hierarchy: your brand in 1 line, 1 paragraph, 1 page',
+            ],
+          },
+          {
+            phase: 'Phase 2',
+            weeks: 'Weeks 3–4',
+            title: 'Voice + Execution System',
+            items: [
+              'Brand voice guide — tone, language rules, what you never say',
+              'Content pillar framework — 4–5 themes every post maps back to',
+              'Platform-specific direction for Instagram, Facebook, YouTube Shorts, GMB',
+              'Complete brand positioning brief — your messaging bible',
+            ],
+          },
+          {
+            phase: 'Phase 3',
+            weeks: 'Included',
+            title: 'AI Platform Onboarding',
+            items: [
+              'Account setup and channel connection',
+              'Brand brief loaded into your content platform',
+              'First content calendar built together',
+              'Walkthrough so you can run it independently',
+            ],
+          },
+        ].map(({ phase, weeks, title, items }) => (
+          <div style="display:grid; grid-template-columns:10rem 1fr; gap:2rem; padding-top:2rem; border-top:1px solid var(--border);" class="sprint-row">
+            <div>
+              <span class="t-label" style="color:var(--sienna); display:block;">{phase}</span>
+              <p style="font-family:'Cormorant Garamond',serif; font-size:1.125rem; font-weight:500; color:var(--espresso); margin-top:0.25rem;">{title}</p>
+              <p style="font-family:'Jost',sans-serif; font-size:0.75rem; color:var(--taupe); margin-top:0.125rem;">{weeks}</p>
+            </div>
+            <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:0.625rem; padding-top:0.25rem;">
+              {items.map((item) => (
+                <li style="display:flex; align-items:flex-start; gap:0.75rem;">
+                  <svg style="width:14px; height:14px; margin-top:3px; flex-shrink:0; color:var(--sienna);" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M3 8l3.5 3.5L13 4"/>
+                  </svg>
+                  <span class="t-body" style="font-size:0.875rem;">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <!-- You leave with box -->
+      <div
+        data-reveal
+        style="margin-top:3rem; border:1.5px solid var(--border); padding:2rem; background:var(--parchment);"
+      >
+        <p style="font-family:'Jost',sans-serif; font-size:0.75rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--espresso); margin-bottom:0.75rem;">You leave with:</p>
+        <p class="t-body">
+          A positioning foundation built to last, a messaging bible you can hand to any writer or AI tool, and a configured content system that generates on-brand posts every week — without you starting from scratch every time.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════════ -->
+<section class="section-pad" aria-labelledby="faq-h" style="border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="max-width:48rem; margin-inline:auto;">
+      <span class="t-label" style="display:block; margin-bottom:1rem;" data-reveal>Good to know</span>
+      <h2 id="faq-h" class="t-h2" style="margin-bottom:3rem;" data-reveal>Frequently asked</h2>
+
+      <div data-stagger>
+        {faqs.map(({ question, answer }) => (
+          <details style="border-top:1px solid var(--border);">
+            <summary style="display:flex; align-items:center; justify-content:space-between; padding:1.5rem 0; cursor:pointer; list-style:none; gap:2rem;">
+              <h3 class="t-h3" style="font-size:1.25rem; font-weight:500;">{question}</h3>
+              <svg style="width:18px; height:18px; flex-shrink:0; color:var(--taupe); transition:transform 0.3s ease;" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" class="faq-icon">
+                <path d="M10 4v12M4 10h12"/>
+              </svg>
+            </summary>
+            <p class="t-body" style="padding-bottom:1.5rem; padding-right:2.5rem;">{answer}</p>
+          </details>
+        ))}
+        <div style="border-top:1px solid var(--border);"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════════════════ -->
+<section class="section-pad" style="background:var(--espresso); text-align:center;" aria-label="Contact CTA">
+  <div class="wrap" data-reveal>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(1.75rem,3.5vw,2.75rem); font-weight:500; letter-spacing:-0.02em; color:var(--parchment); margin-bottom:1rem;">
+      Not sure which option is right?
+    </p>
+    <p style="font-family:'Jost',sans-serif; font-size:1rem; color:color-mix(in srgb, var(--parchment) 55%, transparent); margin-bottom:2rem;">
+      Book a free 20-minute call and I'll tell you exactly where to start.
+    </p>
+    <a href="/contact" class="btn btn-ghost" style="cursor:none;">Book a Free Call</a>
+  </div>
+</section>
+
+</BaseLayout>
+
+<style>
+  @media (max-width: 768px) {
+    .pricing-grid { grid-template-columns: 1fr !important; }
+    .sprint-row { grid-template-columns: 1fr !important; }
+  }
+  details[open] .faq-icon { transform: rotate(45deg); }
+</style>

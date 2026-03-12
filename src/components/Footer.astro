@@ -1,0 +1,95 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer style="background:var(--mahogany); border-top:1px solid rgba(250,247,242,0.08); padding-block:clamp(3rem,6vw,5rem);">
+  <div class="wrap">
+
+    <div style="display:grid; grid-template-columns:1fr auto; gap:4rem; align-items:start; margin-bottom:3rem;" class="two-col">
+
+      <!-- Left: entity -->
+      <div>
+        <img
+          src="/images/logo.png"
+          alt="Airy Alps"
+          style="
+            height: 64px;
+            width: auto;
+            display: block;
+            margin-bottom: 1rem;
+            filter: brightness(0) invert(1);
+            opacity: 0.85;
+          "
+        />
+        <p style="font-family:'Jost',sans-serif; font-size:0.8125rem; line-height:1.7; color:color-mix(in srgb, var(--parchment) 50%, transparent); max-width:44ch;">
+          Airy Alps is a brand positioning consultancy founded by Riya Uppal. We help solopreneurs and DTC founders build sharp positioning and AI-powered content systems. Based in Toronto. Working globally.
+        </p>
+      </div>
+
+      <!-- Right: nav + contact -->
+      <div style="display:grid; grid-template-columns:auto auto; gap:4rem; align-items:start;">
+
+        <div>
+          <p class="t-label" style="margin-bottom:1rem; color:color-mix(in srgb, var(--parchment) 40%, transparent);">Navigation</p>
+          <nav style="display:flex; flex-direction:column; gap:0.6rem;">
+            {[
+              { href: '/', label: 'Home' },
+              { href: '/about', label: 'About' },
+              { href: '/work-with-me', label: 'Work With Me' },
+              { href: '/case-studies', label: 'Case Studies' },
+              { href: '/contact', label: 'Contact' },
+            ].map(({ href, label }) => (
+              <a
+                href={href}
+                style="
+                  font-family:'Jost',sans-serif;
+                  font-size:0.8125rem;
+                  color:color-mix(in srgb, var(--parchment) 55%, transparent);
+                  text-decoration:none;
+                  transition:color 0.2s ease;
+                  cursor:none;
+                  width:fit-content;
+                "
+                onmouseenter="this.style.color='var(--parchment)'"
+                onmouseleave="this.style.color='color-mix(in srgb, var(--parchment) 55%, transparent)'"
+              >{label}</a>
+            ))}
+          </nav>
+        </div>
+
+        <div>
+          <p class="t-label" style="margin-bottom:1rem; color:color-mix(in srgb, var(--parchment) 40%, transparent);">Contact</p>
+          <div style="display:flex; flex-direction:column; gap:0.6rem;">
+            <a
+              href="mailto:riyauppal777@gmail.com"
+              style="font-family:'Jost',sans-serif; font-size:0.8125rem; color:color-mix(in srgb, var(--parchment) 55%, transparent); text-decoration:none; transition:color 0.2s ease; cursor:none; width:fit-content;"
+              onmouseenter="this.style.color='var(--parchment)'"
+              onmouseleave="this.style.color='color-mix(in srgb, var(--parchment) 55%, transparent)'"
+            >riyauppal777@gmail.com</a>
+            <a
+              href="https://linkedin.com/in/riya-uppal01"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="font-family:'Jost',sans-serif; font-size:0.8125rem; color:color-mix(in srgb, var(--parchment) 55%, transparent); text-decoration:none; transition:color 0.2s ease; cursor:none; width:fit-content;"
+              onmouseenter="this.style.color='var(--parchment)'"
+              onmouseleave="this.style.color='color-mix(in srgb, var(--parchment) 55%, transparent)'"
+            >LinkedIn ↗</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="display:flex; align-items:center; justify-content:space-between; padding-top:2rem; border-top:1px solid rgba(250,247,242,0.08); gap:2rem; flex-wrap:wrap;">
+      <p style="font-family:'Jost',sans-serif; font-size:0.6875rem; letter-spacing:0.06em; color:color-mix(in srgb, var(--parchment) 30%, transparent);">
+        &copy; {year} Airy Alps
+      </p>
+      <p style="font-family:'Jost',sans-serif; font-size:0.6875rem; letter-spacing:0.06em; text-transform:uppercase; color:color-mix(in srgb, var(--parchment) 30%, transparent);">
+        Riya Uppal · Brand Positioning Consultant · Toronto
+      </p>
+    </div>
+
+  </div>
+</footer>

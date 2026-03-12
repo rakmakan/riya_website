@@ -1,0 +1,77 @@
+---
+interface Testimonial {
+  quote: string;
+  clientName: string;
+  role: string;
+  company: string;
+}
+
+interface Props {
+  testimonials: Testimonial[];
+}
+
+const { testimonials } = Astro.props;
+---
+
+<div class="testimonial-swiper-wrapper" data-gsap="fade-up">
+  <div class="swiper swiper-testimonial" id="testimonial-swiper">
+    <div class="swiper-wrapper">
+      {testimonials.map((t) => (
+        <div class="swiper-slide">
+          <div class="border border-cream-200 bg-cream-50 px-8 md:px-12 py-10 md:py-14">
+            <!-- Opening quote mark -->
+            <div class="font-cormorant text-7xl leading-none text-brand-sage/30 select-none mb-4" aria-hidden="true">
+              &ldquo;
+            </div>
+            <blockquote class="pull-quote text-xl md:text-2xl">
+              {t.quote}
+            </blockquote>
+            <div class="mt-8 pt-6 border-t border-cream-200 flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-cream-200 flex items-center justify-center flex-shrink-0">
+                <span class="font-fraunces text-lg font-medium text-brand-ink/50">
+                  {t.clientName.charAt(0)}
+                </span>
+              </div>
+              <div>
+                <p class="text-sm font-inter font-medium text-brand-ink">{t.clientName}</p>
+                <p class="text-xs text-brand-ink/60">{t.role}, {t.company}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="swiper-pagination mt-4"></div>
+  </div>
+</div>
+
+<script>
+  import Swiper from 'swiper';
+  import { Pagination, Autoplay, A11y } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/pagination';
+
+  new Swiper('#testimonial-swiper', {
+    modules: [Pagination, Autoplay, A11y],
+    slidesPerView: 1,
+    spaceBetween: 24,
+    loop: true,
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    a11y: {
+      prevSlideMessage: 'Previous testimonial',
+      nextSlideMessage: 'Next testimonial',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 1,
+      },
+    },
+  });
+</script>
