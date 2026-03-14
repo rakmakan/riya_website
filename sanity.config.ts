@@ -6,8 +6,8 @@ export default defineConfig({
   name: 'airy-alps',
   title: 'Airy Alps CMS',
 
-  projectId: process.env.PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.PUBLIC_SANITY_DATASET || 'production',
+  projectId: import.meta.env.PUBLIC_SANITY_PROJECT_ID ?? '8chfwd64',
+  dataset: import.meta.env.PUBLIC_SANITY_DATASET ?? 'production',
 
   plugins: [
     structureTool({
