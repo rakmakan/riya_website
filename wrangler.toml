@@ -1,6 +1,3 @@
 name = "riya-website"
 compatibility_date = "2026-03-14"
-main = "./dist/_worker.js"
-
-[assets]
-directory = "./dist"
+pages_build_output_dir = "./dist"
